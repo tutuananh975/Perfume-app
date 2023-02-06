@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
+import Header from './layouts/Header';
 
 function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Perfume app
-    </h1>
+    <div className='App'>
+      <Header/>
+    </div>
   );
 }
 

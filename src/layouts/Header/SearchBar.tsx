@@ -5,7 +5,7 @@ const SearchBar: FC = () => {
 
     return(
         <div className="flex">  
-            <img src={logo}></img>
+            <img className="w-60 h-16 " src={logo}></img>
         </div>
     )
 }
