@@ -7,6 +7,7 @@ import {
   faMedal,
 } from "@fortawesome/free-solid-svg-icons";
 import Optional from "./Optional";
+import Cart from "./Cart";
 
 const SearchBar: FC = () => {
   return (
@@ -19,12 +20,17 @@ const SearchBar: FC = () => {
             className="search-input pl-4 pr-10 py-1 border h-full w-full rounded"
             placeholder="Search Value"
           />
-          <button className="btn-search bg-9c6711 w-20 h-full p-1 absolute right-0 rounded-r">Search</button>
+          <button className="btn-search bg-9c6711 w-20 h-full p-1 absolute right-0 rounded-r">
+            Search
+          </button>
         </div>
-        <div className="optinals flex items-center">
+        <div className="optinals items-center hidden sm:flex">
           <Optional icon={faCarSide} textBold="FREE" textLight="SHIPPING" />
           <Optional icon={faArrowsSpin} textBold="100%" textLight="SECURE" />
           <Optional icon={faMedal} textBold="100%" textLight="AUTHENTIC" />
+        </div>
+        <div className="cart sm:hidden">
+          <Cart />
         </div>
       </div>
       <div className="search-mobile px-2 py-4 flex lg:hidden">
