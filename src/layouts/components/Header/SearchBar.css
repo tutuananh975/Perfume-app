@@ -1,0 +1,35 @@
+.search-input {
+    border: 1px solid #d3d1d0;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+.search {
+    width: 35%;
+}
+
+.bg-9c6711 {
+    background-color: #9c6711;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.w-full {
+    width: 100%;
+}
+ 
+.optional {
+    cursor: pointer;
+}
+
+.search-mobile {
+    width: 100%;
+}
+
+.optional:hover > .optional-text > .text-bold{
+    color: rgba(0, 0, 0, 0.9)
+}
