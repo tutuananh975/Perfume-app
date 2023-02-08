@@ -17,7 +17,7 @@ const SearchBar: FC = () => {
         <div className="search relative hidden lg:flex">
           <input
             type="text"
-            className="search-input pl-4 pr-10 py-1 border h-full w-full rounded"
+            className="search-input pl-4 pr-24 py-1 border h-full w-full rounded"
             placeholder="Search Value"
           />
           <button className="btn-search bg-9c6711 w-20 h-full p-1 absolute right-0 rounded-r">
@@ -36,7 +36,7 @@ const SearchBar: FC = () => {
       <div className="search-mobile px-2 py-4 flex lg:hidden">
         <input
           type="text"
-          className="search-input pl-4 pr-10 py-1 border h-full w-full rounded"
+          className="search-input pl-4 pr-24 py-1 border h-full w-full rounded"
           placeholder="Search Value"
         />
         <button className="btn-search bg-9c6711 w-20 p-1 absolute right-4 rounded-r">

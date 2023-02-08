@@ -8,3 +8,5 @@ const SideBar: FC = () => {
         </div>
     )
 }
+
+export default SideBar;
