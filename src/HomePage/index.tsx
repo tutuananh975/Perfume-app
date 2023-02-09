@@ -21,6 +21,7 @@ const HomePage: FC = () => {
                 <div className="p-3">Explore the best selling perfumes of all times</div>
             </div>
             <ProductList data={BestSallers}/>
+            <div>git</div>
         </div>
     )
 }
