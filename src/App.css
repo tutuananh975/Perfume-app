@@ -27,6 +27,12 @@
 .App-link {
   color: #61dafb;
 }
+.slick-next:before {
+    color: black !important;
+}
+.slick-prev:before{
+    color: black !important;
+}
 
 @keyframes App-logo-spin {
   from {
