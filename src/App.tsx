@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import { MainLayout } from './components/layouts';
 import NotSideBarLayOut from './components/layouts/NotSideBarLayOut'
+import HomePage from './HomePage';
 import { publicRoutes } from './routes';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             })
           }
         </Routes>
+        <HomePage/>
       </div>
     </Router>
   );
