@@ -9,26 +9,6 @@
 .search {
     width: 35%;
 }
-
-.bg-9c6711 {
-    background-color: #9c6711;
-}
-
-.bg-081857 {
-    background-color: #081857;
-}
-
-.bg-5c79b1 {
-    background-color: #5c79b1;
-}
-
-.h-full {
-    height: 100%;
-}
-
-.w-full {
-    width: 100%;
-}
  
 .optional {
     cursor: pointer;
@@ -75,10 +55,6 @@
     border-top-color: #333;
 }
 
-.text-cdcac9 {
-    color: #cdcac9;
-}
-
 .navbar {
     border-top: 1px solid #d3d1d0;
 }
@@ -100,8 +76,4 @@
     box-shadow: 0 4px 10px 0 #666;
     background-color: #FFF;
     padding-top: 28px;
-}
-
-.text-6d6c97 {
-    color: #6d6c97;
 }
