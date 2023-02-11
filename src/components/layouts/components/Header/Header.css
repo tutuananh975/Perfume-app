@@ -76,4 +76,25 @@
     box-shadow: 0 4px 10px 0 #666;
     background-color: #FFF;
     padding-top: 28px;
+    left: -52px;
+    display: none;
+}
+
+.sign-in-btn:hover > .action-sign-in {
+    display: block;
+}
+
+.triangle-up {
+    position: absolute;
+    top: -16px;
+    left: 58px;
+    content: "";
+    display: block;
+    width: 32px;
+    height: 19px;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIxOSIgdmlld0JveD0iMCAwIDMyIDE5Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBvbHlnb24gZmlsbD0iI0VCRUJFOCIgcG9pbnRzPSItMS4zMzMgMTkgMTYgMCAzMy4zMzMgMTkiLz4KICAgICAgICA8cG9seWdvbiBmaWxsPSIjRkZGIiBwb2ludHM9IjAgMTkgMTYgMS4zMyAzMiAxOSIvPgogICAgPC9nPgo8L3N2Zz4K);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: absolute;
 }

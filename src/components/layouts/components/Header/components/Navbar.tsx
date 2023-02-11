@@ -49,7 +49,7 @@ const Navbar: FC = () => {
             <div className="nav-right-text-link">SIGN IN</div>
             <div className="triangle absolute"></div>
           </Link>
-          <div className="px-6 absolute z-10 top-0 left-0 w-56 action-sign-in">
+          <div className="px-6 absolute z-10 top-10 w-56 action-sign-in">
             <button className="btn-modal-sign-in text-white py-1.5 w-full bg-081857 rounded">
               SIGN IN
             </button>
@@ -59,6 +59,7 @@ const Navbar: FC = () => {
               <div className="pt-1 pb-2 leading-tight">Need Help?</div>
             </div>
             <div className="other-login w-full">
+              <div className="triangle-up"></div>
               <p className="text-6d6c97">Or log in with:</p>
               <button className="w-full bg-5c79b1 text-xs p-1 text-white hover:opacity-90 rounded-sm mb-1">
                 <FontAwesomeIcon icon={["fab", "facebook-f"]} />
