@@ -1,8 +1,8 @@
 import { FC } from "react";
 import Optional from "./Optional";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-const Cart: FC = () => {
-  return <Optional icon={faCartShopping} textLight="CART" />;
+const CartItem: FC = () => {
+  return <Optional icon={faCartShopping}/>;
 };
 
-export default Cart;
+export default CartItem;
