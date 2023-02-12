@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faBars } from "@fortawesome/free-solid-svg-icons";
 import { fab, faFacebook, faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 
-// library.add(fab, faFacebook, faFacebookF, faGoogle)
+// library.add("fab", "faFacebook", "faFacebookF", "faGoogle")
 
 const Navbar: FC = () => {
   return (
@@ -27,7 +27,7 @@ const Navbar: FC = () => {
         <li className="ml-4 py-2 nav-link">
           <NavLink to="men">
             MEN'S
-            <span className="hidden lg:inline">COLOGNE</span>
+            <span className="hidden lg:inline"> PERFUME</span>
           </NavLink>
         </li>
         <li className="ml-4 py-2 nav-link hidden xl:block">
