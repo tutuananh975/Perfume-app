@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactStars from 'react-stars'
-import { Data } from '../../interface'
+import { Data } from '../../interfacae/interface'
 import Slider from "react-slick";
 import { settings } from '../Slick/Slick';
 

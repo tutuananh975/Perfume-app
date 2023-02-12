@@ -1,3 +1,9 @@
 img {
   background-size: cover;
 }
+.slick-next:before {
+  color : black !important;
+}
+.slick-prev:before {
+  color : black !important;
+}
