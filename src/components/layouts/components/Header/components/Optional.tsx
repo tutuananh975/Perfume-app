@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 interface Prop {
   icon: any;
   textBold?: string;
-  textLight: string;
+  textLight?: string;
 }
 
 const Optional: FC<Prop> = ({ icon, textBold, textLight }) => {

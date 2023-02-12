@@ -1,18 +1,18 @@
 import { FC } from "react";
-import logo from "./icons/logo-main.png";
-import "./SearchBar.css";
+import logo from "../icons/logo-main.png";
 import {
   faCarSide,
   faArrowsSpin,
   faMedal,
 } from "@fortawesome/free-solid-svg-icons";
 import Optional from "./Optional";
-import Cart from "./Cart";
+import CartItem from "./CartItem";
+import { NavLink } from "react-router-dom";
 
 const SearchBar: FC = () => {
   return (
-    <div className="p-4">
-      <div className="flex justify-between items-center">
+    <>
+      <div className="flex justify-between items-center mb-4">
         <img className="w-60 h-16" src={logo} alt="logo" />
         <div className="search relative hidden lg:flex">
           <input
@@ -30,7 +30,9 @@ const SearchBar: FC = () => {
           <Optional icon={faMedal} textBold="100%" textLight="AUTHENTIC" />
         </div>
         <div className="cart sm:hidden">
-          <Cart />
+          <NavLink to="cart">
+            <CartItem />
+          </NavLink>
         </div>
       </div>
       <div className="search-mobile px-2 py-4 flex lg:hidden">
@@ -43,7 +45,7 @@ const SearchBar: FC = () => {
           Search
         </button>
       </div>
-    </div>
+    </>
   );
 };
 
