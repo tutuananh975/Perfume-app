@@ -59,13 +59,6 @@
     border-top: 1px solid #d3d1d0;
 }
 
-.navbar-right {
-    border: 2px solid #d3d1d0;
-    padding: 8px;
-    border-radius: 6px;
-    border-top-left-radius: 0;
-}
-
 .nav-right-text-link:hover {
     border-bottom: 1px solid #cb4bdb;
 }
@@ -97,4 +90,13 @@
     background-repeat: no-repeat;
     background-position: center center;
     position: absolute;
+}
+
+@media (min-width: 768px) {
+    .navbar-right {
+        border: 2px solid #d3d1d0;
+        padding: 8px;
+        border-radius: 6px;
+        border-top-left-radius: 0;
+    }
 }
