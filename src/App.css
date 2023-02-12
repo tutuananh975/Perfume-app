@@ -1,3 +1,7 @@
+img {
+  background-size: cover;
+}
+
 .bg-9c6711 {
   background-color: #9c6711;
 }
@@ -20,4 +24,11 @@
 
 .text-6d6c97 {
     color: #6d6c97;
+}
+
+.slick-next:before {
+  color : black !important;
+}
+.slick-prev:before {
+  color : black !important;
 }

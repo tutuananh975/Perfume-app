@@ -6,3 +6,7 @@ export interface Data {
     img: string;
     sale: string;
 }
+
+
+
+
