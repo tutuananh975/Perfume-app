@@ -1,7 +1,6 @@
 img {
   background-size: cover;
 }
-
 .bg-9c6711 {
   background-color: #9c6711;
 }
@@ -17,18 +16,15 @@ img {
 .bg-d95442 {
   background-color: #d95442;
 }
-
-.text-cdcac9 {
-  color: #cdcac9;
-}
-
-.text-6d6c97 {
-    color: #6d6c97;
-}
-
 .slick-next:before {
   color : black !important;
 }
 .slick-prev:before {
   color : black !important;
+}
+.text-cdcac9 {
+  color: #cdcac9;
+}
+.text-6d6c97 {
+    color: #6d6c97;
 }

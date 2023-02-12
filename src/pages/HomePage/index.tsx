@@ -64,7 +64,7 @@ const HomePage: FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="text-3xl text-center my-8">POPULAR CATEGORIES</div>
+            <div className="text-3xl text-center my-9">POPULAR CATEGORIES</div>
             <Categories/>
         </div>
     )
