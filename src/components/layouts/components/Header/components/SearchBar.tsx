@@ -13,7 +13,9 @@ const SearchBar: FC = () => {
   return (
     <>
       <div className="flex justify-between items-center mb-4">
-        <img className="w-60 h-16" src={logo} alt="logo" />
+        <NavLink to="/">
+          <img className="w-60 h-16" src={logo} alt="logo" />
+        </NavLink>
         <div className="search relative hidden lg:flex">
           <input
             type="text"

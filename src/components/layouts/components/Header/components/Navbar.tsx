@@ -50,7 +50,7 @@ const Navbar: FC = () => {
             <div className="triangle absolute"></div>
           </Link>
           <div className="px-6 absolute z-10 top-10 w-56 action-sign-in">
-            <button className="btn-modal-sign-in text-white py-1.5 w-full bg-081857 rounded">
+            <button className="btn-modal-sign-in text-white py-1.5 w-full bg-blue-081857 rounded">
               SIGN IN
             </button>
             <div className="pt-1 mb-5 text-md">
