@@ -19,33 +19,33 @@ const Navbar: FC = () => {
           </div>
         </li>
         <li className="py-2 nav-link">
-          <NavLink to="women">
+          <NavLink to="/women">
             WOMEN'S
             <span className="hidden lg:inline"> PERFUME</span>
           </NavLink>
         </li>
         <li className="ml-4 py-2 nav-link">
-          <NavLink to="men">
+          <NavLink to="/men">
             MEN'S
             <span className="hidden lg:inline"> PERFUME</span>
           </NavLink>
         </li>
         <li className="ml-4 py-2 nav-link hidden xl:block">
-          <NavLink to="best-sellers"> BEST SELLERS</NavLink>
+          <NavLink to="/best-sellers"> BEST SELLERS</NavLink>
         </li>
         <li className="ml-4 py-2 nav-link hidden xl:block">
-          <NavLink to="gift">GIFT SETS</NavLink>
+          <NavLink to="/gift">GIFT SETS</NavLink>
         </li>
         <li className="ml-4 py-2 nav-link hidden xl:block">
-          <NavLink to="brands">BRANDS</NavLink>
+          <NavLink to="/brands">BRANDS</NavLink>
         </li>
         <li className="ml-4 py-2 nav-link">
-          <NavLink to="fragrance">JOIN THE CLUB</NavLink>
+          <NavLink to="/fragrance">JOIN THE CLUB</NavLink>
         </li>
       </ul>
       <ul className="flex navbar-right">
         <li className="cursor-pointer has-triangle hidden md:block sign-in-btn relative">
-          <Link to="customeraccount">
+          <Link to="/customeraccount">
             <div className="nav-right-text-link">SIGN IN</div>
             <div className="triangle absolute"></div>
           </Link>
@@ -75,7 +75,7 @@ const Navbar: FC = () => {
           </div>
         </li>
         <li className="ml-9 cursor-pointer hidden md:block">
-          <Link to="help">
+          <Link to="/help">
             <div className="nav-right-text-link">HELP</div>
           </Link>
         </li>
@@ -84,7 +84,7 @@ const Navbar: FC = () => {
           <div className="triangle absolute"></div>
         </li>
         <li className="ml-4 cursor-pointer hidden sm:block">
-          <Link to="cart">
+          <Link to="/cart">
             <Optional icon={faCartShopping} textLight="CART" />
           </Link>
         </li>

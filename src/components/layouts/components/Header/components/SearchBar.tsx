@@ -32,7 +32,7 @@ const SearchBar: FC = () => {
           <Optional icon={faMedal} textBold="100%" textLight="AUTHENTIC" />
         </div>
         <div className="cart sm:hidden">
-          <NavLink to="cart">
+          <NavLink to="/cart">
             <CartItem />
           </NavLink>
         </div>
