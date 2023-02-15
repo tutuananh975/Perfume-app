@@ -13,12 +13,12 @@ const MainLayout: FC<PropOutlet> = ({ children } ) => {
         <div>
             <Header />
             <div className="title-products"></div>
-            <div className="container px-2">
-                <div className="grid grid-cols-6 gap-6">
-                    <div>
+            <div className="px-2">
+                <div className="grid grid-cols-12 gap-4">
+                    <div className="col-span-3">
                         <SideBar />
                     </div>
-                    <div className="col-span-5">
+                    <div className="col-span-9">
                         {children}
                     </div>
                 </div>

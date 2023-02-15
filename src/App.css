@@ -1,11 +1,12 @@
 img {
   background-size: cover;
 }
+
 .bg-9c6711 {
   background-color: #9c6711;
 }
 
-.bg-081857 {
+.bg-blue-081857 {
   background-color: #081857;
 }
 
@@ -16,15 +17,28 @@ img {
 .bg-d95442 {
   background-color: #d95442;
 }
+
+.bg-eee {
+  background-color: #eee;
+}
+
+
 .slick-next:before {
-  color : black !important;
+  color: black !important;
 }
+
 .slick-prev:before {
-  color : black !important;
+  color: black !important;
 }
+
 .text-cdcac9 {
   color: #cdcac9;
 }
+
 .text-6d6c97 {
-    color: #6d6c97;
+  color: #6d6c97;
+}
+
+.text-blue-081857 {
+  color: #081857;
 }
