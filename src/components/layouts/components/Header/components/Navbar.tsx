@@ -4,9 +4,7 @@ import Optional from "./Optional";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faBars } from "@fortawesome/free-solid-svg-icons";
-import { fab, faFacebook, faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
-
-// library.add("fab", "faFacebook", "faFacebookF", "faGoogle")
+import { FaFacebookF, FaGoogle } from "react-icons/fa";
 
 const Navbar: FC = () => {
   return (
@@ -61,13 +59,13 @@ const Navbar: FC = () => {
             <div className="other-login w-full">
               <div className="triangle-up"></div>
               <p className="text-6d6c97">Or log in with:</p>
-              <button className="w-full bg-5c79b1 text-xs p-1 text-white hover:opacity-90 rounded-sm mb-1">
-                <FontAwesomeIcon icon={["fab", "facebook-f"]} />
+              <button className="w-full bg-5c79b1 text-xs p-1 text-white hover:opacity-90 rounded-sm mb-1 flex items-center justify-center">
+                <FaFacebookF />
                 <span className="ml-1 font-light">Sign in with </span>
                 <span className="font-semibold">Facebook</span>
               </button>
-              <button className="w-full bg-d95442 text-xs p-1 text-white hover:opacity-90 rounded-sm">
-                <FontAwesomeIcon icon={["fab", "google"]} />
+              <button className="w-full bg-d95442 text-xs p-1 text-white hover:opacity-90 rounded-sm flex items-center justify-center">
+                <FaGoogle />
                 <span className="ml-1 font-light">Sign in with </span>
                 <span className="font-semibold">Google</span>
               </button>

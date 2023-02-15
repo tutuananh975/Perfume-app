@@ -15,7 +15,7 @@ const publicRoutes: {path: string, component: FC, layout?: any }[] = [
   { path: "/", component: HomePage, layout: NotSideBarLayOut },
   { path: "/best-sellers", component: BestSellers },
   { path: "/brands", component: Brands, layout: NotSideBarLayOut },
-  { path: "/customeraccount", component: Customeraccount },
+  { path: "/customeraccount", component: Customeraccount, layout: null },
   { path: "/fragrance", component: Fragrance, layout: null },
   { path: "/gift", component: Gift },
   { path: "/men", component: Men },
