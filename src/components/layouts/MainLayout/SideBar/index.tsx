@@ -16,6 +16,10 @@ const SideBar: FC = () => {
             <h2 className="sidebar-title font-semibold text-2xl mb-6">MEN'S PERFUME</h2>
             <h4 className="mb-9">Filter</h4>
             <DropDown />
+            <DropDown />
+            <DropDown />
+            <DropDown />
+            
         </div>
     )
 }
