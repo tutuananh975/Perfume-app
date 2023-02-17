@@ -28,7 +28,7 @@ const SideBar: FC = () => {
             <div className="sidebar-desc flex items-center text-xs pb-4">
                 <span className="mr-2">Home</span>
                 <span className="mr-2">
-                    <FaChevronRight size={10gi} />
+                    <FaChevronRight size={10} />
                 </span> 
                 <span>Perfume & Cologne Gift Sets</span>
             </div>
