@@ -1,14 +1,41 @@
-import { FC } from "react";
+import { FaChevronUp, FaChevronDown } from "react-icons/fa";
+import { FC, useState } from "react";
 
-const DropDown: FC = () => {
+interface DropDownProp {
+  dropDowntitle: string;
+  dropdownLinks: string[];
+}
+
+const DropDown: FC<DropDownProp> = ({ dropDowntitle, dropdownLinks }) => {
+  const [openDropDown, setOpenDropDown] = useState<Boolean>(false);
+
   return (
-    <div className="w-full lg:max-w-sm">
-      <select className="w-80 text-gray-500 outline-none">
-        <option>ReactJS Dropdown</option>
-        <option>Laravel 9 with React</option>
-        <option>React with Tailwind CSS</option>
-        <option>React With Headless UI</option>
-      </select>
+    <div 
+      className="mb-6 border-b border-stone-200"
+      style={{width: "80%"}}  
+    >
+      <div
+        className="drop-down-title flex justify-between items-center mb-6 cursor-pointer"
+        onClick={() => setOpenDropDown(!openDropDown)}
+      >
+        <h3 className="f font-semibold text-lg">{dropDowntitle}</h3>
+        <FaChevronDown />
+      </div>
+      {openDropDown && (
+        <ul 
+          className="ml-2 text-sm"
+          style={{
+            height: "180px",
+            overflowY: "scroll"
+          }}
+        >
+          {dropdownLinks.map((dropdownLink, index) => (
+            <li key={index} className="mt-6 cursor-pointer">
+              <input className="mr-2" type="checkbox" /> {dropdownLink}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
