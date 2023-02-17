@@ -1,29 +1,39 @@
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { FC, useState } from "react";
 
-const DropDown: FC = () => {
+interface DropDownProp {
+  dropDowntitle: string;
+  dropdownLinks: string[];
+}
+
+const DropDown: FC<DropDownProp> = ({ dropDowntitle, dropdownLinks }) => {
   const [openDropDown, setOpenDropDown] = useState<Boolean>(false);
 
   return (
-    <div className="w-full lg:max-w-sm">
+    <div 
+      className="mb-6 border-b border-stone-200"
+      style={{width: "80%"}}  
+    >
       <div
-        className="drop-down-title flex justify-between items-center"
+        className="drop-down-title flex justify-between items-center mb-6"
         onClick={() => setOpenDropDown(!openDropDown)}
       >
-        <h3 className="f font-semibold text-lg">GENDER</h3>
-        <FaChevronDown className="mr-20"/>
+        <h3 className="f font-semibold text-lg">{dropDowntitle}</h3>
+        <FaChevronDown />
       </div>
       {openDropDown && (
-        <ul className="ml-2 text-sm">
-          <li className="mt-6">
-            <input className="mr-2" type="checkbox" value="Women" /> Women
-          </li>
-          <li className="mt-6">
-            <input className="mr-2" type="checkbox" value="Men" /> Men
-          </li>
-          <li className="mt-6">
-            <input className="mr-2" type="checkbox" value="Unisex" /> Unisex
-          </li>
+        <ul 
+          className="ml-2 text-sm"
+          style={{
+            height: "180px",
+            overflowY: "scroll"
+          }}
+        >
+          {dropdownLinks.map((dropdownLink, index) => (
+            <li key={index} className="mt-6">
+              <input className="mr-2" type="checkbox" /> {dropdownLink}
+            </li>
+          ))}
         </ul>
       )}
     </div>
