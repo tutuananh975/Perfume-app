@@ -15,7 +15,7 @@ const DropDown: FC<DropDownProp> = ({ dropDowntitle, dropdownLinks }) => {
       style={{width: "80%"}}  
     >
       <div
-        className="drop-down-title flex justify-between items-center mb-6"
+        className="drop-down-title flex justify-between items-center mb-6 cursor-pointer"
         onClick={() => setOpenDropDown(!openDropDown)}
       >
         <h3 className="f font-semibold text-lg">{dropDowntitle}</h3>
@@ -30,7 +30,7 @@ const DropDown: FC<DropDownProp> = ({ dropDowntitle, dropdownLinks }) => {
           }}
         >
           {dropdownLinks.map((dropdownLink, index) => (
-            <li key={index} className="mt-6">
+            <li key={index} className="mt-6 cursor-pointer">
               <input className="mr-2" type="checkbox" /> {dropdownLink}
             </li>
           ))}

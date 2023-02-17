@@ -25,10 +25,10 @@ const SideBar: FC = () => {
 
     return(
         <div className="sidebar p-2">
-            <div className="sidebar-desc flex items-center text-xs py-4">
+            <div className="sidebar-desc flex items-center text-xs pb-4">
                 <span className="mr-2">Home</span>
                 <span className="mr-2">
-                    <FaChevronRight size={12} />
+                    <FaChevronRight size={10gi} />
                 </span> 
                 <span>Perfume & Cologne Gift Sets</span>
             </div>
