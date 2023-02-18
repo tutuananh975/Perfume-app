@@ -16,7 +16,7 @@ const MainLayout: FC<PropOutlet> = ({ children } ) => {
     return (
         <div>
             <Header />
-            <div className="title-products flex items-center text-xs pb-4">
+            <div className="title-products flex items-center text-sm pb-4 px-4">
                 <span className="mr-2">Home</span>
                 <span className="mr-2">
                     <FaChevronRight size={10} />
