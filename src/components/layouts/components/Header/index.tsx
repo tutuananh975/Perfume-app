@@ -1,7 +1,7 @@
 import { FC } from "react"
-import Navbar from "./components/Navbar"
-import SearchBar from "./components/SearchBar"
-import './Header.css'
+import Navbar from "./Navbar"
+import SearchBar from "./SearchBar"
+import './styles/Header.css'
 
 
 const Header: FC = () => {
