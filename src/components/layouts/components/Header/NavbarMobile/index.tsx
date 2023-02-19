@@ -24,7 +24,7 @@ const NavbarMobile: FC<PropNavbarMobile> = ({ onCloseNavbarMobile }) => {
                     <h3>MENU</h3>
                     <CloseBtn onClose={onCloseNavbarMobile}/>
                 </div>
-                <div className='flex items-center py-4 pr-2 bg-red-300 cursor-pointer'>
+                <div className='flex items-center py-4 pr-2 bg-red-300 cursor-pointer hover:bg-red-500'>
                     <div 
                         style={{
                             width: "43px",
