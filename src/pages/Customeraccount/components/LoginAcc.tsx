@@ -32,8 +32,8 @@ const Login:FC = () => {
     >
     {({handleSubmit,handleChange})=>(
         <Form onSubmit={handleSubmit} onChange={handleChange}>
-            <div className="text-center font-semibold text-2xl">SING IN</div>
-            <div className="text-center">Already have an account? Sign in for a more personalized experience</div>
+            <div className="text-center font-semibold text-2xl mb-4">SING IN</div>
+            <div className="text-center text-sm">Already have an account? Sign in for a more personalized experience</div>
             <div className="input-container">
                 <label className={valueOnChange?.userName && "label"}>Username</label>
                 <Field id="userName" name="userName" type="text" className=" w-full border-2 pt-4 pl-2 pb-1 inputAcc"/>

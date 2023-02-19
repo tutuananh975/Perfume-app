@@ -41,8 +41,8 @@ const HomePage: FC = () => {
             </div>
             <ProductList data={PerfectData}/>
             <div className="flex justify-end my-5 p-5">Shop perfect scents for winter<AiOutlineArrowRight className="text-2xl mx-1 pt-1 text-center"/></div>
-            <div className="flex">
-                <img src="https://cdn.shopify.com/s/files/1/0269/7763/2389/files/Perfumania_Store.jpg?v=1636134750" className="max-w-lg" alt="" />
+            <div className="block lg:flex">
+                <img src="https://cdn.shopify.com/s/files/1/0269/7763/2389/files/Perfumania_Store.jpg?v=1636134750" className="lg:max-w-lg" alt="" />
                 <div className="bg-black text-white text-center p-8">
                     <div className=" text-4xl font-medium ">OVER 100 STORES ACROSS THE US</div>
                     <div className="text-lg my-6">With over 100 discount fragrance retail stores throughout the United States, Perfumania offers a wide selection of high-quality products at substantial savings, serviced by our dedicated associates offering superior customer service.</div>
@@ -58,7 +58,7 @@ const HomePage: FC = () => {
                             <div>Genuine designer fragrances at discounted prices</div>
                         </div>
                     </div>
-                    <div className="bg-white text-black flex justify-center w-1/3 my-6 mx-auto p-2 rounded-xl cursor-pointer">
+                    <div className="bg-white text-black flex justify-center lg:w-1/3 w-3/4 my-6 mx-auto p-2 rounded-xl cursor-pointer">
                         <GoLocation className="m-1"/>
                         <div>Find your local store</div>
                     </div>

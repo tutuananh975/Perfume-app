@@ -14,7 +14,7 @@ const ProductList:React.FC<Props> = (props) => {
   const {data} = props
 
   return (
-    <div className='w-11/12 mx-auto'>
+    <div className='lg:w-11/12 w-10/12 mx-auto'>
       <Slider {...settings}>
       {data.map((data)=>(
       <div className='w-full' key={data.id}>
