@@ -6,12 +6,13 @@ import SideBar from "./SideBar";
 import SideBarMobile from "./SideBarMobile";
 
 interface PropOutlet {
-    children: any
+    children: any,
+    onCloseSideBarMobile: any
 }
 
 const MainLayout: FC<PropOutlet> = ({ children } ) => {
 
-    const [openSideBarMobile, setOpenSideBarMobile] = useState(false);
+    const [openSideBarMobile, setOpenSideBarMobile] = useState(true);
 
     return (
         <div>
@@ -26,14 +27,14 @@ const MainLayout: FC<PropOutlet> = ({ children } ) => {
             <div className="px-4">
                 <div className="grid grid-cols-4 gap-4">
                     <div className="hidden md:block md:col-span-1">
-                        <SideBar />
+                        <SideBar titleSideBar = "Men's Perfume"/>
                     </div>
                     <div className="col-start-1 col-end-5 md:col-span-3">
                         {children}
                     </div>
                 </div>
             </div>
-            {openSideBarMobile && <SideBarMobile />}    
+            {openSideBarMobile && <SideBarMobile onCloseSideBarMobile={() => setOpenSideBarMobile(false)}/>}    
             <Footer />
         </div>
     )

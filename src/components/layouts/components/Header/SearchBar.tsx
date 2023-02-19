@@ -1,5 +1,5 @@
 import { FC } from "react";
-import logo from "../icons/logo-main.png";
+import logo from "./icons/logo-main.png";
 import {
   faCarSide,
   faArrowsSpin,

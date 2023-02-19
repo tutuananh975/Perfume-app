@@ -12,14 +12,14 @@ const DropDown: FC<DropDownProp> = ({ dropDowntitle, dropdownLinks }) => {
   return (
     <div 
       className="mb-6 border-b border-stone-200"
-      style={{width: "80%"}}  
+      style={{width: "90"}}  
     >
       <div
         className="drop-down-title flex justify-between items-center mb-6 cursor-pointer"
         onClick={() => setOpenDropDown(!openDropDown)}
       >
-        <h3 className="f font-semibold text-lg">{dropDowntitle}</h3>
-        <FaChevronDown />
+        <h3 className="font-semibold text-lg">{dropDowntitle}</h3>
+        <FaChevronDown className="mr-6"/>
       </div>
       {openDropDown && (
         <ul 

@@ -1,18 +1,26 @@
 import { FC } from "react";
 import DropDown from "./Dropdown";
-import { dropdowns } from "../instance"; 
+import { dropdowns } from "./instance"; 
 
-const SideBar: FC = () => {
+interface PropSideBar {
+    titleSideBar: string,
+    children?: any
+}
+
+const SideBar: FC<PropSideBar> = ({ titleSideBar, children }) => {
 
     return(
-        <>
-            <h2 className="sidebar-title font-semibold text-2xl mb-6">MEN'S PERFUME</h2>
+        <div>
+            <div>
+                <h2 className="sidebar-title font-semibold text-2xl mb-6">{ titleSideBar }</h2>
+                { children }
+            </div>
             <h4 className="mb-9">Filter</h4>
-            {dropdowns.map(dropDown => (
-                <DropDown dropDowntitle = {dropDown.title} dropdownLinks = { dropDown.links }/>
+            {dropdowns.map((dropDown, index) => (
+                <DropDown key={index} dropDowntitle = {dropDown.title} dropdownLinks = { dropDown.links }/>
             ))}
 
-        </>
+        </div>
     )
 }
 
