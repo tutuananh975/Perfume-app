@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import Image from '../../../../Image';
 import { FaChevronRight } from "react-icons/fa";
+import { NavLink } from 'react-router-dom';
 
 
 interface PropNavbarMobileRow {
@@ -12,13 +13,15 @@ interface PropNavbarMobileRow {
 const NavbarMoblieRow: FC<PropNavbarMobileRow> = ({ alt, src, title }) => {
 
     return (
-        <div className='py-4 pr-2 flex justify-between items-center bg-slate-100'>
-            <div className='flex items-center'>
-                <Image alt={alt} src={src} w="43px" h="43px"/>
-                <h4 className='ml-4'>{title}</h4>
+        <NavLink to={alt}>
+            <div className='py-4 pr-2 flex justify-between items-center bg-slate-100 cursor-pointer hover:bg-slate-300'>
+                <div className='flex items-center'>
+                    {<Image alt={alt} src={src} w="43px" h="43px"/>}
+                    <h4 className='ml-4'>{title}</h4>
+                </div>
+                <FaChevronRight className='text-gray-300 mr-6'/>
             </div>
-            <FaChevronRight className='text-gray-300 mr-6'/>
-        </div>
+        </NavLink>
     )
 }
 
