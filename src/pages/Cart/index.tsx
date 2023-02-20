@@ -73,8 +73,8 @@ const Cart: FC = () => {
     })
   return (
     <div className="cart px-4 pt-9 pb-5">
-      <div className="grid grid-cols-3 gap-12">
-        <div className="col-span-2">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="col lg:col-span-2">
           <div className="border-b border-solid border-slate-300 font-semibold text-base py-6">
             YOUR CART
             <span className=" text-gray-400"> ( 5 ITEMS )</span>
@@ -95,6 +95,7 @@ const Cart: FC = () => {
         </div>
         <div className="col-span-1">
           <Order totalPrice = { totalPrice } savings = { savings }/>
+          
         </div>
       </div>
     </div>

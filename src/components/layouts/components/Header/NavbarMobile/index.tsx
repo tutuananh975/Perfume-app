@@ -18,7 +18,8 @@ const NavbarMobile: FC<PropNavbarMobile> = ({ onCloseNavbarMobile }) => {
                 style={{
                     width: "80%",
                     paddingBottom: "100px",
-                    zIndex: "2"
+                    zIndex: "2",
+                    overflow: "scroll"
                 }}    
             >
                 <div className='p-4 pr-2 flex justify-between items-center'>

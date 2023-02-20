@@ -38,6 +38,8 @@ const Order: FC<PropOrder> = ({ totalPrice, savings }) => {
                     <span>${totalPrice}</span>
                 </div>
             </div>
+
+            <button className="bg-black text-white w-full py-3 rounded-lg">PROCEED TO CHECKOUT</button>
         </div>
     )
 }
