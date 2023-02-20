@@ -29,7 +29,6 @@ const ProductCart: FC<ProductProp> = ({
   onCrease,
   onDelete
 }) => {
-
   return (
     <div className="flex py-8 items-center border-b border-solid border-slate-300 relative">
       <div className="product-cart-img mr-5 sm:w" style={{width:"135px", height:"135px", minWidth:"135px"}}>
@@ -39,7 +38,7 @@ const ProductCart: FC<ProductProp> = ({
         <div className="w-2/3 md:w-1/2">
           <div className="text-lg uppercase font-semibold leading-6">{name}</div>
           <p className=" text-base font-extralight mt-2">{desc}</p>
-          <p className="mt-1 text-base font-extralight">{size}</p>
+          <p className="mt-1 text-base font-extralight">Size: {size} oz.</p>
         </div>
         <div className="md:ml-4 font-normal text-base leading-tight">
           <h3 className="text-gray-400 mb-2 line-through">

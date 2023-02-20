@@ -37,7 +37,7 @@ const Cart: FC = () => {
     return data;
   }, [loading]);
 
-  const handleSetOrder = useCallback((cartProducts: any[]) => {
+  const handleSetOrder = (cartProducts: any[])=> {
     let newTotalPrice: number = 0;
     let newSavingPrice: number = 0;
     let newTotalItem: number = 0;
@@ -50,7 +50,7 @@ const Cart: FC = () => {
     setTotalPrice(newTotalPrice);
     setSavings(newSavingPrice);
     setTotalItems(newTotalItem);
-  }, [loading, putLoading, deleteLoading]);
+  };
 
   const handleCreaseAmout = (id: string) => {
     const newCart: any[] = [];
@@ -76,7 +76,6 @@ const Cart: FC = () => {
       }
     });
     setCartProducts(newCart);
-    console.log(newCart);
     setDataPut({ cart: newCart });
     handleSetOrder(newCart);
   };
@@ -92,6 +91,7 @@ const Cart: FC = () => {
   };
 
   useEffect(() => {
+    console.log('useEffect chạy')
     if (data) {
       setCartProducts(data.cart);
       handleSetOrder(data.cart)
