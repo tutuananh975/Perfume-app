@@ -1,6 +1,7 @@
 import { FC } from "react";
 import ProductItem from "../../components/ProductItem";
 
+
 const products = [
   {
     "title": "AZZARO",
@@ -95,7 +96,8 @@ const Men: FC = () => {
        }
         </div>
     </div>
-  );
-};
+
+      )}
+
 
 export default Men;
