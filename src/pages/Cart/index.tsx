@@ -6,14 +6,31 @@ import ProductCart from "./ProductCart";
 
 const Cart: FC = () => {
   const { data, loading, error } = useFetchTA('https://63782c6a5c477765122d0c95.mockapi.io/users/2');
+
+  const [dataPut, setDataPut] = useState({});
+  const { data: putData, loading: putLoading, error: putError } = useFetchTA('https://63782c6a5c477765122d0c95.mockapi.io/users/2', {
+    method: 'PUT',
+    body: dataPut
+  })
+  const [cartProducts, setCartProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
   const [savings, setSavings] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
-  console.log(data);
+  console.log(cartProducts);
+
+  const handleCreaseAmout = (id: string) => {
+    console.log('Crease amount for id:', id)
+  }
+
+  
+  const handleDecreaseAmout = (id: string) => {
+    console.log('Decrease amount for id:', id)
+  }
 
   useEffect(() => {
     if(data) {
+      setCartProducts(data.cart)
       let newTotalPrice: number = 0;
       let newSavingPrice: number = 0;
       let newTotalItem: number = 0;
@@ -54,6 +71,8 @@ const Cart: FC = () => {
               retailPrice={product.retailPrice}
               ourPrice={product.ourPrice}
               amount={product.amount}
+              onCrease = {() => handleCreaseAmout(product.id)}
+              onDecrease = {() => handleDecreaseAmout(product.id)}
             />
           ))}
         </div>

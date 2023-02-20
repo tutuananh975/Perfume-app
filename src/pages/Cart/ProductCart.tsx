@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, MouseEventHandler, useState } from "react";
 import Image from "../../components/Image";
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -11,6 +11,8 @@ interface ProductProp {
   retailPrice: number;
   ourPrice: number;
   amount: number;
+  onDecrease: MouseEventHandler;
+  onCrease: MouseEventHandler;
 }
 
 const ProductCart: FC<ProductProp> = ({
@@ -22,6 +24,8 @@ const ProductCart: FC<ProductProp> = ({
   retailPrice,
   ourPrice,
   amount,
+  onDecrease,
+  onCrease
 }) => {
 
   return (
@@ -43,6 +47,7 @@ const ProductCart: FC<ProductProp> = ({
         </div>
         <div className="flex md:ml-auto mt-4 md:mt-0">
           <div
+            onClick={onDecrease}
             className="flex justify-center items-center w-7 h-7 cursor-pointer border border-slate-300 mr-3 hover:bg-black hover:text-white"
             style={{
               borderRadius: "50%",
@@ -59,6 +64,7 @@ const ProductCart: FC<ProductProp> = ({
           </div>
           <span>{amount}</span>
           <div
+            onClick={onCrease}
             className="flex justify-center items-center w-7 h-7 cursor-pointer border border-slate-300 ml-3 bg-black hover:opacity-60"
             style={{
               borderRadius: "50%",
