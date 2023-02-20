@@ -1,12 +1,13 @@
 import { FC, useState } from "react";
 import { Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from 'yup';
+import { usePost } from "../../../hooksdd/usePost";
 
 
 interface newUser{
-    newName: string,
-    newUserName: string,
-    newPassWord: string,
+    FullName: string,
+    UserName: string,
+    PassWord: string,
     email: string,
 }
 
@@ -14,24 +15,25 @@ interface newUser{
 const CreateAcc:FC = () => {
 
     const [newValue, setNewValue] = useState<newUser>()
+    const [value, setdata] = useState<newUser>()
     
     return (
         <div>
     <Formik
         initialValues = {{
-            newName:"",
-            newUserName: "",
-            newPassWord: "",
+            FullName:"",
+            UserName: "",
+            PassWord: "",
             email: "",
         }}
         validationSchema = {Yup.object({
-            newName: Yup.string()
+            FullName: Yup.string()
             .max(20, "Name must less than or equal 20 charactes")
             .required("Please fill Full Name field"),
-            newUserName: Yup.string()
+            UserName: Yup.string()
                 .max(20, "UserName must less than or equal 20 charactes")
                 .required("Please fill UserName field"),
-            newPassWord:Yup.string()
+            PassWord:Yup.string()
                 .required("Please fill PassWord field"),
             email: Yup.string()
                 .required("Please fill Email field")
@@ -43,29 +45,28 @@ const CreateAcc:FC = () => {
         validateOnChange={false}
         
         onSubmit={(values:newUser)=>{
-            // alert(JSON.stringify(values))
-            console.log(values);
-            
+            setdata(values)
         }}
+
     >   
         <Form>
         <div>
             <div className="text-center font-semibold text-2xl mb-4">NEW TO PERFUMANIA?</div>
             <div className="text-center text-sm">By creating an account you will be able to shop faster, be up to date on an order’s status, and keep track of the orders you have previously made.</div>
             <div className="input-container">
-                <label htmlFor="newName" className={newValue?.newName && "label"}>Full Name</label>
-                <Field  id='newName' name="newName" type="text" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
-                <ErrorMessage name="newName" render={msg => <div className="errMessage">{msg}</div>}/>
+                <label htmlFor="FullName" className={newValue?.FullName && "label"}>Full Name</label>
+                <Field  id='FullName' name="FullName" type="text" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
+                <ErrorMessage name="FullName" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
             <div className="input-container">
-                <label htmlFor="newUserName" className={newValue?.newUserName && "label"}>Username</label>
-                <Field  id='newUserName' name="newUserName" type="text" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
-                <ErrorMessage name="newUserName" render={msg => <div className="errMessage">{msg}</div>}/>
+                <label htmlFor="UserName" className={newValue?.UserName && "label"}>Username</label>
+                <Field  id='UserName' name="UserName" type="text" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
+                <ErrorMessage name="UserName" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
             <div className="input-container">
-                <label htmlFor="newPassWord" className={newValue?.newPassWord && "label"}>Password</label>
-                <Field id='newPassWord'  name="newPassWord" type="password" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
-                <ErrorMessage name="newPassWord" render={msg => <div className="errMessage">{msg}</div>}/>
+                <label htmlFor="PassWord" className={newValue?.PassWord && "label"}>Password</label>
+                <Field id='PassWord'  name="PassWord" type="password" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
+                <ErrorMessage name="PassWord" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
             <div className="input-container">
                 <label htmlFor="email" className={newValue?.email && "label"}>Email</label>
