@@ -1,5 +1,5 @@
 import { FC } from "react";
-import logo from "../icons/logo-main.png";
+import logo from "./icons/logo-main.png";
 import {
   faCarSide,
   faArrowsSpin,
@@ -22,7 +22,7 @@ const SearchBar: FC = () => {
             className="search-input pl-4 pr-24 py-1 border h-full w-full rounded"
             placeholder="Search Value"
           />
-          <button className="btn-search bg-9c6711 w-20 h-full p-1 absolute right-0 rounded-r">
+          <button className="btn-search bg-9c6711 w-20 h-full p-1 absolute right-0 rounded-r hover:bg-orange-300">
             Search
           </button>
         </div>

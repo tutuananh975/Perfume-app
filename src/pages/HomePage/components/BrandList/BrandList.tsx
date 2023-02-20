@@ -12,7 +12,7 @@ interface item{
 const BrandList:React.FC = () => {
 
   return (
-    <div className='w-11/12 mx-auto'>
+    <div className='lg:w-11/12 w-10/12 mx-auto'>
         <Slider {...settings}>
         {BrandData.map((item:item)=>(
             <div key={item.id}>

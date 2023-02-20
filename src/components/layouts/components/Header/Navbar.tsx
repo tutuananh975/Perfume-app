@@ -1,20 +1,24 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import Optional from "./Optional";
-import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
+import NavbarMobile from "./NavbarMobile";
 
 const Navbar: FC = () => {
+  
+  const [isOpenNavbarMobile, setIsOpenNavbarMobile] = useState(false)
+
   return (
     <div className="navbar flex justify-between items-center">
       <ul className="flex text-base font-semibold">
-        <li className="py-2 mr-4 md:hidden">
-          <div className="flex items-center">
+        <li className="py-2 mr-4 xl:hidden">
+          <div className="flex items-center cursor-pointer" onClick={() => setIsOpenNavbarMobile(true)}>
             <FontAwesomeIcon className="text-cdcac9 text-2xl" icon={faBars} />
             <h4 className="ml-2">MENU</h4>
           </div>
+          
         </li>
         <li className="py-2 nav-link">
           <NavLink to="/women">
@@ -87,6 +91,7 @@ const Navbar: FC = () => {
           </Link>
         </li>
       </ul>
+      {isOpenNavbarMobile && <NavbarMobile onCloseNavbarMobile={() => {setIsOpenNavbarMobile(false)}}/>}
     </div>
   );
 };

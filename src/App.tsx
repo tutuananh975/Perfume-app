@@ -1,12 +1,12 @@
 import { Fragment } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, HashRouter } from 'react-router-dom';
 import './App.css';
 import { MainLayout } from './components/layouts';
 import { publicRoutes } from './routes';
 
 function App() {
   return (
-    <Router>
+    <HashRouter>
       <div className='App'>
         <Routes>
           {
@@ -18,7 +18,7 @@ function App() {
           }
         </Routes>
       </div>
-    </Router>
+    </HashRouter>
   );
 }
 
