@@ -1,76 +1,41 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
+import useFetchTA from "../../hooks/useFetch";
 import Order from "./Order";
 
 import ProductCart from "./ProductCart";
 
-const cartProducts = [
-  {
-    id: 1,
-    alt: "Ralph Lauren",
-    src: "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Ralph-Lauren-Polo-Red-Mens-Eau-de-Toilette-Spray-2.5-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Details_medium.jpg?v=1598971348",
-    name: "RALPH LAUREN",
-    desc: "Polo Red For Men By Ralph Lauren Eau De Toilette Spray",
-    size: "2.5 oz.",
-    retailPrice: 82.0,
-    ourPrice: 69.95,
-    amout: 1,
-  },
-  {
-    id: 2,
-    alt: "Ralph Lauren",
-    src: "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Ralph-Lauren-Polo-Red-Mens-Eau-de-Toilette-Spray-2.5-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Details_medium.jpg?v=1598971348",
-    name: "RALPH LAUREN",
-    desc: "Polo Red For Men By Ralph Lauren Eau De Toilette Spray",
-    size: "2.5 oz.",
-    retailPrice: 82.0,
-    ourPrice: 69.95,
-    amout: 1,
-  },
-  {
-    id: 3,
-    alt: "Ralph Lauren",
-    src: "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Ralph-Lauren-Polo-Red-Mens-Eau-de-Toilette-Spray-2.5-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Details_medium.jpg?v=1598971348",
-    name: "RALPH LAUREN",
-    desc: "Polo Red For Men By Ralph Lauren Eau De Toilette Spray",
-    size: "2.5 oz.",
-    retailPrice: 82.0,
-    ourPrice: 69.95,
-    amout: 1,
-  },
-  {
-    id: 4,
-    alt: "Ralph Lauren",
-    src: "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Ralph-Lauren-Polo-Red-Mens-Eau-de-Toilette-Spray-2.5-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Details_medium.jpg?v=1598971348",
-    name: "RALPH LAUREN",
-    desc: "Polo Red For Men By Ralph Lauren Eau De Toilette Spray",
-    size: "2.5 oz.",
-    retailPrice: 82.0,
-    ourPrice: 69.95,
-    amout: 1,
-  },
-  {
-    id: 5,
-    alt: "Ralph Lauren",
-    src: "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Ralph-Lauren-Polo-Red-Mens-Eau-de-Toilette-Spray-2.5-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Details_medium.jpg?v=1598971348",
-    name: "RALPH LAUREN",
-    desc: "Polo Red For Men By Ralph Lauren Eau De Toilette Spray",
-    size: "2.5 oz.",
-    retailPrice: 82.0,
-    ourPrice: 69.95,
-    amout: 1,
-  },
-];
+const Cart: FC = () => {
+  const { data, loading, error } = useFetchTA('https://63782c6a5c477765122d0c95.mockapi.io/users/2');
+  const [totalPrice, setTotalPrice] = useState(0);
 
-const Cart: FC = () => {    
-    const [totalPrice, setTotalPrice] = useState(() => {
-        return cartProducts.reduce((total, product) => {
-            return total + product.ourPrice*product.amout
-        }, 0)
-    });
+  const [savings, setSavings] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
 
-    const [savings, setSavings] = useState(() => {
-        return cartProducts.reduce((total, product) => total + (product.retailPrice - product.ourPrice) * product.amout, 0)
-    })
+  useEffect(() => {
+    if(data) {
+      let newTotalPrice: number = 0;
+      let newSavingPrice: number = 0;
+      let newTotalItem: number = 0;
+      data.cart.forEach((product: any) => {
+        newTotalPrice += product.ourPrice * product.amount;
+        newSavingPrice += (product.retailPrice - product.ourPrice)*product.amount;
+        newTotalItem += product.amount;
+      })
+      setTotalPrice(newTotalPrice);
+      setSavings(newSavingPrice);
+      setTotalItems(newTotalItem);
+    }
+  }, [data])
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+  // const totalPrice = data.cart.reduce((total: number, product: any) => {
+  //   return (total + Number((product.ourPrice))*Number(product.amount))  
+  // })
   return (
     <div className="cart px-4 pt-9 pb-5">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -79,23 +44,22 @@ const Cart: FC = () => {
             YOUR CART
             <span className=" text-gray-400"> ( 5 ITEMS )</span>
           </div>
-          {cartProducts.map((product) => (
+          {data.cart.map((product: any) => (
             <ProductCart
               key={product.id}
-              alt={product.alt}
-              src={product.src}
+              alt={product.name}
+              src={product.imgSrc}
               name={product.name}
               desc={product.desc}
               size={product.size}
               retailPrice={product.retailPrice}
               ourPrice={product.ourPrice}
-              amount={product.amout}
+              amount={product.amount}
             />
           ))}
         </div>
         <div className="col-span-1">
-          <Order totalPrice = { totalPrice } savings = { savings }/>
-          
+          <Order totalPrice = {totalPrice} savings = { savings } totalItems = {totalItems}/>   
         </div>
       </div>
     </div>

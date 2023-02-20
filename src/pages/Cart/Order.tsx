@@ -1,11 +1,12 @@
 import { FC } from "react";
 
 interface PropOrder {
-    totalPrice: number,
-    savings: number
+    totalPrice: number;
+    savings: number;
+    totalItems: number
 }
 
-const Order: FC<PropOrder> = ({ totalPrice, savings }) => {
+const Order: FC<PropOrder> = ({ totalPrice, savings, totalItems }) => {
 
     return (
         <div 
@@ -19,7 +20,7 @@ const Order: FC<PropOrder> = ({ totalPrice, savings }) => {
             <div className="text-lg leading-5">    
                 <div className="flex justify-between pb-6 mb-5 border-b border-dashed border-gray-300">
                     <span>Total Item(s)</span>
-                    <span className="font-semibold">5</span>
+                    <span className="font-semibold">{totalItems}</span>
                 </div>
                 <div className="flex justify-between mb-3 ">
                     <span>Total</span>
@@ -39,7 +40,7 @@ const Order: FC<PropOrder> = ({ totalPrice, savings }) => {
                 </div>
             </div>
 
-            <button className="bg-black text-white w-full py-3 rounded-lg">PROCEED TO CHECKOUT</button>
+            <button className="bg-black text-white w-full py-3 mb-4 rounded-lg hover:opacity-75">PROCEED TO CHECKOUT</button>
         </div>
     )
 }

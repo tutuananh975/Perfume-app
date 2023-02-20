@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import Image from "../../components/Image";
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -23,6 +23,7 @@ const ProductCart: FC<ProductProp> = ({
   ourPrice,
   amount,
 }) => {
+
   return (
     <div className="flex py-8 items-center border-b border-solid border-slate-300 relative">
       <div className="product-cart-img mr-5 sm:w" style={{width:"135px", height:"135px", minWidth:"135px"}}>
@@ -42,12 +43,12 @@ const ProductCart: FC<ProductProp> = ({
         </div>
         <div className="flex md:ml-auto mt-4 md:mt-0">
           <div
-            className="flex justify-center items-center w-7 h-7 cursor-pointer border border-slate-300 mr-3"
+            className="flex justify-center items-center w-7 h-7 cursor-pointer border border-slate-300 mr-3 hover:bg-black hover:text-white"
             style={{
               borderRadius: "50%",
             }}
           >
-            <span
+            <span 
               style={{
                 position: "relative",
                 top: "-2px",
@@ -58,7 +59,7 @@ const ProductCart: FC<ProductProp> = ({
           </div>
           <span>{amount}</span>
           <div
-            className="flex justify-center items-center w-7 h-7 cursor-pointer border border-slate-300 ml-3 bg-black"
+            className="flex justify-center items-center w-7 h-7 cursor-pointer border border-slate-300 ml-3 bg-black hover:opacity-60"
             style={{
               borderRadius: "50%",
             }}
