@@ -13,7 +13,7 @@ const Navbar: FC = () => {
   return (
     <div className="navbar flex justify-between items-center">
       <ul className="flex text-base font-semibold">
-        <li className="py-2 mr-4 md:hidden">
+        <li className="py-2 mr-4 xl:hidden">
           <div className="flex items-center cursor-pointer" onClick={() => setIsOpenNavbarMobile(true)}>
             <FontAwesomeIcon className="text-cdcac9 text-2xl" icon={faBars} />
             <h4 className="ml-2">MENU</h4>

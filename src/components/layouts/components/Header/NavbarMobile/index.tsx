@@ -3,6 +3,7 @@ import CloseBtn from '../../../../overflay/CloseBtn.tsx';
 import Overflay from '../../../../overflay/Overflay';
 import { FaUserAlt, FaChevronRight } from "react-icons/fa";
 import NavbarMoblieRow from './NavbarMobileRow';
+import { NavLink } from 'react-router-dom';
 
 interface PropNavbarMobile {
     onCloseNavbarMobile: Function
@@ -11,34 +12,37 @@ interface PropNavbarMobile {
 const NavbarMobile: FC<PropNavbarMobile> = ({ onCloseNavbarMobile }) => {
 
     return (
-        <div className='md:hidden'>
+        <div className='xl:hidden'>
             <div 
                 className='fixed top-0 bottom-0 left-0 bg-white'
                 style={{
                     width: "80%",
                     paddingBottom: "100px",
-                    zIndex: "2"
+                    zIndex: "2",
+                    overflow: "scroll"
                 }}    
             >
                 <div className='p-4 pr-2 flex justify-between items-center'>
-                    <h3>MENU</h3>
+                        <h3 className='font-semibold'>MENU</h3>
                     <CloseBtn onClose={onCloseNavbarMobile}/>
                 </div>
-                <div className='flex items-center py-4 pr-2 bg-red-300 cursor-pointer hover:bg-red-500'>
-                    <div 
-                        style={{
-                            width: "43px",
-                            height: "43px",
-                            borderRadius: "50%",
-                            backgroundColor: "grey",
-                            display: "flex"
-                        }}
-                    >
-                        <FaUserAlt className='m-auto'/>
+                <NavLink to="/customeraccount">
+                    <div className='flex items-center py-4 px-2 bg-red-300 cursor-pointer hover:bg-red-500'>
+                        <div 
+                            style={{
+                                width: "43px",
+                                height: "43px",
+                                borderRadius: "50%",
+                                backgroundColor: "grey",
+                                display: "flex"
+                            }}
+                        >
+                            <FaUserAlt className='m-auto'/>
+                        </div>
+                        <p className='ml-4'>My Acount</p>
+                        <FaChevronRight className='text-gray-300 mr-6 ml-auto'/>
                     </div>
-                    <p className='ml-4'>My Acount</p>
-                    <FaChevronRight className='text-gray-300 mr-6 ml-auto'/>
-                </div>
+                </NavLink>
                 <NavbarMoblieRow  
                     alt='Women' 
                     src='https://cdn.shopify.com/s/files/1/0269/7763/2389/files/women_icon_47eda231-6206-4341-8b62-dfdce31ca056.png'
