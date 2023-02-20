@@ -1,22 +1,31 @@
-import { FC, useState, useEffect, useMemo } from "react";
+import { FC, useState, useEffect, useMemo, useCallback } from "react";
 import useFetchTA from "../../hooks/useFetchTA";
 import Order from "./Order";
 
 import ProductCart from "./ProductCart";
 
 const Cart: FC = () => {
-
   const [dataPut, setDataPut] = useState({});
   const [dataDelete, setDataDelete] = useState({});
-  const { data, loading, error } = useFetchTA('https://63782c6a5c477765122d0c95.mockapi.io/users/2');
-  const { data: putData, loading: putLoading, error: putError } = useFetchTA('https://63782c6a5c477765122d0c95.mockapi.io/users/2', {
-    method: 'PUT',  
-    body: dataPut
-  })
-  const {data: deleteData, loading: deleteLoading, error: deleteError} = useFetchTA('https://63782c6a5c477765122d0c95.mockapi.io/users/2', {
-    method: 'PUT',
-    body: dataDelete
-  })
+  const { data, loading, error } = useFetchTA(
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/2"
+  );
+  const {
+    data: putData,
+    loading: putLoading,
+    error: putError,
+  } = useFetchTA("https://63782c6a5c477765122d0c95.mockapi.io/users/2", {
+    method: "PUT",
+    body: dataPut,
+  });
+  const {
+    data: deleteData,
+    loading: deleteLoading,
+    error: deleteError,
+  } = useFetchTA("https://63782c6a5c477765122d0c95.mockapi.io/users/2", {
+    method: "PUT",
+    body: dataDelete,
+  });
 
   const [cartProducts, setCartProducts] = useState<any[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -26,59 +35,66 @@ const Cart: FC = () => {
 
   useMemo(() => {
     return data;
-  }, [loading])
+  }, [loading]);
+
+  const handleSetOrder = useCallback((cartProducts: any[]) => {
+    let newTotalPrice: number = 0;
+    let newSavingPrice: number = 0;
+    let newTotalItem: number = 0;
+    cartProducts.forEach((product: any) => {
+      newTotalPrice += product.ourPrice * product.amount;
+      newSavingPrice +=
+        (product.retailPrice - product.ourPrice) * product.amount;
+      newTotalItem += product.amount;
+    });
+    setTotalPrice(newTotalPrice);
+    setSavings(newSavingPrice);
+    setTotalItems(newTotalItem);
+  }, [loading, putLoading, deleteLoading]);
 
   const handleCreaseAmout = (id: string) => {
     const newCart: any[] = [];
     cartProducts.forEach((product: any) => {
-      if(product.id === id) {
-        newCart.push({...product, amount: Number(product.amount) + 1})
+      if (product.id === id) {
+        newCart.push({ ...product, amount: Number(product.amount) + 1 });
       } else {
-        newCart.push(product)
+        newCart.push(product);
       }
-    })
+    });
     setCartProducts(newCart);
-    setDataPut({cart: newCart});
-  }
+    setDataPut({ cart: newCart });
+    handleSetOrder(newCart)
+  };
 
-  
   const handleDecreaseAmout = (id: string) => {
     const newCart: any[] = [];
     cartProducts.forEach((product: any) => {
-      if(product.id === id) {
-        newCart.push({...product, amount: Number(product.amount) - 1})
+      if (product.id === id) {
+        newCart.push({ ...product, amount: Number(product.amount) - 1 });
       } else {
-        newCart.push(product)
+        newCart.push(product);
       }
-    })
+    });
     setCartProducts(newCart);
     console.log(newCart);
-    setDataPut({cart: newCart})
-  }
+    setDataPut({ cart: newCart });
+    handleSetOrder(newCart);
+  };
 
   const handleDeleteCart = (id: string) => {
     const newCart = cartProducts.filter((product) => {
       return product.id !== id;
-    })
+    });
     setCartProducts(newCart);
     console.log(newCart);
-    setDataDelete({cart: newCart});
-  }
+    setDataDelete({ cart: newCart });
+    handleSetOrder(newCart);
+  };
 
   useEffect(() => {
-    if(data) {
-      setCartProducts(data.cart)
-      let newTotalPrice: number = 0;
-      let newSavingPrice: number = 0;
-      let newTotalItem: number = 0;
-      data.cart.forEach((product: any) => {
-        newTotalPrice += product.ourPrice * product.amount;
-        newSavingPrice += (product.retailPrice - product.ourPrice)*product.amount;
-        newTotalItem += product.amount;
-      })
-      setTotalPrice(newTotalPrice);
-      setSavings(newSavingPrice);
-      setTotalItems(newTotalItem);
+    if (data) {
+      setCartProducts(data.cart);
+      handleSetOrder(data.cart)
     }
   }, [data]);
 
@@ -109,14 +125,18 @@ const Cart: FC = () => {
               retailPrice={product.retailPrice}
               ourPrice={product.ourPrice}
               amount={product.amount}
-              onCrease = {() => handleCreaseAmout(product.id)}
-              onDecrease = {() => handleDecreaseAmout(product.id)}
-              onDelete = {() => handleDeleteCart(product.id)}
+              onCrease={() => handleCreaseAmout(product.id)}
+              onDecrease={() => handleDecreaseAmout(product.id)}
+              onDelete={() => handleDeleteCart(product.id)}
             />
           ))}
         </div>
         <div className="col-span-1">
-          <Order totalPrice = {totalPrice} savings = { savings } totalItems = {totalItems}/>   
+          <Order
+            totalPrice={totalPrice}
+            savings={savings}
+            totalItems={totalItems}
+          />
         </div>
       </div>
     </div>
