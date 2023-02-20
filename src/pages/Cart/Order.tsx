@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 
 interface PropOrder {
     totalPrice: number;
@@ -45,4 +45,4 @@ const Order: FC<PropOrder> = ({ totalPrice, savings, totalItems }) => {
     )
 }
 
-export default Order;
+export default memo(Order);

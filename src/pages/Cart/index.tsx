@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import useFetchTA from "../../hooks/useFetch";
+import useFetchTA from "../../hooks/useFetchTA";
 import Order from "./Order";
 
 import ProductCart from "./ProductCart";
@@ -10,6 +10,7 @@ const Cart: FC = () => {
 
   const [savings, setSavings] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
+  console.log(data);
 
   useEffect(() => {
     if(data) {
@@ -25,7 +26,8 @@ const Cart: FC = () => {
       setSavings(newSavingPrice);
       setTotalItems(newTotalItem);
     }
-  }, [data])
+  }, []);
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -33,9 +35,6 @@ const Cart: FC = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-  // const totalPrice = data.cart.reduce((total: number, product: any) => {
-  //   return (total + Number((product.ourPrice))*Number(product.amount))  
-  // })
   return (
     <div className="cart px-4 pt-9 pb-5">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
