@@ -1,3 +1,6 @@
+
+
+
 import { FC } from 'react';
 
 interface Prop {
@@ -21,4 +24,4 @@ const ProductItem: FC<Prop> = ({product}) =>{
   )
 }
 
-export default ProductItem
+export default ProductItem;
