@@ -1,7 +1,9 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from 'yup';
-import { usePost } from "../../../hooksdd/usePost";
+import useFetch from "../../../hooks/useFetch";
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from "react-toastify";
 
 
 interface newUser{
@@ -9,22 +11,45 @@ interface newUser{
     UserName: string,
     PassWord: string,
     email: string,
+    phone: string,
+    address: string,
 }
+
+interface newValueAcc{
+    FullName: string,
+    UserName: string,
+    PassWord: string,
+    email: string,
+    phone: string,
+    address: string
+    cart:[]
+}
+
+
 
 
 const CreateAcc:FC = () => {
 
     const [newValue, setNewValue] = useState<newUser>()
-    const [value, setdata] = useState<newUser>()
-    
+    const [valueAcc, setvaluesAcc] = useState<newValueAcc>()
+    const [method, setMethod] = useState<any> ("GET")
+      
+    const {data} = useFetch("https://6367c751edc85dbc84db8620.mockapi.io/ManagerAccount",{
+        method: method,
+        body: valueAcc
+      })
+
     return (
-        <div>
+    <div>
+        <ToastContainer/>
     <Formik
         initialValues = {{
             FullName:"",
             UserName: "",
             PassWord: "",
             email: "",
+            phone:  "",
+            address: ""
         }}
         validationSchema = {Yup.object({
             FullName: Yup.string()
@@ -38,6 +63,12 @@ const CreateAcc:FC = () => {
             email: Yup.string()
                 .required("Please fill Email field")
                 .email("Please fill in the correct email"),
+            phone: Yup.string()
+                .max(10, "Phone must less than or equal 10 charactes")
+                .required("Please fill Phone field"),
+            address: Yup.string()
+                .required("Please fill Address field"),
+                
         })}
         validate={(valueChange:newUser)=>{
             setNewValue(valueChange)
@@ -45,9 +76,18 @@ const CreateAcc:FC = () => {
         validateOnChange={false}
         
         onSubmit={(values:newUser)=>{
-            setdata(values)
+            const dataAcc:newValueAcc = ({...values,cart:[]})        
+            setvaluesAcc(dataAcc)
+            const isExi = data.some((elemen:any)=>{
+                if(elemen.UserName===dataAcc?.UserName)
+                return true
+        })
+            if(isExi){
+               toast.error("Tài khoản đã tồn tại")
+            }else{
+                setMethod("POST")
+            }
         }}
-
     >   
         <Form>
         <div>
@@ -73,6 +113,16 @@ const CreateAcc:FC = () => {
                 <Field id='email' type="text" name="email" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
                 <ErrorMessage name="email" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
+            <div className="input-container">
+                <label htmlFor="phone" className={newValue?.phone && "label"}>Phone</label>
+                <Field id='phone' type="number" name="phone" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
+                <ErrorMessage name="phone" render={msg => <div className="errMessage">{msg}</div>}/>
+            </div>
+            <div className="input-container">
+                <label htmlFor="address" className={newValue?.address && "label"}>Address</label>
+                <Field id='address' type="address" name="address" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
+                <ErrorMessage name="address" render={msg => <div className="errMessage">{msg}</div>}/>
+            </div>
             <div className='px-4'>
                 <button className="bg-black text-white w-full my-4 py-2 rounded-2xl" type="submit" >Create an Account </button>
             </div>     
@@ -80,7 +130,6 @@ const CreateAcc:FC = () => {
             </div>         
         </Form>
     </Formik>
-
     </div>                   
     )
 }
