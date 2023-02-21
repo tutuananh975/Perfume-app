@@ -1,49 +1,102 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useMemo, useCallback } from "react";
 import useFetchTA from "../../hooks/useFetchTA";
 import Order from "./Order";
 
 import ProductCart from "./ProductCart";
 
 const Cart: FC = () => {
-  const { data, loading, error } = useFetchTA('https://63782c6a5c477765122d0c95.mockapi.io/users/2');
-
   const [dataPut, setDataPut] = useState({});
-  const { data: putData, loading: putLoading, error: putError } = useFetchTA('https://63782c6a5c477765122d0c95.mockapi.io/users/2', {
-    method: 'PUT',
-    body: dataPut
-  })
-  const [cartProducts, setCartProducts] = useState([]);
+  const [dataDelete, setDataDelete] = useState({});
+  const { data, loading, error } = useFetchTA(
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/2"
+  );
+  const {
+    data: putData,
+    loading: putLoading,
+    error: putError,
+  } = useFetchTA("https://63782c6a5c477765122d0c95.mockapi.io/users/2", {
+    method: "PUT",
+    body: dataPut,
+  });
+  const {
+    data: deleteData,
+    loading: deleteLoading,
+    error: deleteError,
+  } = useFetchTA("https://63782c6a5c477765122d0c95.mockapi.io/users/2", {
+    method: "PUT",
+    body: dataDelete,
+  });
+
+  const [cartProducts, setCartProducts] = useState<any[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
   const [savings, setSavings] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
-  console.log(cartProducts);
+
+  useMemo(() => {
+    return data;
+  }, [loading]);
+
+  const handleSetOrder = (cartProducts: any[])=> {
+    let newTotalPrice: number = 0;
+    let newSavingPrice: number = 0;
+    let newTotalItem: number = 0;
+    cartProducts.forEach((product: any) => {
+      newTotalPrice += product.ourPrice * product.amount;
+      newSavingPrice +=
+        (product.retailPrice - product.ourPrice) * product.amount;
+      newTotalItem += product.amount;
+    });
+    setTotalPrice(newTotalPrice);
+    setSavings(newSavingPrice);
+    setTotalItems(newTotalItem);
+  };
 
   const handleCreaseAmout = (id: string) => {
-    console.log('Crease amount for id:', id)
-  }
+    const newCart: any[] = [];
+    cartProducts.forEach((product: any) => {
+      if (product.id === id) {
+        newCart.push({ ...product, amount: Number(product.amount) + 1 });
+      } else {
+        newCart.push(product);
+      }
+    });
+    setCartProducts(newCart);
+    setDataPut({ cart: newCart });
+    handleSetOrder(newCart)
+  };
 
-  
   const handleDecreaseAmout = (id: string) => {
-    console.log('Decrease amount for id:', id)
-  }
+    const newCart: any[] = [];
+    cartProducts.forEach((product: any) => {
+      if (product.id === id) {
+        newCart.push({ ...product, amount: Number(product.amount) - 1 });
+      } else {
+        newCart.push(product);
+      }
+    });
+    setCartProducts(newCart);
+    setDataPut({ cart: newCart });
+    handleSetOrder(newCart);
+  };
+
+  const handleDeleteCart = (id: string) => {
+    const newCart = cartProducts.filter((product) => {
+      return product.id !== id;
+    });
+    setCartProducts(newCart);
+    console.log(newCart);
+    setDataDelete({ cart: newCart });
+    handleSetOrder(newCart);
+  };
 
   useEffect(() => {
-    if(data) {
-      setCartProducts(data.cart)
-      let newTotalPrice: number = 0;
-      let newSavingPrice: number = 0;
-      let newTotalItem: number = 0;
-      data.cart.forEach((product: any) => {
-        newTotalPrice += product.ourPrice * product.amount;
-        newSavingPrice += (product.retailPrice - product.ourPrice)*product.amount;
-        newTotalItem += product.amount;
-      })
-      setTotalPrice(newTotalPrice);
-      setSavings(newSavingPrice);
-      setTotalItems(newTotalItem);
+    console.log('useEffect chạy')
+    if (data) {
+      setCartProducts(data.cart);
+      handleSetOrder(data.cart)
     }
-  }, []);
+  }, [data]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -52,6 +105,7 @@ const Cart: FC = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
+
   return (
     <div className="cart px-4 pt-9 pb-5">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -60,7 +114,7 @@ const Cart: FC = () => {
             YOUR CART
             <span className=" text-gray-400"> ( 5 ITEMS )</span>
           </div>
-          {data.cart.map((product: any) => (
+          {cartProducts.map((product: any) => (
             <ProductCart
               key={product.id}
               alt={product.name}
@@ -71,13 +125,18 @@ const Cart: FC = () => {
               retailPrice={product.retailPrice}
               ourPrice={product.ourPrice}
               amount={product.amount}
-              onCrease = {() => handleCreaseAmout(product.id)}
-              onDecrease = {() => handleDecreaseAmout(product.id)}
+              onCrease={() => handleCreaseAmout(product.id)}
+              onDecrease={() => handleDecreaseAmout(product.id)}
+              onDelete={() => handleDeleteCart(product.id)}
             />
           ))}
         </div>
         <div className="col-span-1">
-          <Order totalPrice = {totalPrice} savings = { savings } totalItems = {totalItems}/>   
+          <Order
+            totalPrice={totalPrice}
+            savings={savings}
+            totalItems={totalItems}
+          />
         </div>
       </div>
     </div>

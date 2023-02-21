@@ -7,7 +7,6 @@ interface PropOrder {
 }
 
 const Order: FC<PropOrder> = ({ totalPrice, savings, totalItems }) => {
-
     return (
         <div 
             style={{
@@ -24,7 +23,7 @@ const Order: FC<PropOrder> = ({ totalPrice, savings, totalItems }) => {
                 </div>
                 <div className="flex justify-between mb-3 ">
                     <span>Total</span>
-                    <span className="font-semibold leading-6">${totalPrice}</span>
+                    <span className="font-semibold leading-6">${totalPrice.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between pb-6 mb-3">
                     <span>Savings</span>
@@ -36,7 +35,7 @@ const Order: FC<PropOrder> = ({ totalPrice, savings, totalItems }) => {
                 </div>
                 <div className="flex justify-between pb-6 mb-4 font-bold text-2xl leading-7">
                     <span>Subtotal</span>
-                    <span>${totalPrice}</span>
+                    <span>${totalPrice.toFixed(2)}</span>
                 </div>
             </div>
 
@@ -45,4 +44,4 @@ const Order: FC<PropOrder> = ({ totalPrice, savings, totalItems }) => {
     )
 }
 
-export default memo(Order);
+export default Order;
