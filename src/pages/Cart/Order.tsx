@@ -1,4 +1,5 @@
-import { FC, memo } from "react";
+import { FC } from "react";
+import { Link } from "react-router-dom";
 
 interface PropOrder {
     totalPrice: number;
@@ -38,8 +39,9 @@ const Order: FC<PropOrder> = ({ totalPrice, savings, totalItems }) => {
                     <span>${totalPrice.toFixed(2)}</span>
                 </div>
             </div>
-
-            <button className="bg-black text-white w-full py-3 mb-4 rounded-lg hover:opacity-75">PROCEED TO CHECKOUT</button>
+            <Link to="/payment">
+                <button className="bg-black text-white w-full py-3 mb-4 rounded-lg hover:opacity-75">PROCEED TO CHECKOUT</button>
+            </Link>
         </div>
     )
 }
