@@ -11,6 +11,7 @@ import Cart from "../pages/Cart";
 import { FC } from "react";
 import NotSideBarLayOut from "../components/layouts/NotSideBarLayOut";
 import Payment from "../pages/Payment";
+import ProductDetail from "../pages/ProductDetail";
 
 const publicRoutes: {path: string, component: FC, layout?: any }[] = [
   { path: "/", component: HomePage, layout: NotSideBarLayOut },
@@ -23,7 +24,8 @@ const publicRoutes: {path: string, component: FC, layout?: any }[] = [
   { path: "/women", component: Women },
   { path: "/help", component: Help, layout: NotSideBarLayOut },
   { path: "/cart", component: Cart, layout: NotSideBarLayOut },
-  { path: "/payment", component: Payment, layout: null }
+  { path: "/payment", component: Payment, layout: null },
+  { path: "productdetail", component: ProductDetail, layout: NotSideBarLayOut}
 ];
 
 const privateRoutes: [] = [];

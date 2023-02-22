@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { NavLink } from 'react-router-dom';
 
 interface Prop {
     product: any
@@ -16,7 +17,12 @@ const ProductItem: FC<Prop> = ({product}) =>{
                 <p>{product.description}</p>
                 <b>{product.price}</b>
                 <br/>
-                <button className='mt-2 px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200'>View details</button>
+                <button
+                 className='mt-2 px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200'>
+                 <NavLink to="/productdetail">
+                    <span>View details</span>
+                 </NavLink>
+                </button>
             </div>
         </div>
     </div>
