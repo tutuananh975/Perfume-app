@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 interface PropOverflay {
-    onClose: any
+    onClose?: any
 }
 
 const Overflay: FC<PropOverflay> = ({ onClose }) => {

@@ -1,13 +1,21 @@
-import { FC, useState, useEffect, useMemo, useCallback } from "react";
+import { FC, useState, useEffect, useMemo } from "react";
+import Overflay from "../../components/overflay/Overflay";
 import useFetchTA from "../../hooks/useFetchTA";
-import Order from "./Order";
 
+import Order from "./Order";
 import ProductCart from "./ProductCart";
+
+interface UseFetchReturn {
+  data: any;
+  loading: boolean;
+  error: any;
+}
 
 const Cart: FC = () => {
   const [dataPut, setDataPut] = useState({});
   const [dataDelete, setDataDelete] = useState({});
-  const { data, loading, error } = useFetchTA(
+
+  const { data, loading, error } =  useFetchTA(
     "https://63782c6a5c477765122d0c95.mockapi.io/users/2"
   );
   const {
@@ -33,11 +41,11 @@ const Cart: FC = () => {
   const [savings, setSavings] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
 
-  useMemo(() => {
+  const dataMemo = useMemo(() => {
     return data;
   }, [loading]);
 
-  const handleSetOrder = (cartProducts: any[])=> {
+  const handleSetOrder = (cartProducts: any[]) => {
     let newTotalPrice: number = 0;
     let newSavingPrice: number = 0;
     let newTotalItem: number = 0;
@@ -63,7 +71,7 @@ const Cart: FC = () => {
     });
     setCartProducts(newCart);
     setDataPut({ cart: newCart });
-    handleSetOrder(newCart)
+    handleSetOrder(newCart);
   };
 
   const handleDecreaseAmout = (id: string) => {
@@ -91,16 +99,12 @@ const Cart: FC = () => {
   };
 
   useEffect(() => {
-    console.log('useEffect chạy')
-    if (data) {
-      setCartProducts(data.cart);
-      handleSetOrder(data.cart)
+    console.log("useEffect chạy");
+    if (dataMemo) {
+      setCartProducts(dataMemo.cart);
+      handleSetOrder(dataMemo.cart);
     }
-  }, [data]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  }, [dataMemo]);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -108,6 +112,17 @@ const Cart: FC = () => {
 
   return (
     <div className="cart px-4 pt-9 pb-5">
+      {(loading || putLoading || deleteLoading) && (
+        <div className="fixed top-0 left-0 bottom-0 right-0 z-10 flex justify-center items-center">
+          <Overflay />
+          <div className="loading-spinner z-20"></div>
+        </div>
+      )}
+
+      {error && <div><h3>Get error: {error.message}</h3></div>}
+      {putError && <div><h3>Get error: {putError.message}</h3></div>}
+      {deleteError && <div><h3>Get error: {deleteError.message}</h3></div>}
+      
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <div className="col lg:col-span-2">
           <div className="border-b border-solid border-slate-300 font-semibold text-base py-6">
