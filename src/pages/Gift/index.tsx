@@ -6,7 +6,7 @@ const Gift: FC = () => {
     return (
         <div className="px-4 pt-2">
         <Banner />
-        <ProductList/>
+        <ProductList products={[]}/>
       </div>
     )
 }
