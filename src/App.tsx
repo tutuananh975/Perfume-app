@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, HashRouter } from 'react-router
 import './App.css';
 import { MainLayout } from './components/layouts';
 import { publicRoutes } from './routes';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
           {
             publicRoutes.map((route, index) => {
               const Layout: any = route.layout === undefined ? MainLayout : route.layout === null ? Fragment : route.layout ;
-              const Page = route.component
+              const Page = route.component;
               return <Route key={index} path={route.path} element={<Layout><Page /></Layout>} />
             })
           }
