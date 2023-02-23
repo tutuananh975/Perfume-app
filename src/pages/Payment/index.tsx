@@ -28,7 +28,7 @@ const Payment: FC = () => {
                 </div>
             </div>
             <div className="col pt-12 pr-14">
-                2
+                
             </div>
         </div>
 

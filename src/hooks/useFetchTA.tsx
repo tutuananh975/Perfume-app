@@ -15,8 +15,14 @@ const useFetchTA = (url: string, { method = 'GET', body }: UseFetchProps = {}) :
     const [data, setData] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<any>(null);
+    const [initialFetchDone, setInitialFetchDone] = useState<boolean>(false);
 
     useEffect(() => {
+        if(!initialFetchDone) {
+            setInitialFetchDone(true);
+            return
+        }
+
         const fetchData = async () => {
             try {
                 const options = {
@@ -34,7 +40,7 @@ const useFetchTA = (url: string, { method = 'GET', body }: UseFetchProps = {}) :
             }
         };
         fetchData();
-    }, [url, method, body])
+    }, [url, method, body, initialFetchDone])
 
     return {data, loading, error}
 }
