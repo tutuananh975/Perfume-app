@@ -15,8 +15,8 @@ const Cart: FC = () => {
   const [dataPut, setDataPut] = useState({});
   const [dataDelete, setDataDelete] = useState({});
 
-  const { data, loading, error } =  useFetchTA(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/2"
+  const { data, loading, error } = useFetchTA(
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/2" 
   );
   const {
     data: putData,
@@ -75,10 +75,13 @@ const Cart: FC = () => {
   };
 
   const handleDecreaseAmout = (id: string) => {
+    console.log(cartProducts)
     const newCart: any[] = [];
     cartProducts.forEach((product: any) => {
       if (product.id === id) {
-        newCart.push({ ...product, amount: Number(product.amount) - 1 });
+        if(product.amount > 1) {
+          newCart.push({ ...product, amount: Number(product.amount) - 1 });
+        }
       } else {
         newCart.push(product);
       }
@@ -99,7 +102,6 @@ const Cart: FC = () => {
   };
 
   useEffect(() => {
-    console.log("useEffect chạy");
     if (dataMemo) {
       setCartProducts(dataMemo.cart);
       handleSetOrder(dataMemo.cart);

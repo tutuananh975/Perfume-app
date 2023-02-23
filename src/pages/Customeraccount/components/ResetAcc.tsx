@@ -31,7 +31,7 @@ const ResetAcc:FC = () => {
             <div className="text-center font-semibold text-2xl mb-4">RESET PASSWORD</div>
             <div className="text-center text-sm">To have your password reset, enter your email address below. We will then send an email containing a link to reset your password.</div>
             <div className="input-container">
-                <label className={valueOnChange?.email && "label"}>Email</label>
+                <label className={valueOnChange?.email? "label" : "labels"}>Email</label>
                 <Field id="email" name="email" type="text" className=" w-full border-2 pt-4 pl-2 pb-1 inputAcc"/>
                 <ErrorMessage name='email' render={msg => <div className="errMessage">{msg}</div>}/>
             </div>

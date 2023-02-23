@@ -39,6 +39,8 @@ const CreateAcc:FC = () => {
         body: valueAcc
       })
 
+    console.log(method);
+
     return (
     <div>
         <ToastContainer/>
@@ -86,40 +88,46 @@ const CreateAcc:FC = () => {
                toast.error("Tài khoản đã tồn tại")
             }else{
                 setMethod("POST")
+                toast.success("Đăng ký tài khoản thành công")
+
+                setTimeout(()=>{
+                    setMethod("GET")
+                },2000)
             }
         }}
+        
     >   
         <Form>
         <div>
             <div className="text-center font-semibold text-2xl mb-4">NEW TO PERFUMANIA?</div>
             <div className="text-center text-sm">By creating an account you will be able to shop faster, be up to date on an order’s status, and keep track of the orders you have previously made.</div>
             <div className="input-container">
-                <label htmlFor="FullName" className={newValue?.FullName && "label"}>Full Name</label>
+                <label htmlFor="FullName" className={newValue?.FullName? "label" : "labels"}>Full Name</label>
                 <Field  id='FullName' name="FullName" type="text" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
                 <ErrorMessage name="FullName" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
             <div className="input-container">
-                <label htmlFor="UserName" className={newValue?.UserName && "label"}>Username</label>
+                <label htmlFor="UserName" className={newValue?.UserName? "label" : "labels"}>Username</label>
                 <Field  id='UserName' name="UserName" type="text" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
                 <ErrorMessage name="UserName" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
             <div className="input-container">
-                <label htmlFor="PassWord" className={newValue?.PassWord && "label"}>Password</label>
+                <label htmlFor="PassWord" className={newValue?.PassWord? "label" : "labels"}>Password</label>
                 <Field id='PassWord'  name="PassWord" type="password" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
                 <ErrorMessage name="PassWord" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
             <div className="input-container">
-                <label htmlFor="email" className={newValue?.email && "label"}>Email</label>
+                <label htmlFor="email" className={newValue?.email? "label" : "labels"}>Email</label>
                 <Field id='email' type="text" name="email" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
                 <ErrorMessage name="email" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
             <div className="input-container">
-                <label htmlFor="phone" className={newValue?.phone && "label"}>Phone</label>
+                <label htmlFor="phone" className={newValue?.phone? "label" : "labels"}>Phone</label>
                 <Field id='phone' type="number" name="phone" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
                 <ErrorMessage name="phone" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
             <div className="input-container">
-                <label htmlFor="address" className={newValue?.address && "label"}>Address</label>
+                <label htmlFor="address" className={newValue?.address? "label" : "labels"}>Address</label>
                 <Field id='address' type="address" name="address" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
                 <ErrorMessage name="address" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
