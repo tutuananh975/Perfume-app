@@ -3,188 +3,39 @@ import ProductItem from "../ProductItem";
 import Pagination from "../Pagination";
 import SideBarMobile from "../layouts/MainLayout/SideBarMobile";
 
-const ProductList: FC = () => {
-  const products = [
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Azzaro-Chrome-Mens-Eau-de-Toilette-Spray-6.8-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Main.jpg?v=1580828163",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Azzaro-Chrome-Mens-Eau-de-Toilette-Spray-6.8-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Main.jpg?v=1580828163",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Azzaro-Chrome-Mens-Eau-de-Toilette-Spray-6.8-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Main.jpg?v=1580828163",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Azzaro-Chrome-Mens-Eau-de-Toilette-Spray-6.8-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Main.jpg?v=1580828163",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Azzaro-Chrome-Mens-Eau-de-Toilette-Spray-6.8-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Main.jpg?v=1580828163",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Azzaro-Chrome-Mens-Eau-de-Toilette-Spray-6.8-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Main.jpg?v=1580828163",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Azzaro-Chrome-Mens-Eau-de-Toilette-Spray-6.8-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Main.jpg?v=1580828163",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Azzaro-Chrome-Mens-Eau-de-Toilette-Spray-6.8-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Main.jpg?v=1580828163",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Azzaro-Chrome-Mens-Eau-de-Toilette-Spray-6.8-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Main.jpg?v=1580828163",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Azzaro-Chrome-Mens-Eau-de-Toilette-Spray-6.8-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Main.jpg?v=1580828163",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Azzaro-Chrome-Mens-Eau-de-Toilette-Spray-6.8-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Main.jpg?v=1580828163",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Azzaro-Chrome-Mens-Eau-de-Toilette-Spray-6.8-Best-Price-Fragrance-Parfume-FragranceOutlet.com-Main.jpg?v=1580828163",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Burberry-Brit-Men-Eau-de-Toilette-1.6-Best-Price-Fragrance-Parfume-FragranceOutlet.com-MAIN.jpg?v=1649948781",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Burberry-Brit-Men-Eau-de-Toilette-1.6-Best-Price-Fragrance-Parfume-FragranceOutlet.com-MAIN.jpg?v=1649948781",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Burberry-Brit-Men-Eau-de-Toilette-1.6-Best-Price-Fragrance-Parfume-FragranceOutlet.com-MAIN.jpg?v=1649948781",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Burberry-Brit-Men-Eau-de-Toilette-1.6-Best-Price-Fragrance-Parfume-FragranceOutlet.com-MAIN.jpg?v=1649948781",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Burberry-Brit-Men-Eau-de-Toilette-1.6-Best-Price-Fragrance-Parfume-FragranceOutlet.com-MAIN.jpg?v=1649948781",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Burberry-Brit-Men-Eau-de-Toilette-1.6-Best-Price-Fragrance-Parfume-FragranceOutlet.com-MAIN.jpg?v=1649948781",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Burberry-Brit-Men-Eau-de-Toilette-1.6-Best-Price-Fragrance-Parfume-FragranceOutlet.com-MAIN.jpg?v=1649948781",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Burberry-Brit-Men-Eau-de-Toilette-1.6-Best-Price-Fragrance-Parfume-FragranceOutlet.com-MAIN.jpg?v=1649948781",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Burberry-Brit-Men-Eau-de-Toilette-1.6-Best-Price-Fragrance-Parfume-FragranceOutlet.com-MAIN.jpg?v=1649948781",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Burberry-Brit-Men-Eau-de-Toilette-1.6-Best-Price-Fragrance-Parfume-FragranceOutlet.com-MAIN.jpg?v=1649948781",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Burberry-Brit-Men-Eau-de-Toilette-1.6-Best-Price-Fragrance-Parfume-FragranceOutlet.com-MAIN.jpg?v=1649948781",
-    },
-    {
-      title: "AZZARO",
-      description: "Azzaro Chrome For Men By Azzaro Eau De Toilette Spray",
-      price: "$36.95 - $92.95",
-      imgUrl:
-        "https://cdn.shopify.com/s/files/1/0269/7763/2389/products/Burberry-Brit-Men-Eau-de-Toilette-1.6-Best-Price-Fragrance-Parfume-FragranceOutlet.com-MAIN.jpg?v=1649948781",
-    },
-  ];
 
+interface Product {
+  imgSrc: string,
+  name: string,
+  desc: string,
+  sex: string,
+  retailPrice:number,
+  ourPrice: number,
+  id: any
+}
+
+type Props = {
+  products: Product[];
+}
+
+const ProductList: FC<Props> = ({products}) => {
+  console.log(products);
+  
+
+
+
+  
+  
   const [isOpenSidebarMobile, setIsOpenSidebarMobile] = useState(false);
+  const [isOpenSortBar, setIsOpenSortBar] = useState(false)
 
   const [currentPage, setCurrentPage] = useState(1);
-  const postPerPage = 12;
+  const productPerPage = 12;
 
-  const lastPostIndex = currentPage * postPerPage;
-  const firstPostIndex = lastPostIndex - postPerPage;
-  const currentPosts = products.slice(firstPostIndex, lastPostIndex);
-
-  console.log(currentPosts);
+  const lastProductIndex = currentPage * productPerPage;
+  const firstProductIndex = lastProductIndex - productPerPage ;
+ 
+ 
   return (
     <>
       {isOpenSidebarMobile && (
@@ -195,26 +46,55 @@ const ProductList: FC = () => {
         />
       )}
 
-      <div className="mt-8 md:hidden">
+      <div className="mt-8 flex justify-end relative">
         <button
-          className="rounded bg-gray-200 h-8 w-14 flex items-center justify-center"
+          className="mr-auto rounded bg-gray-200 h-8 w-14 flex items-center justify-center md:hidden"
           onClick={() => setIsOpenSidebarMobile(true)}
         >
           Filter
         </button>
+
+        <button
+          className="rounded bg-gray-200 h-8 w-14 flex items-center justify-center"
+          onClick={() => {setIsOpenSortBar(!isOpenSortBar)}}
+        >
+          Sort
+        </button>
+        <div className={isOpenSortBar? "absolute w-36 h-28 right-0 top-8 bg-white shadow-lg" : "hidden"}>
+          <ul className="">
+            <li className="pl-1 hover:bg-gray-200 cursor-pointer" onClick={() => {
+              products = products.sort((a,b) => a.ourPrice - b.ourPrice)
+              setIsOpenSortBar(!isOpenSortBar)
+            }}
+            >Price, low to high</li>
+            <li className="pl-1 hover:bg-gray-200 cursor-pointer" onClick={() => {
+              products = products.sort((a,b) => b.ourPrice - a.ourPrice)
+              setIsOpenSortBar(!isOpenSortBar)
+            }}>Price, high to low</li>
+            <li className="pl-1 hover:bg-gray-200 cursor-pointer" onClick={() => {
+              products = products.sort((a,b) => a.name.localeCompare(b.name))
+              setIsOpenSortBar(!isOpenSortBar)
+            }}>Alphabetically, A-Z</li>
+            <li className="pl-1 hover:bg-gray-200 cursor-pointer" onClick={() => {
+              products = products.sort((a,b) => b.name.localeCompare(a.name))
+              setIsOpenSortBar(!isOpenSortBar)
+            }}>Alphabetically, Z-A</li>
+          </ul>
+        </div>
       </div>
       <div className=" -mr-4  pt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-        {currentPosts.map((product, i) => {
+        {
+        products.slice(firstProductIndex, lastProductIndex).map((product) => {
           return (
             <>
-              <ProductItem key={i} product={product} />
+              <ProductItem key={product.id} product={product} />
             </>
           );
         })}
       </div>
       <Pagination
-        totalPosts={products.length}
-        postsPerPage={postPerPage}
+        totalProducts={products.length}
+        productsPerPage={productPerPage}
         setCurrentPage={setCurrentPage}
       />
     </>

@@ -25,7 +25,8 @@ const publicRoutes: {path: string, component: FC, layout?: any }[] = [
   { path: "/help", component: Help, layout: NotSideBarLayOut },
   { path: "/cart", component: Cart, layout: NotSideBarLayOut },
   { path: "/payment", component: Payment, layout: null },
-  { path: "productdetail", component: ProductDetail, layout: NotSideBarLayOut}
+  { path: "productdetail", component: ProductDetail, layout: NotSideBarLayOut},
+  
 ];
 
 const privateRoutes: [] = [];
