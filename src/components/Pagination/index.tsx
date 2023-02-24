@@ -1,18 +1,18 @@
 import React, { FC } from "react";
 
 interface Prop {
-  totalPosts: number;
-  postsPerPage: number;
+  totalProducts: number;
+  productsPerPage: number;
   setCurrentPage: any;
 }
 
-const Pagination: FC<Prop> = ({ totalPosts, postsPerPage, setCurrentPage }) => {
+const Pagination: FC<Prop> = ({ totalProducts, productsPerPage, setCurrentPage }) => {
   let pages = [];
 
   
 
 
-  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
     pages.push(i);
   }
 

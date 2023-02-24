@@ -12,7 +12,7 @@ interface PropOutlet {
 
 const MainLayout: FC<PropOutlet> = ({ children } ) => {
 
-    const [openSideBarMobile, setOpenSideBarMobile] = useState(true);
+    // const [openSideBarMobile, setOpenSideBarMobile] = useState(true);
 
     return (
         <div>
@@ -34,7 +34,7 @@ const MainLayout: FC<PropOutlet> = ({ children } ) => {
                     </div>
                 </div>
             </div>
-            {openSideBarMobile && <SideBarMobile onCloseSideBarMobile={() => setOpenSideBarMobile(false)}/>}    
+            {/* {openSideBarMobile && <SideBarMobile onCloseSideBarMobile={() => setOpenSideBarMobile(false)}/>}     */}
             <Footer />
         </div>
     )
