@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import useFetch from "../../../hooks/useFetch";
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 
 interface newUser{
@@ -33,13 +34,12 @@ const CreateAcc:FC = () => {
     const [newValue, setNewValue] = useState<newUser>()
     const [valueAcc, setvaluesAcc] = useState<newValueAcc>()
     const [method, setMethod] = useState<any> ("GET")
+    const navigate = useNavigate()
       
     const {data} = useFetch("https://6367c751edc85dbc84db8620.mockapi.io/ManagerAccount",{
         method: method,
         body: valueAcc
       })
-
-    console.log(method);
 
     return (
     <div>
@@ -89,10 +89,7 @@ const CreateAcc:FC = () => {
             }else{
                 setMethod("POST")
                 toast.success("Đăng ký tài khoản thành công")
-
-                setTimeout(()=>{
-                    setMethod("GET")
-                },2000)
+                navigate('./')
             }
         }}
         
