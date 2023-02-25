@@ -59,3 +59,16 @@ img {
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
 }
+
+.modal-ta {
+  position: fixed;
+  top: calc(50% - 75px);
+  left: calc(50% - 125px);
+  width: 300px;
+  border-radius: 8px;
+  background-color: #FFF;
+  box-shadow: 2px 2px 20px grey;
+  z-index: 10;
+  padding: 16px;
+  text-align: center;
+}

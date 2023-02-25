@@ -19,8 +19,6 @@ type Props = {
 }
 
 const ProductList: FC<Props> = ({products}) => {
-  console.log(products);
-  
 
 
 
@@ -86,9 +84,7 @@ const ProductList: FC<Props> = ({products}) => {
         {
         products.slice(firstProductIndex, lastProductIndex).map((product) => {
           return (
-            <>
               <ProductItem key={product.id} product={product} />
-            </>
           );
         })}
       </div>

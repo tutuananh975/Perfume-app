@@ -1,27 +1,31 @@
-import { FC, useState, useEffect, useMemo } from "react";
+import { FC, useState, useEffect, useMemo, useContext } from "react";
 import { Link } from "react-router-dom";
 import useFetchTA from "../../hooks/useFetchTA";
+
+import { AuthContext } from "../../App";
 
 import { FiChevronRight } from "react-icons/fi";
 import FormCheckOut from "./FormCheckOut";
 import ProductsCart from "../../components/ProductsCart.tsx";
+import OrderSuccess from "./OrderSuccess";
 
 const Payment: FC = () => {
   const [dataPut, setDataPut] = useState({});
   const [dataDelete, setDataDelete] = useState({});
+  const { idUser } = useContext(AuthContext);
 
   const { data, loading, error } = useFetchTA(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/2"
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser
   );
   const { loading: putLoading, error: putError } = useFetchTA(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/2",
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser,
     {
       method: "PUT",
       body: dataPut,
     }
   );
   const { loading: deleteLoading, error: deleteError } = useFetchTA(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/2",
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser,
     {
       method: "PUT",
       body: dataDelete,
@@ -30,6 +34,7 @@ const Payment: FC = () => {
 
   const [cartProducts, setCartProducts] = useState<any[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [isSuccess, setIsSuccess] = useState(false)
 
   const dataMemo = useMemo(() => {
     return data;
@@ -58,7 +63,6 @@ const Payment: FC = () => {
   };
 
   const handleDecreaseAmout = (id: string) => {
-    console.log(cartProducts);
     const newCart: any[] = [];
     cartProducts.forEach((product: any) => {
       if (product.id === id) {
@@ -84,6 +88,11 @@ const Payment: FC = () => {
     handleSetOrder(newCart);
   };
 
+  const handleResetCartProducts = () => {
+    setCartProducts([]);
+    setIsSuccess(true);
+  };
+
   useEffect(() => {
     if (dataMemo) {
       setCartProducts(dataMemo.cart);
@@ -92,8 +101,8 @@ const Payment: FC = () => {
   }, [dataMemo]);
 
   return (
-    <div className="px-4 grid grid-cols-2 gap-4">
-      <div className="col pt-12 pr-14 flex flex-col">
+    <div className="px-4 grid grid-cols-3 gap-4">
+      <div className="col-span-3 lg:col-span-1 pt-12 xl:pr-14 flex flex-col">
         <div>
           <Link to="/">
             <h3 className=" text-3xl">Perfume</h3>
@@ -107,10 +116,14 @@ const Payment: FC = () => {
           </h5>
         </div>
         <div>
-          <FormCheckOut />
+          <FormCheckOut
+            totalPrice={totalPrice}
+            cartProducts={cartProducts}
+            onResetCartProducts={handleResetCartProducts}
+          />
         </div>
       </div>
-      <div className="col pt-12 pr-14">
+      <div className="col-span-3 lg:col-span-2 pt-12 xl:pr-14">
         <ProductsCart
           loading={loading}
           putLoading={putLoading}
@@ -123,11 +136,11 @@ const Payment: FC = () => {
           onDecreaseAmout={handleDecreaseAmout}
           onDeleteCart={handleDeleteCart}
         />
-        <div className="mt-4 float-right mr-20 text-3xl font-bold">
-            <span className="mr-4">TOTAL:</span>
-            ${totalPrice.toFixed(2)}
+        <div className="mt-4 float-right lg:mr-20 text-3xl font-bold">
+          <span className="mr-4">TOTAL:</span>${totalPrice.toFixed(2)}
         </div>
       </div>
+      {isSuccess && <OrderSuccess />}
     </div>
   );
 };
