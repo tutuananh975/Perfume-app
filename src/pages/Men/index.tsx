@@ -23,9 +23,6 @@ const Men: FC = () => {
     getProductList().then((data: Product[]) => {
       const menProducts = data.filter((product) => product.sex === "men");
       setMenProducts(menProducts);
-      console.log(menProducts);
-
-     
       
     });
   }, []);

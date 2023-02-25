@@ -6,7 +6,6 @@ import ProductsCart from "../../components/ProductsCart.tsx";
 
 const Cart: FC = () => {
   const [dataPut, setDataPut] = useState({});
-  console.log(dataPut);
   
   const [dataDelete, setDataDelete] = useState({});
  

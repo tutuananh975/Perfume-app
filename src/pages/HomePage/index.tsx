@@ -19,6 +19,7 @@ import  { logout, selectUser } from "../Customeraccount/featurnes/useSlice";
 const HomePage: FC = () => {
 
     const persist = useSelector(selectUser)
+    console.log(persist)
 
     const disPatch = useDispatch()
     const handleLognOut = ()=>{
