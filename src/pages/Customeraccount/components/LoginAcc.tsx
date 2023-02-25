@@ -52,6 +52,7 @@ const Login:FC = () => {
                 setTimeout(()=>{
                     navigate("/men")
                 },2000)
+                localStorage.setItem("accessToken", data[0].id)
             return 
         }
         const isExi = data.some((elemen:any)=>{

@@ -1,18 +1,23 @@
-import {configureStore} from "@reduxjs/toolkit";
-import useReducer, { selectUser } from "../pages/Customeraccount/featurnes/useSlice"
+import { configureStore, getDefaultMiddleware} from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import useSlice from "../pages/Customeraccount/featurnes/useSlice";
-import logger from 'redux-logger'
-import thunk from 'redux-thunk'
+import {
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+  } from 'redux-persist';
+
+
 
 
 const persistConfig = {
-    key: "root",
-    version:1,
+    key: "persist-key",
+    version :1,
     storage,
-    reducer: useSlice,
-    middleware: [thunk, logger],
   }
 
 
@@ -20,10 +25,14 @@ const user = persistReducer(persistConfig, useSlice)
 
 const store = configureStore({
     reducer: {
-        user
-    }
-})
+        user,
+    },
+    middleware: getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }),
+    });
 
 export const persistor = persistStore(store)
-
 export default store
