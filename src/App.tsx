@@ -1,4 +1,3 @@
-
 import { Fragment, useState } from 'react';
 import { Routes, Route, HashRouter } from 'react-router-dom';
 import './App.css';
@@ -15,10 +14,11 @@ import NotAdmin from './pages/Admin/NotAdmin';
 function App() {  
   
 
-  // const { idUser, isLogin, isAdmin } = useSelector(selectUser);
+  // const persist = useSelector(selectUser)
+  const { idUser, isLogin, isAdmin } = useSelector(selectUser);
     // 2 dòng này fake dòng trên
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  // const [isAdmin, setIsAdmin] = useState(false);
+  // const [isLogin, setIsLogin] = useState(false);
 
   return (
     <HashRouter>

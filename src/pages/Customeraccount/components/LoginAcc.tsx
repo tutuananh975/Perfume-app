@@ -47,11 +47,17 @@ const Login:FC = () => {
         
         if(data[0].UserName===dataAcc.userName && data[0].PassWord===dataAcc.passWord){
             toast.success("Đăng nhập tài khoản admin thành công")
+            dispatch(
+                login(
+                    {
+                     idUser: idUser.id,
+                     isAdmin: true,
+                     isLogin:true
+                    })
+            )
                 setTimeout(()=>{
                     navigate("/men")
                 },2000)
-                
-                localStorage.setItem("accessToken", data[0].id)
             return 
         }
         const isExi = data.some((elemen:any)=>{
@@ -66,9 +72,10 @@ const Login:FC = () => {
             dispatch(
                 login(
                     {
-                     UserName: dataAcc.userName,
                      IdUser : idUser.id,
-                     loggetIn : true,
+                     userName: dataAcc.userName,
+                     isLogin : true,
+                     isAdmin: false
                     })
             )
             setTimeout(()=>{
