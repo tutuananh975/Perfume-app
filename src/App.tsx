@@ -10,6 +10,8 @@ import NotUser from "./components/NotUser";
 import { selectUser } from './pages/Customeraccount/featurnes/useSlice';
 import Admin from './pages/Admin';
 import NotAdmin from './pages/Admin/NotAdmin';
+import ProductDetail from './pages/ProductDetail';
+import Men from './pages/Men';
 
 
 function App() {  

@@ -29,7 +29,7 @@ const ProductCart: FC<ProductProp> = ({
 }) => {
   return (
     <div className="flex py-8 items-center border-b border-solid border-slate-300 relative">
-      <div className="product-cart-img mr-5 sm:w" style={{width:"135px", height:"135px", minWidth:"135px"}}>
+      <div className="product-cart-img mr-5 sm:w" style={{ width: "135px", height: "135px", minWidth: "135px" }}>
         <Image src={src} alt={alt} w="135px" h="135px" />
       </div>
       <div className="flex flex-col md:flex-row items-start md:items-center">
@@ -51,7 +51,7 @@ const ProductCart: FC<ProductProp> = ({
               borderRadius: "50%",
             }}
           >
-            <span 
+            <span
               style={{
                 position: "relative",
                 top: "-2px",
@@ -83,7 +83,7 @@ const ProductCart: FC<ProductProp> = ({
         <h4 className="md:mr-10 text-xl font-bold leading-5 ml-3  absolute left-0 sm:static bottom-0 right-0 mb-8 md:mb-0 md:static">
           ${(ourPrice * amount).toFixed(2)}
         </h4>
-        <div 
+        <div
           onClick={onDelete}
           className=" bg-slate-300 hover:bg-gray-500 cursor-pointer absolute top-0 right-0 mt-8 md:mt-0 md:static"
           style={{

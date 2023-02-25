@@ -30,11 +30,9 @@ const publicRoutes: {path: string, component: FC, layout?: any, children?: any, 
   { path: "/help", component: Help, layout: NotSideBarLayOut },
   // { path: "/cart", component: Cart, layout: NotSideBarLayOut },
   { path: "/payment", component: Payment, layout: null },
-  { path: "productdetail", component: ProductDetail, layout: NotSideBarLayOut},
+  { path: "product/:id", component: ProductDetail, layout: NotSideBarLayOut},
 ];
 
-
-const PrivateRoutes: [] = [];
 const privateRoutes: {path: string, component: FC, layout?: any, naviComponent: FC}[] = [
   {path: "/cart", component: Cart, layout: NotSideBarLayOut, naviComponent: NotUser}
 ];

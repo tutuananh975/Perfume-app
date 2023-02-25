@@ -21,7 +21,7 @@ const ProductItem: FC<Prop> = ({product}) =>{
                 <br/>
                 <button
                  className='mt-2 px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 '>
-                 <NavLink to="/productdetail">
+                 <NavLink to={"/product/" + product.id}>
                     <span>View details</span>
                  </NavLink>
                 </button>

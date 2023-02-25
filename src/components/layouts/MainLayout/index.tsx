@@ -5,12 +5,12 @@ import Footer from "../components/Footer";
 import SideBar from "./SideBar";
 import SideBarMobile from "./SideBarMobile";
 
-interface PropOutlet {
-    children: any,
-    onCloseSideBarMobile: any
-}
+// interface PropOutlet {
+//     children: any,
+//     onCloseSideBarMobile: any
+// }
 
-const MainLayout: FC<PropOutlet> = ({ children } ) => {
+const MainLayout: FC<any> = ({ children } ) => {
 
     // const [openSideBarMobile, setOpenSideBarMobile] = useState(true);
 
