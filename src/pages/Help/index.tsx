@@ -3,7 +3,7 @@ import { FC } from "react";
 const Help: FC = () => {
     return (
         <div>
-            Help
+            Help meeeeeee
         </div>
     )
 }

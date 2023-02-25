@@ -1,13 +1,16 @@
-import { FC, Fragment, useState } from "react";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+
+import { Fragment } from 'react';
+import { BrowserRouter as Router, Routes, Route, HashRouter, redirect, Navigate } from 'react-router-dom';
+import './App.css';
+import { MainLayout } from './components/layouts';
+import { publicRoutes } from './routes';
+import ProductDetail from './pages/ProductDetail';
+import Help from './pages/Help';
+import { useSelector } from 'react-redux';
+import HomePage from './pages/HomePage';
 import "./App.css";
-import { MainLayout } from "./components/layouts";
-import { publicRoutes, privateRoutes } from "./routes";
 import NotUser from "./components/NotUser";
 
-interface Props { }
-
-const App: FC<Props> = () => {
   // const [idUser, setIdUser] = useState(() => {
   //   return localStorage.idUser;
   // })
@@ -21,6 +24,29 @@ const App: FC<Props> = () => {
   //   setIsLogin(true)
   // };
 
+function App() {  
+  
+
+
+  const PrivateRoutes = () => {
+    return localStorage.getItem("accessToken") ? <Help/> : <Navigate to='/' />
+  }
+
+  return (
+    <HashRouter>
+      <div className='App'>
+        <Routes>
+          {
+            publicRoutes.map((route, index) => {
+              const Layout: any = route.layout === undefined ? MainLayout : route.layout === null ? Fragment : route.layout ;
+              const Page = route.component;
+              return <Route key={index} path={route.path} element={<Layout><Page /></Layout>} />
+            })
+          }
+          <Route path="/help" element={<PrivateRoutes/>} />
+        </Routes>
+      </div>
+    </HashRouter>
   // const logout = () => {
   //   localStorage.removeItem('idUser');
   //   setIdUser(null);
@@ -33,58 +59,6 @@ const App: FC<Props> = () => {
   //   login,
   //   logout
   // }
-
-  return (
-    <Router>
-      <div className="App">
-        <Routes>
-          {publicRoutes.map((route, index) => {
-            const Layout: any =
-              route.layout === undefined
-                ? MainLayout
-                : route.layout === null
-                  ? Fragment
-                  : route.layout;
-            const Page = route.component;
-            return (
-              <Route
-                key={index}
-                path={route.path}
-                element={
-                  <Layout>
-                    <Page />
-                  </Layout>
-                }
-              />
-            );
-          })}
-          {/* {privateRoutes.map((route, index) => {
-            const Layout: any =
-              route.layout === undefined
-                ? MainLayout
-                : route.layout === null
-                  ? Fragment
-                  : route.layout;
-            const Page = route.component;
-            return (
-              <Route
-                key={index}
-                path={route.path}
-                element={
-                  isLogin ? (
-                    <Layout>
-                      <Page />
-                    </Layout>
-                  ) : (
-                    <NotUser />
-                  )
-                }
-              />
-            );
-          })} */}
-        </Routes>
-      </div>
-    </Router>
   );
 };
 

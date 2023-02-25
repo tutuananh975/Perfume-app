@@ -13,7 +13,6 @@ import { GoLocation } from 'react-icons/go';
 import Categories from "./components/Categories/Categories";
 import { useDispatch, useSelector } from "react-redux";
 import  { logout, selectUser } from "../Customeraccount/featurnes/useSlice";
-import store from "../../Store/store";
 
 
 
