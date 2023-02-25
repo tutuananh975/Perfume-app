@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import HomePage from './pages/HomePage';
 import "./App.css";
 import NotUser from "./components/NotUser";
+import { selectUser } from './pages/Customeraccount/featurnes/useSlice';
 
   // const [idUser, setIdUser] = useState(() => {
   //   return localStorage.idUser;
@@ -26,10 +27,10 @@ import NotUser from "./components/NotUser";
 
 function App() {  
   
-
+  const persist = useSelector(selectUser)
 
   const PrivateRoutes = () => {
-    return localStorage.getItem("accessToken") ? <Help/> : <Navigate to='/' />
+    return persist.isAdmin ? <Help/> : <Navigate to='/' />
   }
 
   return (

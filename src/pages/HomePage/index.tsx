@@ -28,7 +28,7 @@ const HomePage: FC = () => {
     
     return (
         <div>
-            <button onClick={handleLognOut} >{persist? "đăng xuất" : 'đăng nhập'}</button>
+            <button onClick={handleLognOut} >{persist.isLogin ? "đăng xuất" : 'đăng nhập'}</button>
             <img src="https://cdn.shopify.com/s/files/1/0269/7763/2389/files/Perfumania_02-06-2023_VDAY_GuideWeb_Banner_1500x.jpg?v=1675690297" alt="" />
             <div className="flex justify-between my-6">
                 <div className="text-2xl">OUR FRAGRANCE BRANDS</div>
