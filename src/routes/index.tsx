@@ -12,6 +12,7 @@ import { Component, FC } from "react";
 import NotSideBarLayOut from "../components/layouts/NotSideBarLayOut";
 import Payment from "../pages/Payment";
 import ProductDetail from "../pages/ProductDetail";
+import NotUser from "../components/NotUser";
 
 
 const publicRoutes: {path: string, component: FC, layout?: any, children?: any, element?:any}[] = [
@@ -34,7 +35,7 @@ const publicRoutes: {path: string, component: FC, layout?: any, children?: any, 
 
 
 const PrivateRoutes: [] = [];
-const privateRoutes: {path: string, component: FC, layout?: any}[] = [
-  {path: "/cart", component: Cart, layout: NotSideBarLayOut}
+const privateRoutes: {path: string, component: FC, layout?: any, naviComponent: FC}[] = [
+  {path: "/cart", component: Cart, layout: NotSideBarLayOut, naviComponent: NotUser}
 ];
 export { publicRoutes, privateRoutes };
