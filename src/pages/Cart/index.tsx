@@ -1,5 +1,7 @@
-import { FC, useState, useEffect, useMemo } from "react";
+import { FC, useState, useEffect, useMemo, useContext } from "react";
 import useFetchTA from "../../hooks/useFetchTA";
+
+import { AuthContext } from "../../App";
 
 import Order from "./Order";
 import ProductsCart from "../../components/ProductsCart.tsx";
@@ -7,7 +9,9 @@ import ProductsCart from "../../components/ProductsCart.tsx";
 const Cart: FC = () => {
   const [dataPut, setDataPut] = useState({});
   const [dataDelete, setDataDelete] = useState({});
-
+  const { idUser } = useContext(AuthContext);
+  console.log(idUser);
+ 
   const { data, loading, error } = useFetchTA(
     "https://63782c6a5c477765122d0c95.mockapi.io/users/2" 
   );
@@ -44,7 +48,7 @@ const Cart: FC = () => {
       newTotalPrice += product.ourPrice * product.amount;
       newSavingPrice +=
         (product.retailPrice - product.ourPrice) * product.amount;
-      newTotalItem += product.amount;
+      newTotalItem += Number(product.amount);
     });
     setTotalPrice(newTotalPrice);
     setSavings(newSavingPrice);

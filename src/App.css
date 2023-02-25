@@ -65,11 +65,10 @@ img {
   top: calc(50% - 75px);
   left: calc(50% - 125px);
   width: 300px;
-  height: 150px;
   border-radius: 8px;
   background-color: #FFF;
   box-shadow: 2px 2px 20px grey;
   z-index: 10;
-  padding: 8px;
+  padding: 16px;
   text-align: center;
 }
