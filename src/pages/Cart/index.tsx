@@ -1,16 +1,14 @@
 import { FC, useState, useEffect, useMemo, useContext } from "react";
 import useFetchTA from "../../hooks/useFetchTA";
 
-import { AuthContext } from "../../App";
-
 import Order from "./Order";
 import ProductsCart from "../../components/ProductsCart.tsx";
 
 const Cart: FC = () => {
   const [dataPut, setDataPut] = useState({});
+  console.log(dataPut);
+  
   const [dataDelete, setDataDelete] = useState({});
-  const { idUser } = useContext(AuthContext);
-  console.log(idUser);
  
   const { data, loading, error } = useFetchTA(
     "https://63782c6a5c477765122d0c95.mockapi.io/users/2" 

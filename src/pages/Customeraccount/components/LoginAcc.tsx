@@ -15,7 +15,6 @@ interface IUser{
 
 const Login:FC = () => {
     const [valueOnChange, setValueOnChange] = useState<IUser>()
-    const [idUser, setIdUser] = useState()
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const {data} = useFetch("https://6367c751edc85dbc84db8620.mockapi.io/ManagerAccount",{
@@ -46,12 +45,12 @@ const Login:FC = () => {
             return elm.id
         })
         
-
         if(data[0].UserName===dataAcc.userName && data[0].PassWord===dataAcc.passWord){
             toast.success("Đăng nhập tài khoản admin thành công")
                 setTimeout(()=>{
                     navigate("/men")
                 },2000)
+                
                 localStorage.setItem("accessToken", data[0].id)
             return 
         }

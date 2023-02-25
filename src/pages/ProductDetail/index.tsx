@@ -1,6 +1,12 @@
-import {FC} from 'react'
+import axios from 'axios'
+import {FC, useState} from 'react'
+
+
 
 const ProductDetail: FC = () => {
+
+
+
   return (
     <div className='block md:grid grid-cols-12 px-4'>
         <div className="col-span-6">

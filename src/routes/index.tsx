@@ -22,26 +22,19 @@ const publicRoutes: {path: string, component: FC, layout?: any, children?: any, 
   { path: "/fragrance", component: Fragrance, layout: null },
   { path: "/gift", component: Gift},
   { path: "/men", component: Men, children: ProductDetail},
-<<<<<<< HEA
   { path: "/women", component: Women, children: ProductDetail},
   { path: "/help", component:Help, layout: NotSideBarLayOut },
   { path: "/cart", component: Cart, layout: NotSideBarLayOut },
-=======
   { path: "/women", component: Women, children: ProductDetail },
   { path: "/help", component: Help, layout: NotSideBarLayOut },
   // { path: "/cart", component: Cart, layout: NotSideBarLayOut },
->>>>>>> 7dc99872739c0ddc38c16689caa2d5452f0baed1
   { path: "/payment", component: Payment, layout: null },
   { path: "productdetail", component: ProductDetail, layout: NotSideBarLayOut},
 ];
 
-<<<<<<< HEAD
 
-const privateRoutes: [] = [];
-=======
+const PrivateRoutes: [] = [];
 const privateRoutes: {path: string, component: FC, layout?: any}[] = [
   {path: "/cart", component: Cart, layout: NotSideBarLayOut}
 ];
->>>>>>> 7dc99872739c0ddc38c16689caa2d5452f0baed1
-
 export { publicRoutes, privateRoutes };

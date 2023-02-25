@@ -2,8 +2,6 @@ import { FC, useState, useEffect, useMemo, useContext } from "react";
 import { Link } from "react-router-dom";
 import useFetchTA from "../../hooks/useFetchTA";
 
-import { AuthContext } from "../../App";
-
 import { FiChevronRight } from "react-icons/fi";
 import FormCheckOut from "./FormCheckOut";
 import ProductsCart from "../../components/ProductsCart.tsx";
@@ -12,20 +10,19 @@ import OrderSuccess from "./OrderSuccess";
 const Payment: FC = () => {
   const [dataPut, setDataPut] = useState({});
   const [dataDelete, setDataDelete] = useState({});
-  const { idUser } = useContext(AuthContext);
 
   const { data, loading, error } = useFetchTA(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/2"
   );
   const { loading: putLoading, error: putError } = useFetchTA(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser,
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/2",
     {
       method: "PUT",
       body: dataPut,
     }
   );
   const { loading: deleteLoading, error: deleteError } = useFetchTA(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser,
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/2",
     {
       method: "PUT",
       body: dataDelete,

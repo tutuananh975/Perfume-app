@@ -20,10 +20,6 @@ type Props = {
 
 const ProductList: FC<Props> = ({products}) => {
 
-
-
-  
-  
   const [isOpenSidebarMobile, setIsOpenSidebarMobile] = useState(false);
   const [isOpenSortBar, setIsOpenSortBar] = useState(false)
 
@@ -60,20 +56,20 @@ const ProductList: FC<Props> = ({products}) => {
         </button>
         <div className={isOpenSortBar? "absolute w-36 h-28 right-0 top-8 bg-white shadow-lg" : "hidden"}>
           <ul className="">
-            <li className="pl-1 hover:bg-gray-200 cursor-pointer" onClick={() => {
+            <li className=" hover:bg-gray-200 cursor-pointer px-2 py-1 text-sm" onClick={() => {
               products = products.sort((a,b) => a.ourPrice - b.ourPrice)
               setIsOpenSortBar(!isOpenSortBar)
             }}
             >Price, low to high</li>
-            <li className="pl-1 hover:bg-gray-200 cursor-pointer" onClick={() => {
+            <li className=" hover:bg-gray-200 cursor-pointer px-2 py-1 text-sm" onClick={() => {
               products = products.sort((a,b) => b.ourPrice - a.ourPrice)
               setIsOpenSortBar(!isOpenSortBar)
             }}>Price, high to low</li>
-            <li className="pl-1 hover:bg-gray-200 cursor-pointer" onClick={() => {
+            <li className=" hover:bg-gray-200 cursor-pointer px-2 py-1 text-sm" onClick={() => {
               products = products.sort((a,b) => a.name.localeCompare(b.name))
               setIsOpenSortBar(!isOpenSortBar)
             }}>Alphabetically, A-Z</li>
-            <li className="pl-1 hover:bg-gray-200 cursor-pointer" onClick={() => {
+            <li className=" hover:bg-gray-200 cursor-pointer px-2 py-1 text-sm" onClick={() => {
               products = products.sort((a,b) => b.name.localeCompare(a.name))
               setIsOpenSortBar(!isOpenSortBar)
             }}>Alphabetically, Z-A</li>
