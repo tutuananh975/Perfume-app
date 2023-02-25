@@ -24,7 +24,6 @@ const Women: FC = () => {
 
       const womenProducts = data.filter((product) => product.sex === "women");
       setWomenProducts(womenProducts);
-      console.log(womenProducts);
       
     });
   }, []);
