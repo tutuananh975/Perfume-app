@@ -1,5 +1,5 @@
 import { FC, MouseEventHandler, useState } from "react";
-import Image from "../../components/Image";
+import Image from "../Image";
 import { AiOutlineClose } from "react-icons/ai";
 
 interface ProductProp {
@@ -7,7 +7,6 @@ interface ProductProp {
   src: string;
   name: string;
   desc: string;
-  size: string;
   retailPrice: number;
   ourPrice: number;
   amount: number;
@@ -21,7 +20,6 @@ const ProductCart: FC<ProductProp> = ({
   src,
   name,
   desc,
-  size,
   retailPrice,
   ourPrice,
   amount,
@@ -38,7 +36,6 @@ const ProductCart: FC<ProductProp> = ({
         <div className="w-2/3 md:w-1/2">
           <div className="text-lg uppercase font-semibold leading-6">{name}</div>
           <p className=" text-base font-extralight mt-2">{desc}</p>
-          <p className="mt-1 text-base font-extralight">Size: {size} oz.</p>
         </div>
         <div className="md:ml-4 font-normal text-base leading-tight">
           <h3 className="text-gray-400 mb-2 line-through">
@@ -83,7 +80,7 @@ const ProductCart: FC<ProductProp> = ({
         </div>
       </div>
       <div className="flex items-center ml-auto">
-        <h4 className="md:mr-10 text-xl font-bold leading-5 ml-3 absolute bottom-0 right-0 mb-8 md:mb-0 md:static">
+        <h4 className="md:mr-10 text-xl font-bold leading-5 ml-3  absolute left-0 sm:static bottom-0 right-0 mb-8 md:mb-0 md:static">
           ${(ourPrice * amount).toFixed(2)}
         </h4>
         <div 

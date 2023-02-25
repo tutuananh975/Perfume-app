@@ -4,6 +4,8 @@ import * as Yup from 'yup';
 import useFetch from '../../../hooks/useFetch';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../featurnes/useSlice';
 
 interface IUser{
     userName: string,
@@ -13,11 +15,14 @@ interface IUser{
 
 const Login:FC = () => {
     const [valueOnChange, setValueOnChange] = useState<IUser>()
+    const [idUser, setIdUser] = useState()
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const {data} = useFetch("https://6367c751edc85dbc84db8620.mockapi.io/ManagerAccount",{
         method: "GET",
       })
-
+      
+      
   return (
     <Formik
     initialValues = {{
@@ -36,6 +41,12 @@ const Login:FC = () => {
     }}
     onSubmit={(dataAcc:IUser)=>{
 
+        const idUser = data.find((elm:any)=>{
+            if(elm.UserName===dataAcc?.userName && elm.PassWord===dataAcc.passWord)
+            return elm.id
+        })
+        
+
         if(data[0].UserName===dataAcc.userName && data[0].PassWord===dataAcc.passWord){
             toast.success("Đăng nhập tài khoản admin thành công")
                 setTimeout(()=>{
@@ -44,11 +55,22 @@ const Login:FC = () => {
             return 
         }
         const isExi = data.some((elemen:any)=>{
-            if(elemen.UserName===dataAcc?.userName && elemen.PassWord===dataAcc.passWord)
+            if(elemen.UserName===dataAcc?.userName && elemen.PassWord===dataAcc.passWord){ 
             return true
+        }
+
+        return false 
     })
         if(isExi){
             toast.success("Đăng nhập thành công")
+            dispatch(
+                login(
+                    {
+                     UserName: dataAcc.userName,
+                     IdUser : idUser.id,
+                     loggetIn : true,
+                    })
+            )
             setTimeout(()=>{
                 navigate("/")
             },2000)
