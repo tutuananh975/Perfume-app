@@ -11,14 +11,14 @@ interface Product {
   sex: string,
   retailPrice:number,
   ourPrice: number,
-  id: any
+  id: any,
 }
 
 type Props = {
-  products: Product[];
+  products : Product[],
+  btnEdit? : boolean,
 }
-
-const ProductList: FC<Props> = ({products}) => {
+const ProductList: FC<Props> = ({products,btnEdit}) => {
 
   const [isOpenSidebarMobile, setIsOpenSidebarMobile] = useState(false);
   const [isOpenSortBar, setIsOpenSortBar] = useState(false)
@@ -80,7 +80,7 @@ const ProductList: FC<Props> = ({products}) => {
         {
         products.slice(firstProductIndex, lastProductIndex).map((product) => {
           return (
-              <ProductItem key={product.id} product={product} />
+              <ProductItem key={product.id} product={product} btnEdit={btnEdit} />
           );
         })}
       </div>
