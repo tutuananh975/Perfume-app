@@ -3,13 +3,15 @@ import { FaChevronRight } from "react-icons/fa";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SideBar from "./SideBar";
-
+import { useLocation } from "react-router-dom";
 // interface PropOutlet {
 //     children: any,
 //     onCloseSideBarMobile: any
 // }
 
 const MainLayout: FC<any> = ({ children } ) => {
+    const location = useLocation();
+    const title = location.pathname.split('/')[1].toUpperCase();
 
     // const [openSideBarMobile, setOpenSideBarMobile] = useState(true);
 
@@ -26,7 +28,7 @@ const MainLayout: FC<any> = ({ children } ) => {
             <div className="px-4">
                 <div className="grid grid-cols-4 gap-4">
                     <div className="hidden md:block md:col-span-1">
-                        <SideBar titleSideBar = "Men's Perfume"/>
+                        <SideBar titleSideBar = {title}/>
                     </div>
                     <div className="col-start-1 col-end-5 md:col-span-3">
                         {children}

@@ -1,5 +1,6 @@
 import { FC } from "react"
 import Navbar from "./Navbar"
+import NavbarDC from "./NavbarDC"
 import SearchBar from "./SearchBar"
 import './styles/Header.css'
 
@@ -10,6 +11,7 @@ const Header: FC = () => {
         <div className="header p-4">
             <SearchBar />
             <Navbar />
+            {/* <NavbarDC /> */}
         </div>
     )
 }

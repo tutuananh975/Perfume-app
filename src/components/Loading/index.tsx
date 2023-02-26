@@ -1,4 +1,3 @@
-import { FC } from "react";
 import Overflay from "../overflay/Overflay";
 
 const Loading = () => {

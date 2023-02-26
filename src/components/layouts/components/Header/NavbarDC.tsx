@@ -9,12 +9,12 @@ import { useSelector } from "react-redux";
 import { logout, selectUser } from "../../../../pages/Customeraccount/featurnes/useSlice";
 import { useDispatch } from "react-redux";
 
-const Navbar: FC = () => {
-  
-  const {userName, isLogin} = useSelector(selectUser)
+const NavbarDC: FC = () => {
+
+  const { userName, isLogin } = useSelector(selectUser)
   const disPatch = useDispatch()
-  const handleLognOut = ()=>{
-      disPatch(logout())
+  const handleLognOut = () => {
+    disPatch(logout())
   }
 
   const [isOpenNavbarMobile, setIsOpenNavbarMobile] = useState(false)
@@ -26,7 +26,7 @@ const Navbar: FC = () => {
             <FontAwesomeIcon className="text-cdcac9 text-2xl" icon={faBars} />
             <h4 className="ml-2">MENU</h4>
           </div>
-          
+
         </li>
         <li className="py-2 nav-link">
           <NavLink to="/women">
@@ -41,7 +41,7 @@ const Navbar: FC = () => {
           </NavLink>
         </li>
         <li className="ml-4 py-2 nav-link hidden xl:block">
-          <NavLink to="/best-sellers"> BEST SELLERS</NavLink>
+          <NavLink to="/search">SEARCH</NavLink>
         </li>
         <li className="ml-4 py-2 nav-link hidden xl:block">
           <NavLink to="/gift">GIFT SETS</NavLink>
@@ -84,33 +84,34 @@ const Navbar: FC = () => {
             </div>
           </div>
         </li> */}
-                <li className="cursor-pointer has-triangle hidden md:block sign-in-btn relative">
-          <div> 
-            <div className="nav-right-text-link" onClick={handleLognOut}>{isLogin?"SIGN OUT":"SIGN IN"}</div>
+        <li className="cursor-pointer has-triangle hidden md:block sign-in-btn relative">
+          <div>
+            <div className="nav-right-text-link" onClick={handleLognOut}>{isLogin ? "SIGN OUT" : "SIGN IN"}</div>
             <div className="triangle absolute"></div>
           </div>
           <div className="px-6 absolute z-10 top-10 w-56 action-sign-in">
             <div className="text-center my-1 mb-4 font-medium">Welcome <p className="text-blue-700">{userName}</p> to our Perfumania Store</div>
-            <Link  to="/customeraccount" onClick={handleLognOut}  className="text-white py-1.5 px-4 text-center block w-full bg-blue-700 rounded-xl font-normal">
-              {isLogin?"SIGN OUT":"SIGN IN"}
+            <Link to="/customeraccount" onClick={handleLognOut} className="text-white py-1.5 px-4 text-center block w-full bg-blue-700 rounded-xl font-normal">
+              {isLogin ? "SIGN OUT" : "SIGN IN"}
             </Link>
-            <div className="other-login w-full">
-              <div className="triangle-up"></div>
-              <p className="text-6d6c97">Or log in with:</p>
-              <button className="w-full bg-5c79b1 text-xs p-1 text-white hover:opacity-90 rounded-sm mb-1 flex items-center justify-center">
-                <FaFacebookF />
-                <span className="ml-1 font-light">Sign in with </span>
-                <span className="font-semibold">Facebook</span>
-              </button>
-              <button className="w-full bg-d95442 text-xs p-1 text-white hover:opacity-90 rounded-sm flex items-center justify-center">
-                <FaGoogle />
-                <span className="ml-1 font-light">Sign in with </span>
-                <span className="font-semibold">Google</span>
-              </button>
-            </div>
+            {!isLogin &&
+              <div className="other-login w-full">
+                <div className="triangle-up"></div>
+                <p className="text-6d6c97">Or log in with:</p>
+                <button className="w-full bg-5c79b1 text-xs p-1 text-white hover:opacity-90 rounded-sm mb-1 flex items-center justify-center">
+                  <FaFacebookF />
+                  <span className="ml-1 font-light">Sign in with </span>
+                  <span className="font-semibold">Facebook</span>
+                </button>
+                <button className="w-full bg-d95442 text-xs p-1 text-white hover:opacity-90 rounded-sm flex items-center justify-center">
+                  <FaGoogle />
+                  <span className="ml-1 font-light">Sign in with </span>
+                  <span className="font-semibold">Google</span>
+                </button>
+              </div>}
           </div>
         </li>
-        
+
         <li className="ml-9 cursor-pointer hidden md:block">
           <Link to="/help">
             <div className="nav-right-text-link">HELP</div>
@@ -126,9 +127,9 @@ const Navbar: FC = () => {
           </Link>
         </li>
       </ul>
-      {isOpenNavbarMobile && <NavbarMobile onCloseNavbarMobile={() => {setIsOpenNavbarMobile(false)}}/>}
+      {isOpenNavbarMobile && <NavbarMobile onCloseNavbarMobile={() => { setIsOpenNavbarMobile(false) }} />}
     </div>
   );
 };
 
-export default Navbar;
+export default NavbarDC;

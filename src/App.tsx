@@ -5,11 +5,13 @@ import { MainLayout } from './components/layouts';
 import { publicRoutes, privateRoutes } from './routes';
 import { useSelector } from 'react-redux';
 import "./App.css";
-import NotUser from "./components/NotUser";
 import { selectUser } from './pages/Customeraccount/featurnes/useSlice';
+import NotAdmin from './pages/Admin/components/NotAdmin';
+import HomeAdmin from './pages/Admin/HomeAdmin';
 import Admin from './pages/Admin';
-import NotAdmin from './pages/Admin/NotAdmin';
-
+import UsersManager from './pages/Admin/UsersManager';
+import ProductsManager from './pages/Admin/ProductsManager';
+import BillsManager from './pages/Admin/BillsManager';
 
 function App() {  
   
@@ -22,7 +24,6 @@ function App() {
 
   return (
     <HashRouter>
-      <div className='App'>
         <Routes>
           {
             publicRoutes.map((route, index) => {
@@ -35,13 +36,17 @@ function App() {
             privateRoutes.map((route, index) => {
               const Layout: any = route.layout === undefined ? MainLayout : route.layout === null ? Fragment : route.layout ;
               const Page = route.component;
-              return <Route key={index} path={route.path} element= {isLogin ? <Layout><Page /></Layout> : <NotUser/>}/>
+              return <Route key={index} path={route.path} element= {isLogin ? <Layout><Page /></Layout> : <route.naviComponent/>}/>
             })
           }
 
-          <Route path='/admin' element = {isAdmin? <Admin/> : <NotAdmin/>} />
+          <Route path='/admin' element = {<Admin />} >
+            <Route index element={<HomeAdmin />} />
+            <Route path='/admin/products-manager' element={<ProductsManager />}/>
+            <Route path='/admin/users-manager' element={<UsersManager />}/>
+            <Route path='/admin/bills-Mmanager' element={<BillsManager />}/>
+          </Route>
         </Routes>
-      </div>
     </HashRouter>
   );
 };

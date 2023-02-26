@@ -1,6 +1,6 @@
 import { FC, useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import Modal from '../../components/Modal';
+import Modal from '../../../components/Modal';
 
 const NotAdmin: FC = () => {
 

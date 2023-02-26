@@ -8,17 +8,17 @@ import { useSelector } from "react-redux";
 
 const ProductDetail: FC = () => {
   const [quantity, setQuantity] = useState<number>(1);
-  const { IdUser ,isLogin } = useSelector(selectUser);
+  const { idUser ,isLogin } = useSelector(selectUser);
 
-  const {id} = useParams();
+  const {id: idProduct} = useParams();
   const { responses, doFetch } = useFetchAxios(
-    "https://63782c6a5c477765122d0c95.mockapi.io/perfume-products/" + id
+    "https://63782c6a5c477765122d0c95.mockapi.io/perfume-products/" + idProduct
   );
   const { responses: addCartResponses, doFetch: addCart } = useFetchAxios(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser
   );
   const { responses: userResponse, doFetch: getUser } = useFetchAxios(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser
   );
   const { data, isLoading } = responses;
   const { data: userData } = userResponse;

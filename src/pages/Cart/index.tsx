@@ -10,22 +10,22 @@ const Cart: FC = () => {
   
   const [dataDelete, setDataDelete] = useState({});
 
-  const {IdUser} = useSelector(selectUser);
+  const {idUser} = useSelector(selectUser);
  
   const { data, loading, error } = useFetchTA(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser 
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser 
   );
   const {
     loading: putLoading,
     error: putError,
-  } = useFetchTA("https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser, {
+  } = useFetchTA("https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser, {
     method: "PUT",
     body: dataPut,
   });
   const {
     loading: deleteLoading,
     error: deleteError,
-  } = useFetchTA("https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser, {
+  } = useFetchTA("https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser  , {
     method: "PUT",
     body: dataDelete,
   });
