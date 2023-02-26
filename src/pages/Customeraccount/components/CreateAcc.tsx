@@ -11,7 +11,7 @@ import Modal from "../../../components/Modal";
 
 
 interface newUser{
-    fullname: string,
+    fullName: string,
     username: string,
     password: string,
     email: string,
@@ -20,7 +20,7 @@ interface newUser{
 }
 
 interface newValueAcc{
-    fullname: string,
+    fullName: string,
     username: string,
     password: string,
     email: string,
@@ -56,7 +56,7 @@ const CreateAcc:FC = () => {
         <ToastContainer/>
     <Formik
         initialValues = {{
-            fullname:"",
+            fullName:"",
             username: "",
             password: "",
             email: "",
@@ -64,7 +64,7 @@ const CreateAcc:FC = () => {
             address: ""
         }}
         validationSchema = {Yup.object({
-            fullname: Yup.string()
+            fullName: Yup.string()
             .max(20, "Name must less than or equal 20 charactes")
             .required("Please fill Full Name field"),
             username: Yup.string()
@@ -114,9 +114,9 @@ const CreateAcc:FC = () => {
             <div className="text-center font-semibold text-2xl mb-4">NEW TO PERFUMANIA?</div>
             <div className="text-center text-sm">By creating an account you will be able to shop faster, be up to date on an order’s status, and keep track of the orders you have previously made.</div>
             <div className="input-container">
-                <label htmlFor="FullName" className={newValue?.fullname? "label" : "labels"}>Full Name</label>
-                <Field  id='fullname' name="fullname" type="text" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
-                <ErrorMessage name="fullname" render={msg => <div className="errMessage">{msg}</div>}/>
+                <label htmlFor="FullName" className={newValue?.fullName? "label" : "labels"}>Full Name</label>
+                <Field  id='fullName' name="fullName" type="text" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
+                <ErrorMessage name="fullName" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
             <div className="input-container">
                 <label htmlFor="username" className={newValue?.username? "label" : "labels"}>Username</label>

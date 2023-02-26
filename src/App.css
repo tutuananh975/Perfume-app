@@ -64,7 +64,7 @@ img {
   position: fixed;
   top: calc(50% - 75px);
   left: calc(50% - 125px);
-  width: 300px;
+  width: 400px;
   border-radius: 8px;
   background-color: #FFF;
   box-shadow: 2px 2px 20px grey;

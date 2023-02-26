@@ -4,14 +4,22 @@ import Optional from "./Optional";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
+import { AiOutlineLogout } from "react-icons/ai";
 import NavbarMobile from "./NavbarMobile";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../../pages/Customeraccount/featurnes/useSlice";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../../pages/Customeraccount/featurnes/useSlice";
 
 const Navbar: FC = () => {
   const { isLogin, userName } = useSelector(selectUser);
 
   const [isOpenNavbarMobile, setIsOpenNavbarMobile] = useState(false);
+  const dispath = useDispatch()
+
+  const handleLogout = () => {
+    dispath(logout())
+  }
   return (
     <div className="navbar flex justify-between items-center">
       <ul className="flex text-base font-semibold">
@@ -63,8 +71,11 @@ const Navbar: FC = () => {
             </Link>
           )}
           {isLogin ? (
-            <div className="px-6 absolute z-10 top-10 w-56 action-sign-in">
-              
+            <div className="px-6 absolute z-10 top-10 w-56 action-sign-in text-center">
+              <button className=" bg-red-400 hover:bg-red-300 text-white py-2 px-4 rounded-md flex w-full items-center text-center justify-center" onClick={handleLogout}>
+                <AiOutlineLogout />
+                <span className="ml-4">Logout</span>
+              </button>
             </div>
           ) : (
             <div className="px-6 absolute z-10 top-10 w-56 action-sign-in">
