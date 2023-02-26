@@ -73,6 +73,7 @@ const Login: FC = () => {
                                     isLogin: true,
                                 })
                         )
+                        setLoginSucces(true)
                         return
                     }
                     if (idUser) {
