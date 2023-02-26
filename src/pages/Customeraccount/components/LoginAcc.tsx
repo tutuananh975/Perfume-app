@@ -65,7 +65,7 @@ const Login:FC = () => {
             dispatch(
                 login(
                     {
-                     IdUser : idUser.id,
+                     idUser : idUser.id,
                      userName: dataAcc.userName,
                      isLogin : true,
                      isAdmin: false
