@@ -5,11 +5,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import NavbarMobile from "./NavbarMobile";
+import { useSelector } from "react-redux";
+import { logout, selectUser } from "../../../../pages/Customeraccount/featurnes/useSlice";
+import { useDispatch } from "react-redux";
 
 const Navbar: FC = () => {
   
-  const [isOpenNavbarMobile, setIsOpenNavbarMobile] = useState(false)
+  const {userName, isLogin} = useSelector(selectUser)
+  const disPatch = useDispatch()
+  const handleLognOut = ()=>{
+      disPatch(logout())
+  }
 
+  const [isOpenNavbarMobile, setIsOpenNavbarMobile] = useState(false)
   return (
     <div className="navbar flex justify-between items-center">
       <ul className="flex text-base font-semibold">
@@ -76,6 +84,7 @@ const Navbar: FC = () => {
             </div>
           </div>
         </li>
+        
         <li className="ml-9 cursor-pointer hidden md:block">
           <Link to="/help">
             <div className="nav-right-text-link">HELP</div>

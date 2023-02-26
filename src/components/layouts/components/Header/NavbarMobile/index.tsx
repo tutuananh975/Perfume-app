@@ -4,12 +4,21 @@ import Overflay from '../../../../overflay/Overflay';
 import { FaUserAlt, FaChevronRight } from "react-icons/fa";
 import NavbarMoblieRow from './NavbarMobileRow';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { logout, selectUser } from '../../../../../pages/Customeraccount/featurnes/useSlice';
 
 interface PropNavbarMobile {
     onCloseNavbarMobile: Function
 }
 
 const NavbarMobile: FC<PropNavbarMobile> = ({ onCloseNavbarMobile }) => {
+
+    const {isLogin} = useSelector(selectUser)
+    const disPatch = useDispatch()
+    const handleLognOut = ()=>{
+        disPatch(logout())
+    }
 
     return (
         <div className='xl:hidden'>
@@ -39,7 +48,7 @@ const NavbarMobile: FC<PropNavbarMobile> = ({ onCloseNavbarMobile }) => {
                         >
                             <FaUserAlt className='m-auto'/>
                         </div>
-                        <p className='ml-4'>My Acount</p>
+                        <p onClick={handleLognOut} className='ml-4'>{isLogin?"Logn Out": "My Acount"}</p>
                         <FaChevronRight className='text-gray-300 mr-6 ml-auto'/>
                     </div>
                 </NavLink>

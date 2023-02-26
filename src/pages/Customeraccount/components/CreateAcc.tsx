@@ -8,18 +8,18 @@ import { useNavigate } from "react-router-dom";
 
 
 interface newUser{
-    FullName: string,
-    UserName: string,
-    PassWord: string,
+    fullname: string,
+    username: string,
+    password: string,
     email: string,
     phone: string,
     address: string,
 }
 
 interface newValueAcc{
-    FullName: string,
-    UserName: string,
-    PassWord: string,
+    fullname: string,
+    username: string,
+    password: string,
     email: string,
     phone: string,
     address: string
@@ -36,7 +36,7 @@ const CreateAcc:FC = () => {
     const [method, setMethod] = useState<any> ("GET")
     const navigate = useNavigate()
       
-    const {data} = useFetch("https://6367c751edc85dbc84db8620.mockapi.io/ManagerAccount",{
+    const {data} = useFetch("https://63782c6a5c477765122d0c95.mockapi.io/users",{
         method: method,
         body: valueAcc
       })
@@ -46,21 +46,21 @@ const CreateAcc:FC = () => {
         <ToastContainer/>
     <Formik
         initialValues = {{
-            FullName:"",
-            UserName: "",
-            PassWord: "",
+            fullname:"",
+            username: "",
+            password: "",
             email: "",
             phone:  "",
             address: ""
         }}
         validationSchema = {Yup.object({
-            FullName: Yup.string()
+            fullname: Yup.string()
             .max(20, "Name must less than or equal 20 charactes")
             .required("Please fill Full Name field"),
-            UserName: Yup.string()
+            username: Yup.string()
                 .max(20, "UserName must less than or equal 20 charactes")
                 .required("Please fill UserName field"),
-            PassWord:Yup.string()
+            password:Yup.string()
                 .required("Please fill PassWord field"),
             email: Yup.string()
                 .required("Please fill Email field")
@@ -81,7 +81,7 @@ const CreateAcc:FC = () => {
             const dataAcc:newValueAcc = ({...values,cart:[]})        
             setvaluesAcc(dataAcc)
             const isExi = data.some((elemen:any)=>{
-                if(elemen.UserName===dataAcc?.UserName)
+                if(elemen.username===dataAcc?.username)
                 return true
         })
             if(isExi){
@@ -99,19 +99,19 @@ const CreateAcc:FC = () => {
             <div className="text-center font-semibold text-2xl mb-4">NEW TO PERFUMANIA?</div>
             <div className="text-center text-sm">By creating an account you will be able to shop faster, be up to date on an order’s status, and keep track of the orders you have previously made.</div>
             <div className="input-container">
-                <label htmlFor="FullName" className={newValue?.FullName? "label" : "labels"}>Full Name</label>
+                <label htmlFor="FullName" className={newValue?.fullname? "label" : "labels"}>Full Name</label>
                 <Field  id='FullName' name="FullName" type="text" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
                 <ErrorMessage name="FullName" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
             <div className="input-container">
-                <label htmlFor="UserName" className={newValue?.UserName? "label" : "labels"}>Username</label>
-                <Field  id='UserName' name="UserName" type="text" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
-                <ErrorMessage name="UserName" render={msg => <div className="errMessage">{msg}</div>}/>
+                <label htmlFor="userName" className={newValue?.username? "label" : "labels"}>Username</label>
+                <Field  id='userName' name="userName" type="text" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
+                <ErrorMessage name="userName" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
             <div className="input-container">
-                <label htmlFor="PassWord" className={newValue?.PassWord? "label" : "labels"}>Password</label>
-                <Field id='PassWord'  name="PassWord" type="password" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
-                <ErrorMessage name="PassWord" render={msg => <div className="errMessage">{msg}</div>}/>
+                <label htmlFor="passWord" className={newValue?.password? "label" : "labels"}>Password</label>
+                <Field id='passWord'  name="passWord" type="password" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
+                <ErrorMessage name="passWord" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
             <div className="input-container">
                 <label htmlFor="email" className={newValue?.email? "label" : "labels"}>Email</label>

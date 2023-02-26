@@ -17,10 +17,9 @@ const Login:FC = () => {
     const [valueOnChange, setValueOnChange] = useState<IUser>()
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const {data} = useFetch("https://6367c751edc85dbc84db8620.mockapi.io/ManagerAccount",{
+    const {data} = useFetch("https://63782c6a5c477765122d0c95.mockapi.io/users",{
         method: "GET",
       })
-      
       
   return (
     <Formik
@@ -41,11 +40,11 @@ const Login:FC = () => {
     onSubmit={(dataAcc:IUser)=>{
 
         const idUser = data.find((elm:any)=>{
-            if(elm.UserName===dataAcc?.userName && elm.PassWord===dataAcc.passWord)
-            return elm.id
+            if(elm.username===dataAcc?.userName && elm.password===dataAcc.passWord)
+            return elm
         })
         
-        if(data[0].UserName===dataAcc.userName && data[0].PassWord===dataAcc.passWord){
+        if(data[0].username===dataAcc.userName && data[0].password===dataAcc.passWord){
             toast.success("Đăng nhập tài khoản admin thành công")
             dispatch(
                 login(
@@ -60,14 +59,7 @@ const Login:FC = () => {
                 },2000)
             return 
         }
-        const isExi = data.some((elemen:any)=>{
-            if(elemen.UserName===dataAcc?.userName && elemen.PassWord===dataAcc.passWord){ 
-            return true
-        }
-
-        return false 
-    })
-        if(isExi){
+        if(idUser){
             toast.success("Đăng nhập thành công")
             dispatch(
                 login(

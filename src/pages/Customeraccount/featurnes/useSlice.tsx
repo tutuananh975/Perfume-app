@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
+
+
 export const useSlice = createSlice({
     name: "user",
     initialState:{
         user : {
-            idUser: null,
+            idUser: "",
             userName:null,
             isLogin: false,
             isAdmin: false,
@@ -17,7 +19,7 @@ export const useSlice = createSlice({
             state.user = action.payload
         },
         logout: (state)=>{
-            state.user.idUser = null
+            state.user.idUser = ""
             state.user.userName = null
             state.user.isLogin = false
             state.user.isAdmin = false
