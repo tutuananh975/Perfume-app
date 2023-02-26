@@ -7,7 +7,7 @@ interface Prop {
 
 const ProductItem: FC<Prop> = ({product}) =>{
   return (
-    <div className=' mr-4 mb-4 border p-4 hover:shadow-lg border-2'>
+    <div className=' mr-4 mb-4 border p-4 hover:shadow-lg '>
         <div className="innerProduct">
             <div className="productImg">
                 <img src={product.imgSrc} alt="..." className='w-full h-full'/>
