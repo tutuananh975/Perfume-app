@@ -70,9 +70,10 @@ const Login: FC = () => {
                                     idUser: idUser.id,
                                     userName: idUser.username,
                                     isAdmin: true,
-                                    isLogin: true
+                                    isLogin: true,
                                 })
                         )
+                        return
                     }
                     if (idUser) {
                         toast.success("Đăng nhập thành công")
@@ -81,9 +82,8 @@ const Login: FC = () => {
                                 {
                                     idUser: idUser.id,
                                     userName: dataAcc.userName,
-                                    isAdmin: false,
-                                    isLogin: true
-                                    
+                                    isLogin: true,
+                                    sAdmin: false,
                                 })
                         )
                     } else {
