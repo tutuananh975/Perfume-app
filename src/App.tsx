@@ -9,15 +9,13 @@ import NotUser from "./components/NotUser";
 import { selectUser } from './pages/Customeraccount/featurnes/useSlice';
 import Admin from './pages/Admin';
 import NotAdmin from './pages/Admin/NotAdmin';
-import ProductDetail from './pages/ProductDetail';
-import Men from './pages/Men';
 
 
 function App() {  
   
 
   // const persist = useSelector(selectUser)
-  const { idUser, isLogin, isAdmin } = useSelector(selectUser);
+  const { isLogin, isAdmin } = useSelector(selectUser);
     // 2 dòng này fake dòng trên
   // const [isAdmin, setIsAdmin] = useState(false);
   // const [isLogin, setIsLogin] = useState(false);

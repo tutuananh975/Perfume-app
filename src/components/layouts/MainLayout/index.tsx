@@ -1,9 +1,8 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SideBar from "./SideBar";
-import SideBarMobile from "./SideBarMobile";
 
 // interface PropOutlet {
 //     children: any,

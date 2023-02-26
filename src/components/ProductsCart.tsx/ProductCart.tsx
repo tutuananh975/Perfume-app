@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler, useState } from "react";
+import { FC, MouseEventHandler } from "react";
 import Image from "../Image";
 import { AiOutlineClose } from "react-icons/ai";
 

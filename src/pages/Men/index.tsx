@@ -3,7 +3,6 @@ import Banner from "../../components/Banner";
 import ProductList from "../../components/ProductList/ProductList";
 import axios from "axios";
 import Loading from "../../components/Loading";
-import { Outlet } from "react-router-dom";
 
 interface Product {
   imgSrc: string;
