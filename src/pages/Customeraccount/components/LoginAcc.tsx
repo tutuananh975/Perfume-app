@@ -73,6 +73,8 @@ const Login: FC = () => {
                                     isLogin: true
                                 })
                         )
+                        setLoginSucces(true)
+                        return
                     }
                     if (idUser) {
                         toast.success("Đăng nhập thành công")
