@@ -41,7 +41,8 @@ const Login:FC = () => {
 
         const idUser = data.find((elm:any)=>{
             if(elm.username===dataAcc?.userName && elm.password===dataAcc.passWord)
-            return elm.id
+            return elm
+
         })
         
         if(data[0].username===dataAcc.userName && data[0].password===dataAcc.passWord){
@@ -55,18 +56,11 @@ const Login:FC = () => {
                     })
             )
                 setTimeout(()=>{
-                    navigate("/men")
+                    navigate("/admin")
                 },2000)
             return 
         }
-        const isExi = data.some((elemen:any)=>{
-            if(elemen.username===dataAcc?.userName && elemen.password===dataAcc.passWord){ 
-            return true
-        }
-
-        return false 
-    })
-        if(isExi){
+        if(idUser){
             toast.success("Đăng nhập thành công")
             dispatch(
                 login(
@@ -102,7 +96,6 @@ const Login:FC = () => {
             <div className='px-4'>
                 <button className="bg-black text-white w-full mx-auto my-4 py-2 rounded-2xl">Continue</button>
             </div>
-           
         </Form>
     )}
 

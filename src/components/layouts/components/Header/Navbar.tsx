@@ -8,8 +8,9 @@ import NavbarMobile from "./NavbarMobile";
 
 const Navbar: FC = () => {
   
-  const [isOpenNavbarMobile, setIsOpenNavbarMobile] = useState(false)
 
+
+  const [isOpenNavbarMobile, setIsOpenNavbarMobile] = useState(false)
   return (
     <div className="navbar flex justify-between items-center">
       <ul className="flex text-base font-semibold">
@@ -76,6 +77,7 @@ const Navbar: FC = () => {
             </div>
           </div>
         </li>
+        
         <li className="ml-9 cursor-pointer hidden md:block">
           <Link to="/help">
             <div className="nav-right-text-link">HELP</div>
