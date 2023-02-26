@@ -22,7 +22,7 @@ const ProductItem: FC<Prop> = ({product,btnEdit}) =>{
                 <br/>
                 {(btnEdit)?
                 <div className='mt-4'>
-                    <button className='bg-green-600 p-1 mr-2 text-white rounded-lg font-medium hover:bg-green-800'>EDIT</button>
+                    <button className='bg-green-600 p-1 mr-2 text-white rounded-lg font-medium hover:bg-green-800 px-2'>EDIT</button>
                     <button className='bg-red-600 p-1 text-white rounded-lg font-medium hover:bg-red-800'>DELETE</button>
                 </div>
                 :

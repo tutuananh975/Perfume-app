@@ -5,7 +5,7 @@ import "./usermannager.css"
 
 interface user{
     id:number;
-    fullname: string,
+    fullName: string,
     username: string,
     password: string,
     email: string,
@@ -38,9 +38,9 @@ const UsersManager: FC = () => {
             {responses.data.map((value:user)=>(
                 <tbody>
                     <td>{value.id}</td>
-                    <td>{value.fullname}</td>
+                    <td>{value.fullName}</td>
                     <td>{value.username}</td>
-                    <td><button className='bg-red-600 p-1 mr-2 text-white rounded-lg font-medium hover:bg-red-800 text-sm'>BLOCK</button></td>
+                    <td><button className=' px-2 bg-red-600 p-1 mr-2 text-white rounded-lg font-medium hover:bg-red-800 text-sm'>BLOCK</button></td>
                 </tbody>
             ))}
             </table>
