@@ -1,6 +1,8 @@
-import { FC, useState, useEffect, useMemo, useContext } from "react";
+import { FC, useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import useFetchTA from "../../hooks/useFetchTA";
+import { useSelector } from "react-redux";
+import { selectUser } from "../Customeraccount/featurnes/useSlice";
 
 import { FiChevronRight } from "react-icons/fi";
 import FormCheckOut from "./FormCheckOut";
@@ -10,19 +12,20 @@ import OrderSuccess from "./OrderSuccess";
 const Payment: FC = () => {
   const [dataPut, setDataPut] = useState({});
   const [dataDelete, setDataDelete] = useState({});
+  const {IdUser} = useSelector(selectUser);
 
   const { data, loading, error } = useFetchTA(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/2"
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser
   );
   const { loading: putLoading, error: putError } = useFetchTA(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/2",
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser,
     {
       method: "PUT",
       body: dataPut,
     }
   );
   const { loading: deleteLoading, error: deleteError } = useFetchTA(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/2",
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser,
     {
       method: "PUT",
       body: dataDelete,

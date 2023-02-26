@@ -1,6 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import useFetchTA from "../../hooks/useFetchTA";
-
+import { useSelector } from "react-redux";
+import { selectUser } from "../Customeraccount/featurnes/useSlice";
 import Order from "./Order";
 import ProductsCart from "../../components/ProductsCart.tsx";
 
@@ -8,21 +9,23 @@ const Cart: FC = () => {
   const [dataPut, setDataPut] = useState({});
   
   const [dataDelete, setDataDelete] = useState({});
+
+  const {IdUser} = useSelector(selectUser);
  
   const { data, loading, error } = useFetchTA(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/2" 
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser 
   );
   const {
     loading: putLoading,
     error: putError,
-  } = useFetchTA("https://63782c6a5c477765122d0c95.mockapi.io/users/2", {
+  } = useFetchTA("https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser, {
     method: "PUT",
     body: dataPut,
   });
   const {
     loading: deleteLoading,
     error: deleteError,
-  } = useFetchTA("https://63782c6a5c477765122d0c95.mockapi.io/users/2", {
+  } = useFetchTA("https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser, {
     method: "PUT",
     body: dataDelete,
   });
@@ -84,7 +87,6 @@ const Cart: FC = () => {
       return product.id !== id;
     });
     setCartProducts(newCart);
-    console.log(newCart);
     setDataDelete({ cart: newCart });
     handleSetOrder(newCart);
   };
@@ -101,6 +103,7 @@ const Cart: FC = () => {
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <ProductsCart 
+          totalItems = {totalItems}
           loading = {loading}
           putLoading = {putLoading}
           deleteLoading = {deleteLoading}
