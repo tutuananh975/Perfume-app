@@ -79,6 +79,16 @@
     display: block;
 }
 
+.sign-in-btn::after {
+    content: "";
+    position: absolute;
+    background-color: transparent;
+    height: 30px;
+    width: 350%;
+    top: 15px;
+    left: -56px;
+}
+
 .triangle-up {
     position: absolute;
     top: -16px;
@@ -91,7 +101,6 @@
     background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: center center;
-    position: absolute;
 }
 
 @media (min-width: 768px) {

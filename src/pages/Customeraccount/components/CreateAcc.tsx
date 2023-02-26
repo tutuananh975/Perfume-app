@@ -4,7 +4,10 @@ import * as Yup from 'yup';
 import useFetch from "../../../hooks/useFetch";
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../featurnes/useSlice";
+import Loading from "../../../components/Loading";
+import Modal from "../../../components/Modal";
 
 
 interface newUser{
@@ -33,16 +36,23 @@ const CreateAcc:FC = () => {
 
     const [newValue, setNewValue] = useState<newUser>()
     const [valueAcc, setvaluesAcc] = useState<newValueAcc>()
-    const [method, setMethod] = useState<any> ("GET")
-    const navigate = useNavigate()
+    const [method, setMethod] = useState<any> ("GET");
+    const [registerSuccess, setRegisterSuccess] = useState(false);
+    const dispatch = useDispatch()
       
-    const {data} = useFetch("https://63782c6a5c477765122d0c95.mockapi.io/users",{
+    const {data, loadding} = useFetch("https://63782c6a5c477765122d0c95.mockapi.io/users",{
         method: method,
         body: valueAcc
       })
 
     return (
     <div>
+        {loadding && <Loading />}
+        {registerSuccess && <Modal 
+            modalText="Congratulations, you have successfully registered. Auto navigate Home Page after "
+            navigatePage="/"
+            modalBtn="Navigate Home Now"
+        />}
         <ToastContainer/>
     <Formik
         initialValues = {{
@@ -81,15 +91,20 @@ const CreateAcc:FC = () => {
             const dataAcc:newValueAcc = ({...values,cart:[]})        
             setvaluesAcc(dataAcc)
             const isExi = data.some((elemen:any)=>{
-                if(elemen.username===dataAcc?.username)
-                return true
+                return elemen.username===dataAcc?.username
         })
             if(isExi){
                toast.error("Tài khoản đã tồn tại")
             }else{
                 setMethod("POST")
                 toast.success("Đăng ký tài khoản thành công")
-                navigate('/')
+                dispatch(login({
+                    idUser: data[data.length-1].id + 1,
+                    userName: values.username,
+                    isAdmin: false,
+                    isLogin:true
+                }))
+                setRegisterSuccess(true);
             }
         }}
         

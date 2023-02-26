@@ -8,10 +8,13 @@ import "./App.css";
 import { selectUser } from './pages/Customeraccount/featurnes/useSlice';
 import NotAdmin from './pages/Admin/components/NotAdmin';
 import HomeAdmin from './pages/Admin/HomeAdmin';
+import Cart from './pages/Cart';
 import Admin from './pages/Admin';
+import NotSideBarLayOut from './components/layouts/NotSideBarLayOut';
 import UsersManager from './pages/Admin/UsersManager';
 import ProductsManager from './pages/Admin/ProductsManager';
 import BillsManager from './pages/Admin/BillsManager';
+import NotUser from './components/NotUser';
 
 function App() {  
   
@@ -36,15 +39,15 @@ function App() {
             privateRoutes.map((route, index) => {
               const Layout: any = route.layout === undefined ? MainLayout : route.layout === null ? Fragment : route.layout ;
               const Page = route.component;
-              return <Route key={index} path={route.path} element= {isLogin ? <Layout><Page /></Layout> : <route.naviComponent/>}/>
+              const NaviPage = route.naviComponent
+              return <Route key={index} path={route.path} element= {isLogin ? <Layout><Page /></Layout> : <NaviPage/>}/>
             })
           }
-
           <Route path='/admin' element = {isAdmin ? <Admin /> : <NotAdmin />} >
             <Route index element={<HomeAdmin />} />
             <Route path='/admin/products-manager' element={<ProductsManager />}/>
             <Route path='/admin/users-manager' element={<UsersManager />}/>
-            <Route path='/admin/bills-Mmanager' element={<BillsManager />}/>
+            <Route path='/admin/bills-manager' element={<BillsManager />}/>
           </Route>
         </Routes>
     </HashRouter>

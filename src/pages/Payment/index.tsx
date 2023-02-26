@@ -6,7 +6,7 @@ import { selectUser } from "../Customeraccount/featurnes/useSlice";
 
 import { FiChevronRight } from "react-icons/fi";
 import FormCheckOut from "./FormCheckOut";
-import ProductsCart from "../../components/ProductsCart.tsx";
+import ProductsCart from "../../components/ProductsCart";
 import OrderSuccess from "./OrderSuccess";
 
 const Payment: FC = () => {

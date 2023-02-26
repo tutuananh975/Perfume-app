@@ -51,6 +51,7 @@ const Login:FC = () => {
                 login(
                     {
                      idUser: idUser.id,
+                     userName: idUser.username,
                      isAdmin: true,
                      isLogin:true
                     })

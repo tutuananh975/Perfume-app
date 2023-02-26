@@ -3,7 +3,7 @@ import useFetchTA from "../../hooks/useFetchTA";
 import { useSelector } from "react-redux";
 import { selectUser } from "../Customeraccount/featurnes/useSlice";
 import Order from "./Order";
-import ProductsCart from "../../components/ProductsCart.tsx";
+import ProductsCart from "../../components/ProductsCart";
 
 const Cart: FC = () => {
   const [dataPut, setDataPut] = useState({});
@@ -66,7 +66,6 @@ const Cart: FC = () => {
   };
 
   const handleDecreaseAmout = (id: string) => {
-    console.log(cartProducts)
     const newCart: any[] = [];
     cartProducts.forEach((product: any) => {
       if (product.id === id) {
@@ -83,7 +82,7 @@ const Cart: FC = () => {
   };
 
   const handleDeleteCart = (id: string) => {
-    const newCart = cartProducts.filter((product) => {
+    const newCart =  cartProducts.filter((product) => {
       return product.id !== id;
     });
     setCartProducts(newCart);
