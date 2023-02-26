@@ -5,17 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import NavbarMobile from "./NavbarMobile";
-import { useSelector } from "react-redux";
-import { logout, selectUser } from "../../../../pages/Customeraccount/featurnes/useSlice";
-import { useDispatch } from "react-redux";
 
 const Navbar: FC = () => {
   
-  const {userName, isLogin} = useSelector(selectUser)
-  const disPatch = useDispatch()
-  const handleLognOut = ()=>{
-      disPatch(logout())
-  }
+
 
   const [isOpenNavbarMobile, setIsOpenNavbarMobile] = useState(false)
   return (
@@ -41,7 +34,7 @@ const Navbar: FC = () => {
           </NavLink>
         </li>
         <li className="ml-4 py-2 nav-link hidden xl:block">
-          <NavLink to="/best-sellers"> BEST SELLERS</NavLink>
+          <NavLink to="/search">SEARCH</NavLink>
         </li>
         <li className="ml-4 py-2 nav-link hidden xl:block">
           <NavLink to="/gift">GIFT SETS</NavLink>

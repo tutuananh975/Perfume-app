@@ -89,7 +89,7 @@ const CreateAcc:FC = () => {
             }else{
                 setMethod("POST")
                 toast.success("Đăng ký tài khoản thành công")
-                navigate('./')
+                navigate('/')
             }
         }}
         
@@ -100,18 +100,18 @@ const CreateAcc:FC = () => {
             <div className="text-center text-sm">By creating an account you will be able to shop faster, be up to date on an order’s status, and keep track of the orders you have previously made.</div>
             <div className="input-container">
                 <label htmlFor="FullName" className={newValue?.fullname? "label" : "labels"}>Full Name</label>
-                <Field  id='FullName' name="FullName" type="text" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
-                <ErrorMessage name="FullName" render={msg => <div className="errMessage">{msg}</div>}/>
+                <Field  id='fullname' name="fullname" type="text" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
+                <ErrorMessage name="fullname" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
             <div className="input-container">
-                <label htmlFor="userName" className={newValue?.username? "label" : "labels"}>Username</label>
-                <Field  id='userName' name="userName" type="text" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
-                <ErrorMessage name="userName" render={msg => <div className="errMessage">{msg}</div>}/>
+                <label htmlFor="username" className={newValue?.username? "label" : "labels"}>Username</label>
+                <Field  id='username' name="username" type="text" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
+                <ErrorMessage name="username" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
             <div className="input-container">
-                <label htmlFor="passWord" className={newValue?.password? "label" : "labels"}>Password</label>
-                <Field id='passWord'  name="passWord" type="password" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
-                <ErrorMessage name="passWord" render={msg => <div className="errMessage">{msg}</div>}/>
+                <label htmlFor="password" className={newValue?.password? "label" : "labels"}>Password</label>
+                <Field id='password'  name="password" type="password" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
+                <ErrorMessage name="password" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
             <div className="input-container">
                 <label htmlFor="email" className={newValue?.email? "label" : "labels"}>Email</label>

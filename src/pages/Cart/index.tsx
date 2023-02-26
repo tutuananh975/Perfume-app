@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useMemo, useContext } from "react";
+import { FC, useState, useEffect } from "react";
 import useFetchTA from "../../hooks/useFetchTA";
 
 import Order from "./Order";
@@ -32,10 +32,6 @@ const Cart: FC = () => {
 
   const [savings, setSavings] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
-
-  const dataMemo = useMemo(() => {
-    return data;
-  }, [loading]);
 
   const handleSetOrder = (cartProducts: any[]) => {
     let newTotalPrice: number = 0;
@@ -94,11 +90,11 @@ const Cart: FC = () => {
   };
 
   useEffect(() => {
-    if (dataMemo) {
-      setCartProducts(dataMemo.cart);
-      handleSetOrder(dataMemo.cart);
+    if (data) {
+      setCartProducts(data.cart);
+      handleSetOrder(data.cart);
     }
-  }, [dataMemo]);
+  }, [loading, data]);
 
   return (
     <div className="cart px-4 pt-9 pb-5">

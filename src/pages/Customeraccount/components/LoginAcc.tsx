@@ -42,6 +42,7 @@ const Login:FC = () => {
         const idUser = data.find((elm:any)=>{
             if(elm.username===dataAcc?.userName && elm.password===dataAcc.passWord)
             return elm
+
         })
         
         if(data[0].username===dataAcc.userName && data[0].password===dataAcc.passWord){
@@ -55,7 +56,7 @@ const Login:FC = () => {
                     })
             )
                 setTimeout(()=>{
-                    navigate("/men")
+                    navigate("/admin")
                 },2000)
             return 
         }
@@ -104,3 +105,4 @@ const Login:FC = () => {
 }
 
 export default memo(Login)
+

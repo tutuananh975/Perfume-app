@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { Routes, Route, HashRouter } from 'react-router-dom';
 import './App.css';
 import { MainLayout } from './components/layouts';
@@ -15,7 +15,7 @@ function App() {
   
 
   // const persist = useSelector(selectUser)
-  const { idUser, isLogin, isAdmin } = useSelector(selectUser);
+  const { isLogin, isAdmin } = useSelector(selectUser);
     // 2 dòng này fake dòng trên
   // const [isAdmin, setIsAdmin] = useState(false);
   // const [isLogin, setIsLogin] = useState(false);

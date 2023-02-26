@@ -1,14 +1,13 @@
 import HomePage from "../pages/HomePage";
-import BestSellers from "../pages/BestSellers";
+import Search from "../pages/Search";
 import Brands from "../pages/Brands";
 import Customeraccount from "../pages/Customeraccount";
 import Fragrance from "../pages/Fragrance";
 import Gift from "../pages/Gift";
 import Men from "../pages/Men";
 import Women from "../pages/Women";
-import Help from "../pages/Help";
 import Cart from "../pages/Cart";
-import { Component, FC } from "react";
+import { FC } from "react";
 import NotSideBarLayOut from "../components/layouts/NotSideBarLayOut";
 import Payment from "../pages/Payment";
 import ProductDetail from "../pages/ProductDetail";
@@ -17,7 +16,7 @@ import NotUser from "../components/NotUser";
 
 const publicRoutes: {path: string, component: FC, layout?: any, children?: any, element?:any}[] = [
   { path: "/", component: HomePage, layout: NotSideBarLayOut},
-  { path: "/best-sellers", component: BestSellers },
+  { path: "/search", component: Search },
   { path: "/brands", component: Brands, layout: NotSideBarLayOut },
   { path: "/customeraccount", component: Customeraccount, layout: null },
   { path: "/fragrance", component: Fragrance, layout: null },
@@ -30,11 +29,9 @@ const publicRoutes: {path: string, component: FC, layout?: any, children?: any, 
   // { path: "/help", component: Help, layout: NotSideBarLayOut },
   // { path: "/cart", component: Cart, layout: NotSideBarLayOut },
   { path: "/payment", component: Payment, layout: null },
-  { path: "productdetail", component: ProductDetail, layout: NotSideBarLayOut},
+  { path: "product/:id", component: ProductDetail, layout: NotSideBarLayOut},
 ];
 
-
-const PrivateRoutes: [] = [];
 const privateRoutes: {path: string, component: FC, layout?: any, naviComponent: FC}[] = [
   {path: "/cart", component: Cart, layout: NotSideBarLayOut, naviComponent: NotUser}
 ];
