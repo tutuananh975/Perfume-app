@@ -158,6 +158,7 @@ const ProductDetail: FC = () => {
                     BUY IT NOW
                   </button>
                 </div>
+                {!isLogin && <h3 className="mt-3 ml-3 text-red-500 text-sm">You must be logged in to use these features! </h3>}
             </div>
           </div>
         </div>

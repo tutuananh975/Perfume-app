@@ -28,7 +28,7 @@ const SearchBar: FC = () => {
           <img className="w-60 h-16" src={logo} alt="logo" />
         </NavLink>
         <div className="search relative hidden lg:flex">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="w-full">
             <input
               type="text"
               className="search-input pl-4 pr-24 py-1 border h-full w-full rounded"

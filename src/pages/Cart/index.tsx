@@ -48,8 +48,6 @@ const Cart: FC = () => {
     setTotalItems(newTotalItem);
   };
 
-  console.log(data);
-
   const handleCreaseAmout = (id: string) => {
     const newCart: any[] = [];
     cartProducts.forEach((product: any) => {

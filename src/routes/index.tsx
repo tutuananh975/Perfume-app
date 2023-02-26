@@ -1,5 +1,5 @@
 import HomePage from "../pages/HomePage";
-import BestSellers from "../pages/BestSellers";
+import Search from "../pages/Search";
 import Brands from "../pages/Brands";
 import Customeraccount from "../pages/Customeraccount";
 import Fragrance from "../pages/Fragrance";
@@ -16,7 +16,7 @@ import NotUser from "../components/NotUser";
 
 const publicRoutes: {path: string, component: FC, layout?: any, children?: any, element?:any}[] = [
   { path: "/", component: HomePage, layout: NotSideBarLayOut},
-  { path: "/best-sellers", component: BestSellers },
+  { path: "/search", component: Search },
   { path: "/brands", component: Brands, layout: NotSideBarLayOut },
   { path: "/customeraccount", component: Customeraccount, layout: null },
   { path: "/fragrance", component: Fragrance, layout: null },

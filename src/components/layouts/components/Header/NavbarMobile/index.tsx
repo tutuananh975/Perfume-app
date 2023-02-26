@@ -44,34 +44,40 @@ const NavbarMobile: FC<PropNavbarMobile> = ({ onCloseNavbarMobile }) => {
                     </div>
                 </NavLink>
                 <NavbarMoblieRow  
-                    alt='Women' 
+                    alt='women' 
                     src='https://cdn.shopify.com/s/files/1/0269/7763/2389/files/women_icon_47eda231-6206-4341-8b62-dfdce31ca056.png'
                     title="Women's Perfume"
+                    onCloseNavbarMobile = {onCloseNavbarMobile}
                 />
                 <NavbarMoblieRow  
-                    alt='Men' 
+                    alt='men' 
                     src='https://cdn.shopify.com/s/files/1/0269/7763/2389/files/men_icon_3fcd8ed9-2d2f-4dd0-b094-f0f56d3f2160.png'
                     title="Men's Perfume"
+                    onCloseNavbarMobile = {onCloseNavbarMobile}
                 />
                 <NavbarMoblieRow  
-                    alt='best-sellers' 
+                    alt='search' 
                     src='https://cdn.shopify.com/s/files/1/0269/7763/2389/files/clearnace_icon_1136ba11-08b4-46e1-8a54-7b56ef389066.png'
-                    title="Best Sellers"
+                    title="Search"
+                    onCloseNavbarMobile = {onCloseNavbarMobile}
                 />
                 <NavbarMoblieRow  
                     alt='gift' 
                     src='https://cdn.shopify.com/s/files/1/0269/7763/2389/files/Gifts_menu.png?v=1636382258'
                     title="Gift Sets"
+                    onCloseNavbarMobile = {onCloseNavbarMobile}
                 />
                 <NavbarMoblieRow  
                     alt='brands' 
                     src='https://cdn.shopify.com/s/files/1/0269/7763/2389/files/atoz.png'
                     title="Shop by brands"
+                    onCloseNavbarMobile = {onCloseNavbarMobile}
                 />
                 <NavbarMoblieRow  
                     alt='fragrance' 
                     src='https://cdn.shopify.com/s/files/1/0269/7763/2389/files/women_icon_47eda231-6206-4341-8b62-dfdce31ca056.png'
                     title="Join Theo Club"
+                    onCloseNavbarMobile = {onCloseNavbarMobile}
                 />
             </div>
             <Overflay onClose={onCloseNavbarMobile}/>
