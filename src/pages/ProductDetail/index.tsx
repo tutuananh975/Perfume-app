@@ -8,10 +8,11 @@ import { useSelector } from "react-redux";
 
 const ProductDetail: FC = () => {
   const [quantity, setQuantity] = useState<number>(1);
-  const params = useParams();
-  const { IdUser, isLogin } = useSelector(selectUser);
+  const { IdUser ,isLogin } = useSelector(selectUser);
+
+  const {id} = useParams();
   const { responses, doFetch } = useFetchAxios(
-    "https://63782c6a5c477765122d0c95.mockapi.io/perfume-products/" + params.id
+    "https://63782c6a5c477765122d0c95.mockapi.io/perfume-products/" + id
   );
   const { responses: addCartResponses, doFetch: addCart } = useFetchAxios(
     "https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser
@@ -48,12 +49,16 @@ const ProductDetail: FC = () => {
     // console.log(data.retailPrice, data.ourPrice, data.amount)
 
     if (!isExistInCart) {
+      let newId;
+      if(userData.cart.length < 1) {
+        newId = "1"
+      } else {
+        newId = (Number(userData.cart[userData.cart.length -1].id) + 1).toString();
+      }
       newCart = [
         ...userData.cart,
         {
-          id: (
-            Number(userData.cart[userData.cart.length - 1].id) + 1
-          ).toString(),
+          id: newId,
           imgSrc: data.imgSrc,
           name: data.name,
           desc: data.desc,
