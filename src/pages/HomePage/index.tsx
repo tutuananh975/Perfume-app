@@ -11,25 +11,14 @@ import { IconData } from "./data/IconData";
 import { PerfectData } from "./data/Perfect";
 import { GoLocation } from 'react-icons/go';
 import Categories from "./components/Categories/Categories";
-import { useDispatch, useSelector } from "react-redux";
-import  { logout, selectUser } from "../Customeraccount/featurnes/useSlice";
-import store from "../../Store/store";
+
 
 
 
 const HomePage: FC = () => {
-
-    const persist = useSelector(selectUser)
-
-    const disPatch = useDispatch()
-    const handleLognOut = ()=>{
-        disPatch(logout())
-    }
-
     
     return (
         <div>
-            <button onClick={handleLognOut} >{persist? "đăng xuất" : 'đăng nhập'}</button>
             <img src="https://cdn.shopify.com/s/files/1/0269/7763/2389/files/Perfumania_02-06-2023_VDAY_GuideWeb_Banner_1500x.jpg?v=1675690297" alt="" />
             <div className="flex justify-between my-6">
                 <div className="text-2xl">OUR FRAGRANCE BRANDS</div>

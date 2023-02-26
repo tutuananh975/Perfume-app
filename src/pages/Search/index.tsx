@@ -2,6 +2,7 @@ import { FC, useState, useEffect } from "react";
 import ProductList from "../../components/ProductList/ProductList";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 
 
@@ -16,9 +17,10 @@ interface Product {
     id: any;
   }
 
-const BestSellers: FC = () => {
+const Search: FC = () => {
 
     const { state } = useLocation();
+    const [loading, setLoading] = useState(false);
 
     const searchValue = state?.searchValue ?? '';
     console.log(searchValue);
@@ -27,9 +29,11 @@ const BestSellers: FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
+      setLoading(true)
       getProductList().then((data: Product[]) => {
         const bestSellersProducts = data.filter((product) => product.name.toLowerCase().includes(searchValue))
         setProducts(bestSellersProducts);
+        setLoading(false)
         
       });
     }, [searchValue]);
@@ -39,16 +43,16 @@ const BestSellers: FC = () => {
         "https://63782c6a5c477765122d0c95.mockapi.io/perfume-products"
       );
       let result = response.data;
-      console.log(result);
       
       return result;
     }
   
       return (
           <div className="px-4 pt-2">
+            {loading && <Loading/>}
         <ProductList products={products}/>
       </div>
       )
 }
 
-export default BestSellers;
+export default Search;

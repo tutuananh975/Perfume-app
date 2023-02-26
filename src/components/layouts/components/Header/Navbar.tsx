@@ -8,8 +8,9 @@ import NavbarMobile from "./NavbarMobile";
 
 const Navbar: FC = () => {
   
-  const [isOpenNavbarMobile, setIsOpenNavbarMobile] = useState(false)
 
+
+  const [isOpenNavbarMobile, setIsOpenNavbarMobile] = useState(false)
   return (
     <div className="navbar flex justify-between items-center">
       <ul className="flex text-base font-semibold">
@@ -33,7 +34,7 @@ const Navbar: FC = () => {
           </NavLink>
         </li>
         <li className="ml-4 py-2 nav-link hidden xl:block">
-          <NavLink to="/best-sellers"> BEST SELLERS</NavLink>
+          <NavLink to="/search">SEARCH</NavLink>
         </li>
         <li className="ml-4 py-2 nav-link hidden xl:block">
           <NavLink to="/gift">GIFT SETS</NavLink>
@@ -76,6 +77,7 @@ const Navbar: FC = () => {
             </div>
           </div>
         </li>
+        
         <li className="ml-9 cursor-pointer hidden md:block">
           <Link to="/help">
             <div className="nav-right-text-link">HELP</div>

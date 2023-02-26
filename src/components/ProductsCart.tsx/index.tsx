@@ -12,10 +12,11 @@ interface PropProductsCart {
     cartProducts: object[],
     onCreaseAmout: any,
     onDecreaseAmout: any,
-    onDeleteCart: any
+    onDeleteCart: any,
+    totalItems?: number
 }
 
-const ProductsCart = ({ 
+const ProductsCart: FC<PropProductsCart> = ({ 
     loading, 
     putLoading, 
     deleteLoading, 
@@ -26,6 +27,7 @@ const ProductsCart = ({
     onCreaseAmout,
     onDecreaseAmout,
     onDeleteCart,
+    totalItems
 } : PropProductsCart) => {
   return (
     <>
@@ -55,7 +57,7 @@ const ProductsCart = ({
 <div className="col lg:col-span-2">
           <div className="border-b border-solid border-slate-300 font-semibold text-base py-6">
             YOUR CART
-            <span className=" text-gray-400"> ( 5 ITEMS )</span>
+            <span className=" text-gray-400"> ( {totalItems} )</span>
           </div>
           {cartProducts.map((product: any) => (
             <ProductCart

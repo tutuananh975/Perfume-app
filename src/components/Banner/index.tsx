@@ -1,16 +1,20 @@
 import { FC } from "react";
 import { useState } from "react";
 
-const Banner: FC = () => {
+interface PropsBanner {
+  imgBanner: string;
+}
+
+const Banner: FC<PropsBanner> = ({ imgBanner }) => {
   const [reading, setReading] = useState<boolean>(false);
 
   return (
     <>
       <div className="block border-b-1 pb-6 lg:grid grid-cols-6">
         <img
-          src="https://cdn.shopify.com/s/files/1/0269/7763/2389/files/collection_header_Men_Desktop.jpg"
+          src={imgBanner}
           alt="..."
-          className="mb-4 rounded-xl col-span-3 xl: col-span-4 "
+          className="mb-4 rounded-xl col-span-3 xl:col-span-4 "
         />
         <div
           className={

@@ -15,13 +15,11 @@ interface IUser{
 
 const Login:FC = () => {
     const [valueOnChange, setValueOnChange] = useState<IUser>()
-    const [idUser, setIdUser] = useState()
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const {data} = useFetch("https://6367c751edc85dbc84db8620.mockapi.io/ManagerAccount",{
+    const {data} = useFetch("https://63782c6a5c477765122d0c95.mockapi.io/users",{
         method: "GET",
       })
-      
       
   return (
     <Formik
@@ -42,33 +40,35 @@ const Login:FC = () => {
     onSubmit={(dataAcc:IUser)=>{
 
         const idUser = data.find((elm:any)=>{
-            if(elm.UserName===dataAcc?.userName && elm.PassWord===dataAcc.passWord)
-            return elm.id
+            if(elm.username===dataAcc?.userName && elm.password===dataAcc.passWord)
+            return elm
+
         })
         
-
-        if(data[0].UserName===dataAcc.userName && data[0].PassWord===dataAcc.passWord){
+        if(data[0].username===dataAcc.userName && data[0].password===dataAcc.passWord){
             toast.success("Đăng nhập tài khoản admin thành công")
+            dispatch(
+                login(
+                    {
+                     idUser: idUser.id,
+                     isAdmin: true,
+                     isLogin:true
+                    })
+            )
                 setTimeout(()=>{
-                    navigate("/men")
+                    navigate("/admin")
                 },2000)
             return 
         }
-        const isExi = data.some((elemen:any)=>{
-            if(elemen.UserName===dataAcc?.userName && elemen.PassWord===dataAcc.passWord){ 
-            return true
-        }
-
-        return false 
-    })
-        if(isExi){
+        if(idUser){
             toast.success("Đăng nhập thành công")
             dispatch(
                 login(
                     {
-                     UserName: dataAcc.userName,
                      IdUser : idUser.id,
-                     loggetIn : true,
+                     userName: dataAcc.userName,
+                     isLogin : true,
+                     isAdmin: false
                     })
             )
             setTimeout(()=>{
@@ -96,7 +96,6 @@ const Login:FC = () => {
             <div className='px-4'>
                 <button className="bg-black text-white w-full mx-auto my-4 py-2 rounded-2xl">Continue</button>
             </div>
-           
         </Form>
     )}
 
@@ -105,3 +104,4 @@ const Login:FC = () => {
 }
 
 export default memo(Login)
+
