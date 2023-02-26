@@ -40,7 +40,7 @@ function App() {
             })
           }
 
-          <Route path='/admin' element = {<Admin />} >
+          <Route path='/admin' element = {isAdmin ? <Admin /> : <NotAdmin />} >
             <Route index element={<HomeAdmin />} />
             <Route path='/admin/products-manager' element={<ProductsManager />}/>
             <Route path='/admin/users-manager' element={<UsersManager />}/>
