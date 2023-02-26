@@ -96,7 +96,6 @@ const Login:FC = () => {
             <div className='px-4'>
                 <button className="bg-black text-white w-full mx-auto my-4 py-2 rounded-2xl">Continue</button>
             </div>
-           
         </Form>
     )}
 
