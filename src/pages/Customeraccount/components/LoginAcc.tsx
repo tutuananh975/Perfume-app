@@ -1,9 +1,8 @@
-import React, { FC, useState, memo } from 'react'
+import { FC, useState, memo } from 'react'
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import useFetch from '../../../hooks/useFetch';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../featurnes/useSlice';
 import Loading from '../../../components/Loading';
@@ -20,7 +19,6 @@ interface IUser {
 const Login: FC = () => {
     const [valueOnChange, setValueOnChange] = useState<IUser>()
     const [loginSuccess, setLoginSucces] = useState(false);
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const { data, loadding } = useFetch("https://63782c6a5c477765122d0c95.mockapi.io/users", {
         method: "GET",

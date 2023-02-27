@@ -1,13 +1,13 @@
 import { FC } from "react";
-import SearchBar from "../../components/layouts/components/Header/SearchBar";
 import Footer from "../../components/layouts/components/Footer";
 import SidebarAdmin from "./components/SidebarAdmin"; 
 import { Outlet } from "react-router-dom";
+import Header from "../../components/layouts/components/Header";
 
 const Admin: FC = () => {
   return (
     <div>
-      <SearchBar />
+      <Header />
       <div className="border-t border-slate-300 ">
         <div className="grid grid-cols-4 gap-4">
           <div className="col-span-4 md:col-span-1 bg-slate-100 pl-4">

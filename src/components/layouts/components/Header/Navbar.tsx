@@ -11,15 +11,22 @@ import { selectUser } from "../../../../pages/Customeraccount/featurnes/useSlice
 import { useDispatch } from "react-redux";
 import { logout } from "../../../../pages/Customeraccount/featurnes/useSlice";
 
+import TotalItems from "./TotalItems";
+
 const Navbar: FC = () => {
-  const { isLogin, userName } = useSelector(selectUser);
+  const { isLogin, userName, isAdmin } = useSelector(selectUser);
 
   const [isOpenNavbarMobile, setIsOpenNavbarMobile] = useState(false);
-  const dispath = useDispatch()
+  const dispath = useDispatch();
+
+  const activeClass = (param: any) => {
+    return param.isActive ? "nav-link-active" : ""
+  }
+    
 
   const handleLogout = () => {
-    dispath(logout())
-  }
+    dispath(logout());
+  };
   return (
     <div className="navbar flex justify-between items-center">
       <ul className="flex text-base font-semibold">
@@ -33,29 +40,36 @@ const Navbar: FC = () => {
           </div>
         </li>
         <li className="py-2 nav-link">
-          <NavLink to="/women">
+          <NavLink to="/women" className={activeClass}>
             WOMEN'S
             <span className="hidden lg:inline"> PERFUME</span>
           </NavLink>
         </li>
         <li className="ml-4 py-2 nav-link">
-          <NavLink to="/men">
+          <NavLink to="/men" className={activeClass}>
             MEN'S
             <span className="hidden lg:inline"> PERFUME</span>
           </NavLink>
         </li>
         <li className="ml-4 py-2 nav-link hidden xl:block">
-          <NavLink to="/search">SEARCH</NavLink>
+          <NavLink to="/search" className={activeClass}>SEARCH</NavLink>
         </li>
         <li className="ml-4 py-2 nav-link hidden xl:block">
-          <NavLink to="/gift">GIFT SETS</NavLink>
+          <NavLink to="/gift" className={activeClass}>GIFT SETS</NavLink>
         </li>
         <li className="ml-4 py-2 nav-link hidden xl:block">
-          <NavLink to="/brands">BRANDS</NavLink>
+          <NavLink to="/brands" className={activeClass}>BRANDS</NavLink>
         </li>
-        <li className="ml-4 py-2 nav-link">
-          <NavLink to="/fragrance">JOIN THE CLUB</NavLink>
+        <li className="ml-4 py-2 nav-link hidden xl:block">
+          <NavLink to="/fragrance" className={activeClass}>JOIN THE CLUB</NavLink>
         </li>
+        {isAdmin &&
+          <li className="ml-4 py-2 nav-link">
+            <NavLink to="/admin" className={activeClass}>
+              <span className=" text-red-600 font-semibold">ADMIN MANAGER</span>
+            </NavLink>
+          </li>
+        }
       </ul>
       <ul className="flex navbar-right">
         <li className="cursor-pointer has-triangle hidden md:block sign-in-btn relative">
@@ -72,7 +86,10 @@ const Navbar: FC = () => {
           )}
           {isLogin ? (
             <div className="px-6 absolute z-10 top-10 w-56 action-sign-in text-center">
-              <button className=" bg-red-400 hover:bg-red-300 text-white py-2 px-4 rounded-md flex w-full items-center text-center justify-center" onClick={handleLogout}>
+              <button
+                className=" bg-red-400 hover:bg-red-300 text-white py-2 px-4 rounded-md flex w-full items-center text-center justify-center"
+                onClick={handleLogout}
+              >
                 <AiOutlineLogout />
                 <span className="ml-4">Logout</span>
               </button>
@@ -114,9 +131,10 @@ const Navbar: FC = () => {
           <div>VND</div>
           <div className="triangle absolute"></div>
         </li>
-        <li className="ml-4 cursor-pointer hidden sm:block">
+        <li className="ml-4 cursor-pointer hidden sm:block relative">
           <Link to="/cart">
             <Optional icon={faCartShopping} textLight="CART" />
+            {isLogin && <TotalItems />}
           </Link>
         </li>
       </ul>

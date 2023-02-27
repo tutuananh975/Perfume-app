@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 interface Prop {
     product: any,
@@ -7,8 +7,10 @@ interface Prop {
 }
 
 const ProductItem: FC<Prop> = ({product,btnEdit}) =>{
+    const navigate = useNavigate();
+
   return (
-    <div className=' mr-4 mb-4 border p-4 hover:shadow-lg'>
+    <div className=' mr-4 mb-4 border p-4 hover:shadow-lg cursor-pointer' onClick={() => navigate("/product/" + product.id)}>
         <div className="innerProduct">
             <div className="productImg">
                 <img src={product.imgSrc} alt="..." className='w-full h-full'/>
@@ -29,7 +31,7 @@ const ProductItem: FC<Prop> = ({product,btnEdit}) =>{
                 <button
                     className='mt-2 px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 '>
                     <NavLink to={"/product/" + product.id}>
-                    <span>View details</span>
+                        <span>View details</span>
                     </NavLink>
                </button>
                 }

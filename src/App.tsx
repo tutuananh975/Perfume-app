@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { Routes, Route, HashRouter } from 'react-router-dom';
 import './App.css';
 import { MainLayout } from './components/layouts';
@@ -8,25 +8,66 @@ import "./App.css";
 import { selectUser } from './pages/Customeraccount/featurnes/useSlice';
 import NotAdmin from './pages/Admin/components/NotAdmin';
 import HomeAdmin from './pages/Admin/HomeAdmin';
-import Cart from './pages/Cart';
 import Admin from './pages/Admin';
-import NotSideBarLayOut from './components/layouts/NotSideBarLayOut';
 import UsersManager from './pages/Admin/UsersManager';
 import ProductsManager from './pages/Admin/ProductsManager/ProductsManager';
 import BillsManager from './pages/Admin/BillsManager';
-import NotUser from './components/NotUser';
+import { createContext } from "react";
+import useFetchAxios from './hooks/UseFetchAxios';
+import Loading from './components/Loading';
+
+export const UserContext = createContext<any>({});
 
 function App() {  
   
+  const { idUser, isLogin, isAdmin } = useSelector(selectUser);
+  const {responses, doFetch} = useFetchAxios('https://63782c6a5c477765122d0c95.mockapi.io/users/' + idUser)
+  // console.log(responses.data);
+  const {data: userData, isLoading} = responses;
+  const [cart, setCart] = useState([]);
+  const [totalItems, setTotalItems] = useState(0)
 
-  // const persist = useSelector(selectUser)
-  const { isLogin, isAdmin } = useSelector(selectUser);
-    // 2 dòng này fake dòng trên
-  // const [isAdmin, setIsAdmin] = useState(false);
-  // const [isLogin, setIsLogin] = useState(false);
+  useEffect(() => {
+    if(idUser) {
+      doFetch({method: "GET"})
+    }
+  }, [idUser, doFetch])
+
+  useEffect(() => {
+    if(userData) {
+      const getTotalItems = userData.cart.reduce((total: number, product: any) => {
+        return total + product.amount;
+      }, 0)
+      setTotalItems(getTotalItems);
+      setCart(userData.cart)
+    }
+  }, [userData])
+
+  const handleSetCart = () => {
+
+  }
+
+
+  // const handleSetTotalItems = useCallback((newTotalItems: number) => {
+  //   setTotalItems(newTotalItems);
+  // }, [])
+
+  const handleSetTotalItems = (newTotalItems : number) => {
+    console.log(newTotalItems)
+    setTotalItems(newTotalItems);
+  }
+  const value = {
+    cart,
+    handleSetCart,
+    totalItems, 
+    handleSetTotalItems
+  }
+
 
   return (
     <HashRouter>
+      {isLoading && <Loading />}
+      <UserContext.Provider value={value}>
         <Routes>
           {
             publicRoutes.map((route, index) => {
@@ -50,6 +91,7 @@ function App() {
             <Route path='/admin/bills-manager' element={<BillsManager />}/>
           </Route>
         </Routes>
+      </UserContext.Provider>
     </HashRouter>
   );
 };

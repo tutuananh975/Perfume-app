@@ -1,28 +1,28 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
 import useFetchAxios from "../../hooks/UseFetchAxios";
 import Image from "../../components/Image";
 import { selectUser } from "../Customeraccount/featurnes/useSlice";
 import { useSelector } from "react-redux";
+import { UserContext } from "../../App";
+import { Link } from "react-router-dom";
 
 const ProductDetail: FC = () => {
   const [quantity, setQuantity] = useState<number>(1);
   const { idUser ,isLogin } = useSelector(selectUser);
 
-  const {id: idProduct} = useParams();
+  const {id} = useParams();
   const { responses, doFetch } = useFetchAxios(
-    "https://63782c6a5c477765122d0c95.mockapi.io/perfume-products/" + idProduct
+    "https://63782c6a5c477765122d0c95.mockapi.io/perfume-products/" + id
   );
   const { responses: addCartResponses, doFetch: addCart } = useFetchAxios(
     "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser
   );
-  const { responses: userResponse, doFetch: getUser } = useFetchAxios(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser
-  );
+
   const { data, isLoading } = responses;
-  const { data: userData } = userResponse;
   const { isLoading: isLoadingAddCart } = addCartResponses;
+  const {cart, handleSetTotalItems, totalItems} = useContext(UserContext);
 
   const onDecrease = () => {
     if (quantity > 1) {
@@ -36,53 +36,60 @@ const ProductDetail: FC = () => {
 
   const handleAddCart = () => {
     let newCart: any = [];
-    let isExistInCart: boolean = false;
+    let isExistInCart: boolean = false
 
-    newCart = userData.cart.map((product: any) => {
-      if (product.name === data.name && product.imgSrc === data.imgSrc) {
-        isExistInCart = true;
-        return { ...product, amount: Number(product.amount) + quantity };
-      }
-      return product;
-    });
-
-    // console.log(data.retailPrice, data.ourPrice, data.amount)
-
-    if (!isExistInCart) {
-      let newId;
-      if(userData.cart.length < 1) {
-        newId = "1"
-      } else {
-        newId = (Number(userData.cart[userData.cart.length -1].id) + 1).toString();
-      }
+    if(cart.length < 1) {
       newCart = [
-        ...userData.cart,
         {
-          id: newId,
+          id: 1,
           imgSrc: data.imgSrc,
           name: data.name,
           desc: data.desc,
           retailPrice: data.retailPrice,
           ourPrice: data.ourPrice,
-          amount: quantity,
-        },
-      ];
+          amount: quantity
+        }
+      ]
+    } else {
+        cart.forEach((product: any) => {
+        if(product.name === data.name && product.imgSrc === data.imgSrc) {
+          isExistInCart = true;
+          newCart.push({
+            ...product,
+            amount: Number(product.amount) + quantity
+          })
+        } else {
+          newCart.push(product);
+        }
+      })
+      if(!isExistInCart) {
+        newCart.push({
+          id: Number(cart[cart.length -1].id) + 1,
+          imgSrc: data.imgSrc,
+          name: data.name,
+          desc: data.desc,
+          retailPrice: data.retailPrice,
+          ourPrice: data.ourPrice,
+          amount: quantity
+        })
+      } 
     }
-
+  
     addCart({
       method: "PUT",
       data: {
         cart: newCart,
       },
     });
+
+    handleSetTotalItems(totalItems + quantity)
   };
 
   useEffect(() => {
-    getUser({ method: "GET" });
     doFetch({
       method: "GET",
     });
-  }, [getUser, doFetch]);
+  }, [doFetch]);
 
   return (
     <>
@@ -99,10 +106,10 @@ const ProductDetail: FC = () => {
               </p>
               <p className="text-base pb-8 font-light">{data.desc}</p>
               <b className="text-base line-through text-gray-400">
-                {data.retailPrice}
+                {(data.retailPrice * quantity).toFixed(2)}
               </b>
               <span className="text-xl font-bold ml-4 text-red-600">
-                {data.ourPrice}
+                {(data.ourPrice * quantity).toFixed(2)}
               </span>
               <br />
               <div>
@@ -155,13 +162,14 @@ const ProductDetail: FC = () => {
                   >
                     ADD TO CART
                   </button>
-
-                  <button 
-                    className={isLogin ? "mt-20 bg-black hover:bg-slate-800 py-4 px-12 rounded font-medium text-white ml-4" : "mt-20 bg-slate-200 py-4 px-12 rounded font-medium text-white ml-4"}
-                    disabled = {!isLogin}
-                  >
-                    BUY IT NOW
-                  </button>
+                  <Link to="/cart">
+                    <button 
+                      className={isLogin ? "mt-20 bg-black hover:bg-slate-800 py-4 px-12 rounded font-medium text-white ml-4" : "mt-20 bg-slate-200 py-4 px-12 rounded font-medium text-white ml-4"}
+                      disabled = {!isLogin}
+                    >
+                      VIEW CART
+                    </button>
+                  </Link>
                 </div>
                 {!isLogin && <h3 className="mt-3 ml-3 text-red-500 text-sm">You must be logged in to use these features! </h3>}
             </div>

@@ -1,5 +1,4 @@
-import { FC, useState, useEffect, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { FC } from "react";
 import Modal from "../Modal";
 
 const NotUser: FC = () => {
