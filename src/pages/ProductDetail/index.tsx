@@ -74,37 +74,7 @@ const ProductDetail: FC = () => {
         })
       } 
     }
-    // newCart = userData.cart.map((product: any) => {
-    //   if (product.name === data.name && product.imgSrc === data.imgSrc) {
-    //     isExistInCart = true;
-    //     return { ...product, amount: Number(product.amount) + quantity };
-    //   }
-    //   return product;
-    // });
-
-    // // console.log(data.retailPrice, data.ourPrice, data.amount)
-
-    // if (!isExistInCart) {
-    //   let newId;
-    //   if(userData.cart.length < 1) {
-    //     newId = "1"
-    //   } else {
-    //     newId = (Number(userData.cart[userData.cart.length -1].id) + 1).toString();
-    //   }
-    //   newCart = [
-    //     ...userData.cart,
-    //     {
-    //       id: newId,
-    //       imgSrc: data.imgSrc,
-    //       name: data.name,
-    //       desc: data.desc,
-    //       retailPrice: data.retailPrice,
-    //       ourPrice: data.ourPrice,
-    //       amount: quantity,
-    //     },
-    //   ];
-    // }
-
+  
     addCart({
       method: "PUT",
       data: {
@@ -134,10 +104,10 @@ const ProductDetail: FC = () => {
               </p>
               <p className="text-base pb-8 font-light">{data.desc}</p>
               <b className="text-base line-through text-gray-400">
-                {data.retailPrice}
+                {(data.retailPrice * quantity).toFixed(2)}
               </b>
               <span className="text-xl font-bold ml-4 text-red-600">
-                {data.ourPrice}
+                {(data.ourPrice * quantity).toFixed(2)}
               </span>
               <br />
               <div>

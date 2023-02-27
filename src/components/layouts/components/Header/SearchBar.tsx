@@ -1,4 +1,4 @@
-import { FC, useState, FormEvent, useContext } from "react";
+import { FC, useState, FormEvent } from "react";
 import logo from "./icons/logo-main.png";
 import {
   faCarSide,
@@ -7,12 +7,20 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Optional from "./Optional";
 import CartItem from "./CartItem";
-import { Link, NavLink } from "react-router-dom";
-import React from "react";
+import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import TotalItems from "./TotalItems";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../../../pages/Customeraccount/featurnes/useSlice";
 
-const SearchBar: FC = () => {
+interface PropSearchBar {
+  totalItems?: any;
+}
+
+const SearchBar: FC<PropSearchBar> = ({totalItems}) => {
   const [searchValue, setSearchValue] = useState<String>("");
+
+  const {isLogin} = useSelector(selectUser); 
 
   const navigate = useNavigate();
 
@@ -45,8 +53,9 @@ const SearchBar: FC = () => {
           <Optional icon={faArrowsSpin} textBold="100%" textLight="SECURE" />
           <Optional icon={faMedal} textBold="100%" textLight="AUTHENTIC" />
         </div>
-        <div className="cart sm:hidden">
+        <div className="cart sm:hidden relative">
           <NavLink to="/cart">
+            {isLogin && <TotalItems totalItems={totalItems}/>} 
             <CartItem />
           </NavLink>
         </div>

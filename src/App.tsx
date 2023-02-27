@@ -24,16 +24,35 @@ function App() {
   const {responses, doFetch} = useFetchAxios('https://63782c6a5c477765122d0c95.mockapi.io/users/' + idUser)
   // console.log(responses.data);
   const {data: userData, isLoading} = responses;
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    doFetch({method: "GET"})
-  }, [])
+    if(idUser) {
+      doFetch({method: "GET"})
+    }
+  }, [idUser, doFetch])
+
+  useEffect(() => {
+    if(userData) {
+      setCart(userData.cart)
+    }
+  }, [userData])
+
+  const handleSetCart = () => {
+
+  }
+
+  const value = {
+    userData,
+    cart,
+    handleSetCart
+  }
 
 
   return (
     <HashRouter>
       {isLoading && <Loading />}
-      <UserContext.Provider value={userData}>
+      <UserContext.Provider value={value}>
         <Routes>
           {
             publicRoutes.map((route, index) => {

@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useMemo } from "react";
+import { FC, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useFetchTA from "../../hooks/useFetchTA";
 import { useSelector } from "react-redux";
@@ -35,10 +35,6 @@ const Payment: FC = () => {
   const [cartProducts, setCartProducts] = useState<any[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [isSuccess, setIsSuccess] = useState(false)
-
-  const dataMemo = useMemo(() => {
-    return data;
-  }, [loading]);
 
   const handleSetOrder = (cartProducts: any[]) => {
     let newTotalPrice: number = 0;
@@ -94,11 +90,11 @@ const Payment: FC = () => {
   };
 
   useEffect(() => {
-    if (dataMemo) {
-      setCartProducts(dataMemo.cart);
-      handleSetOrder(dataMemo.cart);
+    if (data) {
+      setCartProducts(data.cart);
+      handleSetOrder(data.cart);
     }
-  }, [dataMemo]);
+  }, [data]);
 
   return (
     <div className="px-4 grid grid-cols-3 gap-4">

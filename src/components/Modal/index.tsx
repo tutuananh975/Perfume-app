@@ -24,12 +24,12 @@ const Modal: FC<PropModal> = ({ modalText, navigatePage, modalBtn }) => {
         return () => {
             clearInterval(intervalId.current)
         }
-    }, [count, navigate])
+    }, [count, navigate, navigatePage])
     return (
         <>
             <div className="modal-ta">
                 <h3 className="mt-3">
-                    {modalText} <span className=" text-red-500 text-base">{count}</span>
+                    {modalText} <span className=" text-red-500 text-lg">{count}</span>
                     second
                 </h3>
                 <Link to={ navigatePage }>

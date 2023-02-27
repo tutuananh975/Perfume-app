@@ -1,4 +1,4 @@
-import { FC, useState, useContext, useMemo} from "react";
+import { FC, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import Optional from "./Optional";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,25 +10,22 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../../../pages/Customeraccount/featurnes/useSlice";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../../pages/Customeraccount/featurnes/useSlice";
-import { UserContext } from "../../../../App";
+
 import TotalItems from "./TotalItems";
 
-const Navbar: FC = () => {
+interface PropNavbar {
+  totalItems?: any
+}
+
+const Navbar: FC<PropNavbar> = ({totalItems}) => {
   const { isLogin, userName } = useSelector(selectUser);
 
   const [isOpenNavbarMobile, setIsOpenNavbarMobile] = useState(false);
-  const dispath = useDispatch()
-
-  const userData = useContext(UserContext);
-
-  // const totalItems = userData?.cart.reduce((total: number, product: any) => {
-  //     return total + product.amount;
-  //   }, 0)
-    // console.log(totalItems);
+  const dispath = useDispatch();
 
   const handleLogout = () => {
-    dispath(logout())
-  }
+    dispath(logout());
+  };
   return (
     <div className="navbar flex justify-between items-center">
       <ul className="flex text-base font-semibold">
@@ -81,7 +78,10 @@ const Navbar: FC = () => {
           )}
           {isLogin ? (
             <div className="px-6 absolute z-10 top-10 w-56 action-sign-in text-center">
-              <button className=" bg-red-400 hover:bg-red-300 text-white py-2 px-4 rounded-md flex w-full items-center text-center justify-center" onClick={handleLogout}>
+              <button
+                className=" bg-red-400 hover:bg-red-300 text-white py-2 px-4 rounded-md flex w-full items-center text-center justify-center"
+                onClick={handleLogout}
+              >
                 <AiOutlineLogout />
                 <span className="ml-4">Logout</span>
               </button>
@@ -126,6 +126,7 @@ const Navbar: FC = () => {
         <li className="ml-4 cursor-pointer hidden sm:block relative">
           <Link to="/cart">
             <Optional icon={faCartShopping} textLight="CART" />
+            {isLogin && <TotalItems totalItems={totalItems}/>}
           </Link>
           {/* <TotalItems /> */}
         </li>
