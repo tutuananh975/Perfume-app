@@ -99,7 +99,7 @@ const CreateAcc:FC = () => {
                 setMethod("POST")
                 toast.success("Đăng ký tài khoản thành công")
                 dispatch(login({
-                    idUser: data[data.length-1].id + 1,
+                    idUser: Number(data[data.length-1].id) + 1,
                     userName: values.username,
                     isAdmin: false,
                     isLogin:true

@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useContext, useMemo} from "react";
 import { NavLink, Link } from "react-router-dom";
 import Optional from "./Optional";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,12 +10,21 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../../../pages/Customeraccount/featurnes/useSlice";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../../pages/Customeraccount/featurnes/useSlice";
+import { UserContext } from "../../../../App";
+import TotalItems from "./TotalItems";
 
 const Navbar: FC = () => {
   const { isLogin, userName } = useSelector(selectUser);
 
   const [isOpenNavbarMobile, setIsOpenNavbarMobile] = useState(false);
   const dispath = useDispatch()
+
+  const userData = useContext(UserContext);
+
+  const totalItems = userData?.cart.reduce((total: number, product: any) => {
+      return total + product.amount;
+    }, 0)
+    console.log(totalItems);
 
   const handleLogout = () => {
     dispath(logout())
@@ -114,10 +123,11 @@ const Navbar: FC = () => {
           <div>VND</div>
           <div className="triangle absolute"></div>
         </li>
-        <li className="ml-4 cursor-pointer hidden sm:block">
+        <li className="ml-4 cursor-pointer hidden sm:block relative">
           <Link to="/cart">
             <Optional icon={faCartShopping} textLight="CART" />
           </Link>
+          {/* <TotalItems /> */}
         </li>
       </ul>
       {isOpenNavbarMobile && (

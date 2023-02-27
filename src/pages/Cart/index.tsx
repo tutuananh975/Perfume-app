@@ -1,9 +1,10 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useContext } from "react";
 import useFetchTA from "../../hooks/useFetchTA";
 import { useSelector } from "react-redux";
 import { selectUser } from "../Customeraccount/featurnes/useSlice";
 import Order from "./Order";
 import ProductsCart from "../../components/ProductsCart";
+import { UserContext } from "../../App";
 
 const Cart: FC = () => {
   const [dataPut, setDataPut] = useState({});

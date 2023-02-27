@@ -1,28 +1,28 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
 import useFetchAxios from "../../hooks/UseFetchAxios";
 import Image from "../../components/Image";
 import { selectUser } from "../Customeraccount/featurnes/useSlice";
 import { useSelector } from "react-redux";
+import { UserContext } from "../../App";
 
 const ProductDetail: FC = () => {
   const [quantity, setQuantity] = useState<number>(1);
   const { idUser ,isLogin } = useSelector(selectUser);
 
-  const {id: idProduct} = useParams();
+  const {id} = useParams();
   const { responses, doFetch } = useFetchAxios(
-    "https://63782c6a5c477765122d0c95.mockapi.io/perfume-products/" + idProduct
+    "https://63782c6a5c477765122d0c95.mockapi.io/perfume-products/" + id
   );
   const { responses: addCartResponses, doFetch: addCart } = useFetchAxios(
     "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser
   );
-  const { responses: userResponse, doFetch: getUser } = useFetchAxios(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser
-  );
+
   const { data, isLoading } = responses;
-  const { data: userData } = userResponse;
   const { isLoading: isLoadingAddCart } = addCartResponses;
+  const userData = useContext(UserContext);
+  console.log(userData);  
 
   const onDecrease = () => {
     if (quantity > 1) {
@@ -36,38 +36,74 @@ const ProductDetail: FC = () => {
 
   const handleAddCart = () => {
     let newCart: any = [];
-    let isExistInCart: boolean = false;
+    let isExistInCart: boolean = false
 
-    newCart = userData.cart.map((product: any) => {
-      if (product.name === data.name && product.imgSrc === data.imgSrc) {
-        isExistInCart = true;
-        return { ...product, amount: Number(product.amount) + quantity };
-      }
-      return product;
-    });
-
-    // console.log(data.retailPrice, data.ourPrice, data.amount)
-
-    if (!isExistInCart) {
-      let newId;
-      if(userData.cart.length < 1) {
-        newId = "1"
-      } else {
-        newId = (Number(userData.cart[userData.cart.length -1].id) + 1).toString();
-      }
+    if(userData.cart.length < 1) {
       newCart = [
-        ...userData.cart,
         {
-          id: newId,
+          id: 1,
           imgSrc: data.imgSrc,
           name: data.name,
           desc: data.desc,
           retailPrice: data.retailPrice,
           ourPrice: data.ourPrice,
-          amount: quantity,
-        },
-      ];
+          amount: quantity
+        }
+      ]
+    } else {
+      userData.cart.forEach((product: any) => {
+        if(product.name === data.name && product.imgSrc === data.imgSrc) {
+          isExistInCart = true;
+          newCart.push({
+            ...product,
+            amount: Number(product.amount) + quantity
+          })
+        } else {
+          newCart.push(product);
+        }
+      })
+      if(!isExistInCart) {
+        newCart.push({
+          id: Number(userData.cart[userData.cart.length -1].id) + 1,
+          imgSrc: data.imgSrc,
+          name: data.name,
+          desc: data.desc,
+          retailPrice: data.retailPrice,
+          ourPrice: data.ourPrice,
+          amount: quantity
+        })
+      } 
     }
+    // newCart = userData.cart.map((product: any) => {
+    //   if (product.name === data.name && product.imgSrc === data.imgSrc) {
+    //     isExistInCart = true;
+    //     return { ...product, amount: Number(product.amount) + quantity };
+    //   }
+    //   return product;
+    // });
+
+    // // console.log(data.retailPrice, data.ourPrice, data.amount)
+
+    // if (!isExistInCart) {
+    //   let newId;
+    //   if(userData.cart.length < 1) {
+    //     newId = "1"
+    //   } else {
+    //     newId = (Number(userData.cart[userData.cart.length -1].id) + 1).toString();
+    //   }
+    //   newCart = [
+    //     ...userData.cart,
+    //     {
+    //       id: newId,
+    //       imgSrc: data.imgSrc,
+    //       name: data.name,
+    //       desc: data.desc,
+    //       retailPrice: data.retailPrice,
+    //       ourPrice: data.ourPrice,
+    //       amount: quantity,
+    //     },
+    //   ];
+    // }
 
     addCart({
       method: "PUT",
@@ -78,11 +114,10 @@ const ProductDetail: FC = () => {
   };
 
   useEffect(() => {
-    getUser({ method: "GET" });
     doFetch({
       method: "GET",
     });
-  }, [getUser, doFetch]);
+  }, [doFetch]);
 
   return (
     <>
