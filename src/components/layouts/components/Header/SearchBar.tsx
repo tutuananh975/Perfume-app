@@ -13,11 +13,7 @@ import TotalItems from "./TotalItems";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../../pages/Customeraccount/featurnes/useSlice";
 
-interface PropSearchBar {
-  totalItems?: any;
-}
-
-const SearchBar: FC<PropSearchBar> = ({totalItems}) => {
+const SearchBar: FC = () => {
   const [searchValue, setSearchValue] = useState<String>("");
 
   const {isLogin} = useSelector(selectUser); 
@@ -55,7 +51,7 @@ const SearchBar: FC<PropSearchBar> = ({totalItems}) => {
         </div>
         <div className="cart sm:hidden relative">
           <NavLink to="/cart">
-            {isLogin && <TotalItems totalItems={totalItems}/>} 
+            {isLogin && <TotalItems />} 
             <CartItem />
           </NavLink>
         </div>

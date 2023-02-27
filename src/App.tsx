@@ -25,6 +25,7 @@ function App() {
   // console.log(responses.data);
   const {data: userData, isLoading} = responses;
   const [cart, setCart] = useState([]);
+  const [totalItems, setTotalItems] = useState(0)
 
   useEffect(() => {
     if(idUser) {
@@ -34,6 +35,10 @@ function App() {
 
   useEffect(() => {
     if(userData) {
+      const getTotalItems = userData.cart.reduce((total: number, product: any) => {
+        return total + product.amount;
+      }, 0)
+      setTotalItems(getTotalItems);
       setCart(userData.cart)
     }
   }, [userData])
@@ -42,10 +47,20 @@ function App() {
 
   }
 
+
+  // const handleSetTotalItems = useCallback((newTotalItems: number) => {
+  //   setTotalItems(newTotalItems);
+  // }, [])
+
+  const handleSetTotalItems = (newTotalItems : number) => {
+    console.log(newTotalItems)
+    setTotalItems(newTotalItems);
+  }
   const value = {
-    userData,
     cart,
-    handleSetCart
+    handleSetCart,
+    totalItems, 
+    handleSetTotalItems
   }
 
 

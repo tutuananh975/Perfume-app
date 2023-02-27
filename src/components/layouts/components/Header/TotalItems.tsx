@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
+import { UserContext } from '../../../../App';
 
-interface PropTotalItem {
-    totalItems: number
-}
 
-const TotalItems: FC<PropTotalItem> = ({totalItems}) => {
+const TotalItems: FC= () => {
+
+    const { totalItems } = useContext(UserContext)
 
     return (
         <div 

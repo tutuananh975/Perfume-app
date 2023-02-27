@@ -6,6 +6,7 @@ import Image from "../../components/Image";
 import { selectUser } from "../Customeraccount/featurnes/useSlice";
 import { useSelector } from "react-redux";
 import { UserContext } from "../../App";
+import { Link } from "react-router-dom";
 
 const ProductDetail: FC = () => {
   const [quantity, setQuantity] = useState<number>(1);
@@ -21,8 +22,7 @@ const ProductDetail: FC = () => {
 
   const { data, isLoading } = responses;
   const { isLoading: isLoadingAddCart } = addCartResponses;
-  const userData = useContext(UserContext);
-  console.log(userData);  
+  const {cart, handleSetTotalItems, totalItems} = useContext(UserContext);
 
   const onDecrease = () => {
     if (quantity > 1) {
@@ -38,7 +38,7 @@ const ProductDetail: FC = () => {
     let newCart: any = [];
     let isExistInCart: boolean = false
 
-    if(userData.cart.length < 1) {
+    if(cart.length < 1) {
       newCart = [
         {
           id: 1,
@@ -51,7 +51,7 @@ const ProductDetail: FC = () => {
         }
       ]
     } else {
-      userData.cart.forEach((product: any) => {
+        cart.forEach((product: any) => {
         if(product.name === data.name && product.imgSrc === data.imgSrc) {
           isExistInCart = true;
           newCart.push({
@@ -64,7 +64,7 @@ const ProductDetail: FC = () => {
       })
       if(!isExistInCart) {
         newCart.push({
-          id: Number(userData.cart[userData.cart.length -1].id) + 1,
+          id: Number(cart[cart.length -1].id) + 1,
           imgSrc: data.imgSrc,
           name: data.name,
           desc: data.desc,
@@ -81,6 +81,8 @@ const ProductDetail: FC = () => {
         cart: newCart,
       },
     });
+
+    handleSetTotalItems(totalItems + quantity)
   };
 
   useEffect(() => {
@@ -160,13 +162,14 @@ const ProductDetail: FC = () => {
                   >
                     ADD TO CART
                   </button>
-
-                  <button 
-                    className={isLogin ? "mt-20 bg-black hover:bg-slate-800 py-4 px-12 rounded font-medium text-white ml-4" : "mt-20 bg-slate-200 py-4 px-12 rounded font-medium text-white ml-4"}
-                    disabled = {!isLogin}
-                  >
-                    BUY IT NOW
-                  </button>
+                  <Link to="/cart">
+                    <button 
+                      className={isLogin ? "mt-20 bg-black hover:bg-slate-800 py-4 px-12 rounded font-medium text-white ml-4" : "mt-20 bg-slate-200 py-4 px-12 rounded font-medium text-white ml-4"}
+                      disabled = {!isLogin}
+                    >
+                      VIEW CART
+                    </button>
+                  </Link>
                 </div>
                 {!isLogin && <h3 className="mt-3 ml-3 text-red-500 text-sm">You must be logged in to use these features! </h3>}
             </div>

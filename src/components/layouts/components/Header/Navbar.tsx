@@ -13,15 +13,16 @@ import { logout } from "../../../../pages/Customeraccount/featurnes/useSlice";
 
 import TotalItems from "./TotalItems";
 
-interface PropNavbar {
-  totalItems?: any
-}
-
-const Navbar: FC<PropNavbar> = ({totalItems}) => {
-  const { isLogin, userName } = useSelector(selectUser);
+const Navbar: FC = () => {
+  const { isLogin, userName, isAdmin } = useSelector(selectUser);
 
   const [isOpenNavbarMobile, setIsOpenNavbarMobile] = useState(false);
   const dispath = useDispatch();
+
+  const activeClass = (param: any) => {
+    return param.isActive ? "nav-link-active" : ""
+  }
+    
 
   const handleLogout = () => {
     dispath(logout());
@@ -39,29 +40,36 @@ const Navbar: FC<PropNavbar> = ({totalItems}) => {
           </div>
         </li>
         <li className="py-2 nav-link">
-          <NavLink to="/women">
+          <NavLink to="/women" className={activeClass}>
             WOMEN'S
             <span className="hidden lg:inline"> PERFUME</span>
           </NavLink>
         </li>
         <li className="ml-4 py-2 nav-link">
-          <NavLink to="/men">
+          <NavLink to="/men" className={activeClass}>
             MEN'S
             <span className="hidden lg:inline"> PERFUME</span>
           </NavLink>
         </li>
         <li className="ml-4 py-2 nav-link hidden xl:block">
-          <NavLink to="/search">SEARCH</NavLink>
+          <NavLink to="/search" className={activeClass}>SEARCH</NavLink>
         </li>
         <li className="ml-4 py-2 nav-link hidden xl:block">
-          <NavLink to="/gift">GIFT SETS</NavLink>
+          <NavLink to="/gift" className={activeClass}>GIFT SETS</NavLink>
         </li>
         <li className="ml-4 py-2 nav-link hidden xl:block">
-          <NavLink to="/brands">BRANDS</NavLink>
+          <NavLink to="/brands" className={activeClass}>BRANDS</NavLink>
         </li>
-        <li className="ml-4 py-2 nav-link">
-          <NavLink to="/fragrance">JOIN THE CLUB</NavLink>
+        <li className="ml-4 py-2 nav-link hidden xl:block">
+          <NavLink to="/fragrance" className={activeClass}>JOIN THE CLUB</NavLink>
         </li>
+        {isAdmin &&
+          <li className="ml-4 py-2 nav-link">
+            <NavLink to="/admin" className={activeClass}>
+              <span className=" text-red-600 font-semibold">ADMIN MANAGER</span>
+            </NavLink>
+          </li>
+        }
       </ul>
       <ul className="flex navbar-right">
         <li className="cursor-pointer has-triangle hidden md:block sign-in-btn relative">
@@ -126,9 +134,8 @@ const Navbar: FC<PropNavbar> = ({totalItems}) => {
         <li className="ml-4 cursor-pointer hidden sm:block relative">
           <Link to="/cart">
             <Optional icon={faCartShopping} textLight="CART" />
-            {isLogin && <TotalItems totalItems={totalItems}/>}
+            {isLogin && <TotalItems />}
           </Link>
-          {/* <TotalItems /> */}
         </li>
       </ul>
       {isOpenNavbarMobile && (

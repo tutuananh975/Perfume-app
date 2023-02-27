@@ -37,6 +37,20 @@
     background-color: #cb4bdb;
 }
 
+.nav-link-active::before {  
+    content: '';
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    height: 0.125rem;
+    border: 1px solid #cb4bdb;
+    background-color: #cb4bdb;
+}
+
+.nav-link-mobile-active {
+    background-color: red !important;
+}
+
 .nav-link:hover::before {
     display: block;
 }
