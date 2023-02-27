@@ -21,10 +21,10 @@ const Navbar: FC = () => {
 
   const userData = useContext(UserContext);
 
-  const totalItems = userData?.cart.reduce((total: number, product: any) => {
-      return total + product.amount;
-    }, 0)
-    console.log(totalItems);
+  // const totalItems = userData?.cart.reduce((total: number, product: any) => {
+  //     return total + product.amount;
+  //   }, 0)
+    // console.log(totalItems);
 
   const handleLogout = () => {
     dispath(logout())
