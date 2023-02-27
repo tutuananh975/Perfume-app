@@ -1,4 +1,4 @@
-import { FC, useState, FormEvent, useContext } from "react";
+import { FC, useState, FormEvent } from "react";
 import logo from "./icons/logo-main.png";
 import {
   faCarSide,
@@ -7,8 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Optional from "./Optional";
 import CartItem from "./CartItem";
-import { Link, NavLink } from "react-router-dom";
-import React from "react";
+import {  NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar: FC = () => {
@@ -18,7 +17,7 @@ const SearchBar: FC = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate("/best-sellers", { state: { searchValue } });
+    navigate("/search", { state: { searchValue } });
   };
 
   return (
