@@ -12,7 +12,7 @@ import Cart from './pages/Cart';
 import Admin from './pages/Admin';
 import NotSideBarLayOut from './components/layouts/NotSideBarLayOut';
 import UsersManager from './pages/Admin/UsersManager';
-import ProductsManager from './pages/Admin/ProductsManager';
+import ProductsManager from './pages/Admin/ProductsManager/ProductsManager';
 import BillsManager from './pages/Admin/BillsManager';
 import NotUser from './components/NotUser';
 
