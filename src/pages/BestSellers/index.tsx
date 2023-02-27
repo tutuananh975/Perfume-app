@@ -22,7 +22,6 @@ const BestSellers: FC = () => {
     const { state } = useLocation();
 
     const searchValue = state?.searchValue ?? '';
-    console.log(searchValue);
     
 
     const [products, setProducts] = useState<Product[]>([]);

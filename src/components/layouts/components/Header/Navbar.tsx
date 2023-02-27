@@ -28,7 +28,7 @@ const Navbar: FC = () => {
     dispath(logout());
   };
   return (
-    <div className="navbar flex justify-between items-center">
+    <div className="navbar flex justify-between items-center ">
       <ul className="flex text-base font-semibold">
         <li className="py-2 mr-4 xl:hidden">
           <div
@@ -133,7 +133,7 @@ const Navbar: FC = () => {
         </li>
         <li className="ml-4 cursor-pointer hidden sm:block relative">
           <Link to="/cart">
-            <Optional icon={faCartShopping} textLight="CART" />
+            <Optional  icon={faCartShopping} textLight="CART" />
             {isLogin && <TotalItems />}
           </Link>
         </li>

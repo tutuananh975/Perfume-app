@@ -4,11 +4,13 @@ import {
   faCarSide,
   faArrowsSpin,
   faMedal,
+  faSearch
 } from "@fortawesome/free-solid-svg-icons";
 import Optional from "./Optional";
 import CartItem from "./CartItem";
-import { Link, NavLink } from "react-router-dom";
-import React from "react";
+
+
+import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import TotalItems from "./TotalItems";
 import { useSelector } from "react-redux";
@@ -23,7 +25,10 @@ const SearchBar: FC = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate("/search", { state: { searchValue } });
+    navigate("/search", { 
+      state: { 
+      searchValue
+    } });
   };
 
   return (
@@ -33,22 +38,22 @@ const SearchBar: FC = () => {
           <img className="w-60 h-16" src={logo} alt="logo" />
         </NavLink>
         <div className="search relative hidden lg:flex">
-          <form onSubmit={handleSubmit} className="w-full">
+          <form onSubmit={(event) => {handleSubmit(event)}} className="w-full">
             <input
               type="text"
-              className="search-input pl-4 pr-24 py-1 border h-full w-full rounded"
-              placeholder="Search Value"
+              className="search-input pl-4 pr-24 py-1 border h-10 w-full rounded-full"
+              placeholder="Search"
               onChange={(e) => setSearchValue(e.target.value)}
             />
-            <button className="btn-search bg-9c6711 w-20 h-full p-1 absolute right-0 rounded-r hover:bg-orange-300">
-              Search
+            <button className="btn-search w-15 h-10 p-1 absolute right-0 rounded-r-3xl hover:bg-gray-300">
+            <Optional  icon={faSearch} />
             </button>
           </form>
         </div>
         <div className="optinals items-center hidden sm:flex">
-          <Optional icon={faCarSide} textBold="FREE" textLight="SHIPPING" />
-          <Optional icon={faArrowsSpin} textBold="100%" textLight="SECURE" />
-          <Optional icon={faMedal} textBold="100%" textLight="AUTHENTIC" />
+          <Optional  icon={faCarSide} textBold="FREE" textLight="SHIPPING" />
+          <Optional  icon={faArrowsSpin} textBold="100%" textLight="SECURE" />
+          <Optional  icon={faMedal} textBold="100%" textLight="AUTHENTIC" />
         </div>
         <div className="cart sm:hidden relative">
           <NavLink to="/cart">
