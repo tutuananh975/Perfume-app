@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/perfume-app/static/css/main.048a31f0.css",
-    "main.js": "/perfume-app/static/js/main.23764a1a.js",
+    "main.js": "/perfume-app/static/js/main.dda9a489.js",
     "static/js/787.a6de0350.chunk.js": "/perfume-app/static/js/787.a6de0350.chunk.js",
     "static/media/logo-main.png": "/perfume-app/static/media/logo-main.41eeec79b1c40fc26d85.png",
     "static/media/slick.svg": "/perfume-app/static/media/slick.2630a3e3eab21c607e21.svg",
@@ -10,11 +10,11 @@
     "static/media/slick.woff": "/perfume-app/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/perfume-app/index.html",
     "main.048a31f0.css.map": "/perfume-app/static/css/main.048a31f0.css.map",
-    "main.23764a1a.js.map": "/perfume-app/static/js/main.23764a1a.js.map",
+    "main.dda9a489.js.map": "/perfume-app/static/js/main.dda9a489.js.map",
     "787.a6de0350.chunk.js.map": "/perfume-app/static/js/787.a6de0350.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.048a31f0.css",
-    "static/js/main.23764a1a.js"
+    "static/js/main.dda9a489.js"
   ]
 }
