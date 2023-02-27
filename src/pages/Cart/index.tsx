@@ -3,29 +3,29 @@ import useFetchTA from "../../hooks/useFetchTA";
 import { useSelector } from "react-redux";
 import { selectUser } from "../Customeraccount/featurnes/useSlice";
 import Order from "./Order";
-import ProductsCart from "../../components/ProductsCart.tsx";
+import ProductsCart from "../../components/ProductsCart";
 
 const Cart: FC = () => {
   const [dataPut, setDataPut] = useState({});
   
   const [dataDelete, setDataDelete] = useState({});
 
-  const {IdUser} = useSelector(selectUser);
+  const {idUser} = useSelector(selectUser);
  
   const { data, loading, error } = useFetchTA(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser 
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser 
   );
   const {
     loading: putLoading,
     error: putError,
-  } = useFetchTA("https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser, {
+  } = useFetchTA("https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser, {
     method: "PUT",
     body: dataPut,
   });
   const {
     loading: deleteLoading,
     error: deleteError,
-  } = useFetchTA("https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser, {
+  } = useFetchTA("https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser  , {
     method: "PUT",
     body: dataDelete,
   });
@@ -66,7 +66,6 @@ const Cart: FC = () => {
   };
 
   const handleDecreaseAmout = (id: string) => {
-    console.log(cartProducts)
     const newCart: any[] = [];
     cartProducts.forEach((product: any) => {
       if (product.id === id) {
@@ -83,7 +82,7 @@ const Cart: FC = () => {
   };
 
   const handleDeleteCart = (id: string) => {
-    const newCart = cartProducts.filter((product) => {
+    const newCart =  cartProducts.filter((product) => {
       return product.id !== id;
     });
     setCartProducts(newCart);

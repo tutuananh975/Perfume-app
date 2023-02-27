@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useMemo } from "react";
+import { FC, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useFetchTA from "../../hooks/useFetchTA";
 import { useSelector } from "react-redux";
@@ -6,26 +6,26 @@ import { selectUser } from "../Customeraccount/featurnes/useSlice";
 
 import { FiChevronRight } from "react-icons/fi";
 import FormCheckOut from "./FormCheckOut";
-import ProductsCart from "../../components/ProductsCart.tsx";
+import ProductsCart from "../../components/ProductsCart";
 import OrderSuccess from "./OrderSuccess";
 
 const Payment: FC = () => {
   const [dataPut, setDataPut] = useState({});
   const [dataDelete, setDataDelete] = useState({});
-  const {IdUser} = useSelector(selectUser);
+  const {idUser} = useSelector(selectUser);
 
   const { data, loading, error } = useFetchTA(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser
   );
   const { loading: putLoading, error: putError } = useFetchTA(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser,
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser,
     {
       method: "PUT",
       body: dataPut,
     }
   );
   const { loading: deleteLoading, error: deleteError } = useFetchTA(
-    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + IdUser,
+    "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser,
     {
       method: "PUT",
       body: dataDelete,
@@ -35,10 +35,6 @@ const Payment: FC = () => {
   const [cartProducts, setCartProducts] = useState<any[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [isSuccess, setIsSuccess] = useState(false)
-
-  const dataMemo = useMemo(() => {
-    return data;
-  }, [loading]);
 
   const handleSetOrder = (cartProducts: any[]) => {
     let newTotalPrice: number = 0;
@@ -94,11 +90,11 @@ const Payment: FC = () => {
   };
 
   useEffect(() => {
-    if (dataMemo) {
-      setCartProducts(dataMemo.cart);
-      handleSetOrder(dataMemo.cart);
+    if (data) {
+      setCartProducts(data.cart);
+      handleSetOrder(data.cart);
     }
-  }, [dataMemo]);
+  }, [data]);
 
   return (
     <div className="px-4 grid grid-cols-3 gap-4">

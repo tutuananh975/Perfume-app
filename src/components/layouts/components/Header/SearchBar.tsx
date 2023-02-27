@@ -7,11 +7,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Optional from "./Optional";
 import CartItem from "./CartItem";
-import {  NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import TotalItems from "./TotalItems";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../../../pages/Customeraccount/featurnes/useSlice";
 
 const SearchBar: FC = () => {
   const [searchValue, setSearchValue] = useState<String>("");
+
+  const {isLogin} = useSelector(selectUser); 
 
   const navigate = useNavigate();
 
@@ -44,8 +50,9 @@ const SearchBar: FC = () => {
           <Optional icon={faArrowsSpin} textBold="100%" textLight="SECURE" />
           <Optional icon={faMedal} textBold="100%" textLight="AUTHENTIC" />
         </div>
-        <div className="cart sm:hidden">
+        <div className="cart sm:hidden relative">
           <NavLink to="/cart">
+            {isLogin && <TotalItems />} 
             <CartItem />
           </NavLink>
         </div>

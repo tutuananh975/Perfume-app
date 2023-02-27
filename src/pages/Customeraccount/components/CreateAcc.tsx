@@ -1,14 +1,17 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from 'yup';
 import useFetch from "../../../hooks/useFetch";
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../featurnes/useSlice";
+import Loading from "../../../components/Loading";
+import Modal from "../../../components/Modal";
 
 
 interface newUser{
-    fullname: string,
+    fullName: string,
     username: string,
     password: string,
     email: string,
@@ -17,7 +20,7 @@ interface newUser{
 }
 
 interface newValueAcc{
-    fullname: string,
+    fullName: string,
     username: string,
     password: string,
     email: string,
@@ -33,20 +36,27 @@ const CreateAcc:FC = () => {
 
     const [newValue, setNewValue] = useState<newUser>()
     const [valueAcc, setvaluesAcc] = useState<newValueAcc>()
-    const [method, setMethod] = useState<any> ("GET")
-    const navigate = useNavigate()
+    const [method, setMethod] = useState<any> ("GET");
+    const [registerSuccess, setRegisterSuccess] = useState(false);
+    const dispatch = useDispatch()
       
-    const {data} = useFetch("https://63782c6a5c477765122d0c95.mockapi.io/users",{
+    const {data, loadding} = useFetch("https://63782c6a5c477765122d0c95.mockapi.io/users",{
         method: method,
         body: valueAcc
       })
 
     return (
     <div>
+        {loadding && <Loading />}
+        {registerSuccess && <Modal 
+            modalText="Congratulations, you have successfully registered. Auto navigate Home Page after "
+            navigatePage="/"
+            modalBtn="Navigate Home Now"
+        />}
         <ToastContainer/>
     <Formik
         initialValues = {{
-            fullname:"",
+            fullName:"",
             username: "",
             password: "",
             email: "",
@@ -54,7 +64,7 @@ const CreateAcc:FC = () => {
             address: ""
         }}
         validationSchema = {Yup.object({
-            fullname: Yup.string()
+            fullName: Yup.string()
             .max(20, "Name must less than or equal 20 charactes")
             .required("Please fill Full Name field"),
             username: Yup.string()
@@ -81,15 +91,20 @@ const CreateAcc:FC = () => {
             const dataAcc:newValueAcc = ({...values,cart:[]})        
             setvaluesAcc(dataAcc)
             const isExi = data.some((elemen:any)=>{
-                if(elemen.username===dataAcc?.username)
-                return true
+                return elemen.username===dataAcc?.username
         })
             if(isExi){
                toast.error("Tài khoản đã tồn tại")
             }else{
                 setMethod("POST")
                 toast.success("Đăng ký tài khoản thành công")
-                navigate('/')
+                dispatch(login({
+                    idUser: Number(data[data.length-1].id) + 1,
+                    userName: values.username,
+                    isAdmin: false,
+                    isLogin:true
+                }))
+                setRegisterSuccess(true);
             }
         }}
         
@@ -99,9 +114,9 @@ const CreateAcc:FC = () => {
             <div className="text-center font-semibold text-2xl mb-4">NEW TO PERFUMANIA?</div>
             <div className="text-center text-sm">By creating an account you will be able to shop faster, be up to date on an order’s status, and keep track of the orders you have previously made.</div>
             <div className="input-container">
-                <label htmlFor="FullName" className={newValue?.fullname? "label" : "labels"}>Full Name</label>
-                <Field  id='fullname' name="fullname" type="text" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
-                <ErrorMessage name="fullname" render={msg => <div className="errMessage">{msg}</div>}/>
+                <label htmlFor="FullName" className={newValue?.fullName? "label" : "labels"}>Full Name</label>
+                <Field  id='fullName' name="fullName" type="text" className=" w-full border-2 pt-4 pl-2 pb-1  inputAcc"/>
+                <ErrorMessage name="fullName" render={msg => <div className="errMessage">{msg}</div>}/>
             </div>
             <div className="input-container">
                 <label htmlFor="username" className={newValue?.username? "label" : "labels"}>Username</label>

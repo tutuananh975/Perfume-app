@@ -85,7 +85,7 @@ const ProductCart: FC<ProductProp> = ({
         </h4>
         <div
           onClick={onDelete}
-          className=" bg-slate-300 hover:bg-gray-500 cursor-pointer absolute top-0 right-0 mt-8 md:mt-0 md:static"
+          className=" bg-slate-300 hover:bg-red-500 cursor-pointer absolute top-0 right-0 mt-8 md:mt-0 md:static"
           style={{
             width: "35px",
             height: "35px",
