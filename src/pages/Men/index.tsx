@@ -44,7 +44,7 @@ const Men: FC = () => {
     <div className="px-4 pt-2">
       {isLoading && <Loading />}
       <Banner imgBanner="https://cdn.shopify.com/s/files/1/0269/7763/2389/files/collection_header_Men_Mobile.jpg"/>
-      <ProductList products = {menProducts}/>
+      <ProductList products = {menProducts} isNavigate = {true} />
     </div>
 
       )}
