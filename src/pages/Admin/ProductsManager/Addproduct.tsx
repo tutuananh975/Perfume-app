@@ -1,6 +1,6 @@
-import React, { FC, useState } from 'react'
-import { Formik, Form, Field, ErrorMessage,FormikProps} from "formik";
-import * as Yup from 'yup';
+import { FC, useState } from 'react'
+import { Formik, Form, Field } from "formik";
+// import * as Yup from 'yup';
 
 interface addUser {
 id?:any,
@@ -29,11 +29,11 @@ const Addproduct:FC<ModalType> = ({toggle, addUser,editProduct,editPutProduct,bt
         setBaseImage(base64);
     }
     const [userEdit, setUserEdit] = useState({
-      name: '',
-      desc: '',
-      retailPrice: '' ,
-      ourPrice: '',
-      sex: ''
+      name: editProduct?.name,
+      desc: editProduct?.desc,
+      retailPrice: editProduct?.retailPrice ,
+      ourPrice: editProduct?.ourPrice,
+      sex: editProduct?.sex
     });
     const convertToBase64 = (file:any) => {
 

@@ -12,16 +12,20 @@ interface PropUserContext {
 
 const UserContextProvider:FC<PropUserContext> = ({children}) => {
   const { idUser } = useSelector(selectUser);
+  const { responses: allUsersResponses, doFetch: getAllUsers} = useFetchAxios('https://63782c6a5c477765122d0c95.mockapi.io/users');
+  const { data: allUsersData } = allUsersResponses
   const {responses, doFetch} = useFetchAxios('https://63782c6a5c477765122d0c95.mockapi.io/users/' + idUser)
   const {data: userData, isLoading} = responses;
   const [cart, setCart] = useState<any>([]);
   const [totalItems, setTotalItems] = useState(0);
+  const [allUsers, setAllUsers] = useState<any>([]);
 
   useEffect(() => {
     if(idUser) {
       doFetch({method: "GET"})
     }
-  }, [idUser, doFetch])
+    getAllUsers({method: "GET"})
+  }, [idUser, doFetch, getAllUsers])
 
   const totalPrice = useMemo(() => {
     return cart.length > 0 
@@ -39,7 +43,11 @@ const UserContextProvider:FC<PropUserContext> = ({children}) => {
       setTotalItems(getTotalItems);
       setCart(userData.cart)
     }
-  }, [userData])
+  }, [userData]);
+
+  useEffect(() => {
+    setAllUsers(allUsersData);
+  }, [allUsersData])
 
   const handleSetCart = (newCart: any) => {
     setCart(newCart)
@@ -48,13 +56,20 @@ const UserContextProvider:FC<PropUserContext> = ({children}) => {
   const handleSetTotalItems = (newTotalItems : number) => {
     setTotalItems(newTotalItems);
   }
+
+  const handleSetAllUsers = (newAllUsers: any) => {
+    setAllUsers(newAllUsers);
+  }
+
   const value = {
     userData,
     cart,
     handleSetCart,
     totalItems, 
     handleSetTotalItems,
-    totalPrice
+    totalPrice,
+    allUsers,
+    handleSetAllUsers
   }
 
   return (

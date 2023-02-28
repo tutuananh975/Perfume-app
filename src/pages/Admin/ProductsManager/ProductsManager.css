@@ -3,7 +3,7 @@
   width: 70%;
   height:100%;
   position: absolute;
-  top: 0;
+  top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,9 +18,7 @@
   background: white;
   border: 2px solid black
 }
-.AddInput{
 
-}
 .AddInputBox{
   border : 2px solid black;
   width: 100%;

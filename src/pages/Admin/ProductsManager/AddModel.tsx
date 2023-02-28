@@ -1,5 +1,4 @@
-import React, { ReactNode, useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
+import { ReactNode } from "react";
 import Addproduct from "./Addproduct";
 
 interface ModalType {

@@ -1,8 +1,6 @@
 import axios from 'axios';
-import { FC, useCallback, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { FC, useEffect, useState } from 'react';
 import Loading from '../../../components/Loading';
-import useFetch from '../../../hooks/useFetch';
 import "./usermannager.css"
 
 interface user{

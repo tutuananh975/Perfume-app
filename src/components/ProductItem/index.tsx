@@ -6,16 +6,17 @@ interface Prop {
     btnEdit?:boolean,
     handleDelete?:any,
     handleEdit?:any,
+    isNavigate?: boolean
 }
 
-const ProductItem: FC<Prop> = ({product,btnEdit,handleDelete,handleEdit}) =>{
+const ProductItem: FC<Prop> = ({product,btnEdit,handleDelete,handleEdit, isNavigate}) =>{
     const navigate = useNavigate();
 
   return (
     <div className=' mr-4 mb-4 border p-4 hover:shadow-lg cursor-pointer'>
         <div className="innerProduct">
             <div className="productImg">
-                <img src={product.imgSrc} alt="..." className='w-full h-full'  onClick={() => navigate("/product/" + product.id)}/>
+                <img src={product.imgSrc} alt="..." className='w-full h-full'  onClick={() => isNavigate? navigate("/product/" + product.id): undefined}/>
             </div>
             <div className="productdesc">
                 <p className='flex justify-start tracking-normal text-black uppercase font-semibold text-base leading-6'>{product.name}</p>

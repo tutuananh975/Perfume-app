@@ -22,7 +22,7 @@ type Props = {
   handleEdit?:(id: any) => void
 }
 
-const ProductList: FC<Props> = ({products,btnEdit,handleDelete,handleEdit}) => {
+const ProductList: FC<Props> = ({products,btnEdit,handleDelete,handleEdit, isNavigate}) => {
 
   const [isOpenSidebarMobile, setIsOpenSidebarMobile] = useState(false);
   const [isOpenSortBar, setIsOpenSortBar] = useState(false)
@@ -90,6 +90,7 @@ const ProductList: FC<Props> = ({products,btnEdit,handleDelete,handleEdit}) => {
               btnEdit={btnEdit} 
               handleDelete={handleDelete}
               handleEdit={handleEdit}
+              isNavigate={isNavigate}
                />
           );
         })}
