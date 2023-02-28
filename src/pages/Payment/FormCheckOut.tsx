@@ -1,46 +1,26 @@
-import { FC, useEffect } from "react";
+import { FC, useState, useContext } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { FiChevronLeft } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import useFetchAxios from "../../hooks/UseFetchAxios";
 import Loading from "../../components/Loading";
-import { useSelector } from "react-redux";
-import { selectUser } from "../Customeraccount/featurnes/useSlice";
+import { UserContext } from "../../context/UserContextProvider";
+import OrderSuccess from "./OrderSuccess";
 
-interface TotalPrice {
-    totalPrice: number;
-    cartProducts: any[];
-    onResetCartProducts: any;
-}
+const FormCheckOut: FC = () => {
+    const [isSuccess, setIsSuccess] = useState(false);
 
-const FormCheckOut: FC<TotalPrice> = ({ totalPrice, cartProducts, onResetCartProducts }) => {
-    const { idUser } = useSelector(selectUser)
+    const { userData: data, handleSetCart, handleSetTotalItems, totalItems, totalPrice, cart} = useContext(UserContext)
 
-    const { responses, doFetch } = useFetchAxios(
-        "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser
-    );
-
-    const { data, isLoading } = responses;
-
-    const { responses: responsePostOrder, doFetch: postOrder } = useFetchAxios(
+    const { responses, doFetch: postOrder } = useFetchAxios(
         "https://63f7976de40e087c95925720.mockapi.io/order-management"
     );
-    
-    const { responses: responseResetCart, doFetch: resetCart } = useFetchAxios('https://63782c6a5c477765122d0c95.mockapi.io/users/' + idUser);
-
-    const { isLoading: isLoadingResetCart } = responseResetCart;
-
-    const { isLoading: isLoadingPostOrder } = responsePostOrder;
-
-    useEffect(() => {
-        doFetch({ method: "GET" });
-    }, [doFetch]);
-    //   console.log(data)
+    const { isLoading } = responses;
 
     return (
         <>
-            {(isLoading || isLoadingPostOrder || isLoadingResetCart )&& <Loading />}
+            {(isLoading) && <Loading />}
             {data && (
                 <Formik
                     initialValues={{
@@ -70,21 +50,20 @@ const FormCheckOut: FC<TotalPrice> = ({ totalPrice, cartProducts, onResetCartPro
                                 fullName: value.fullName,
                                 address: value.address,
                                 phone: value.phone,
-                                totalPrice,
-                                products: cartProducts,
+                                totalItems: totalItems,
+                                totalPrice: totalPrice,
+                                products: cart,
                             },
                         });
-                        resetCart({
-                            method: "PUT",
-                            data: {
-                                cart: [] 
-                            }
-                        });
-                        onResetCartProducts();
+                        handleSetCart([])
+                        setIsSuccess(true);
+                        handleSetTotalItems(0)
                     }}
                 >
                     {({ errors, touched }: any) => (
                         <Form>
+                            {isSuccess && <OrderSuccess />}
+
                             <h3 className=" text-base mt-4">Contact information</h3>
                             <div className="relative mt-4">
                                 <label className="absolute top-1 left-2 text-xs text-gray-400">
