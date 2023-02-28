@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import store, { persistor } from "./Store/store";
 import { PersistGate } from 'redux-persist/integration/react';
 import UserContextProvider from './context/UserContextProvider';
+import ProductsProvider from './context/ProductsProvider';
 
 
 const root = ReactDOM.createRoot(
@@ -16,9 +17,11 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <UserContextProvider>
-          <App />
-        </UserContextProvider>
+        <ProductsProvider>
+          <UserContextProvider>
+            <App />
+          </UserContextProvider>
+        </ProductsProvider>
       </PersistGate>
     </Provider>
   </React.StrictMode>

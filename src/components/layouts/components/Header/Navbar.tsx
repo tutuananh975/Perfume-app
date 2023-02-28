@@ -139,9 +139,11 @@ const Navbar: FC = () => {
               </div>
             ) : (
               <div className="px-6 absolute z-10 top-10 w-56 action-sign-in">
-                <button className="btn-modal-sign-in text-white py-1.5 w-full bg-blue-081857 rounded">
-                  SIGN IN
-                </button>
+                <Link to= "/customeraccount">
+                  <button className="btn-modal-sign-in text-white py-1.5 w-full bg-blue-081857 rounded">
+                    SIGN IN
+                  </button>
+                </Link>
                 <div className="pt-1 mb-5 text-md">
                   <div className="pt-1 pb-2 leading-tight">New Customer?</div>
                   <div className="pt-1 pb-2 leading-tight">Order Status</div>

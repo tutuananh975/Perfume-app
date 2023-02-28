@@ -13,7 +13,6 @@ interface PropUserContext {
 const UserContextProvider:FC<PropUserContext> = ({children}) => {
   const { idUser } = useSelector(selectUser);
   const {responses, doFetch} = useFetchAxios('https://63782c6a5c477765122d0c95.mockapi.io/users/' + idUser)
-  // console.log(responses.data);
   const {data: userData, isLoading} = responses;
   const [cart, setCart] = useState<any>([]);
   const [totalItems, setTotalItems] = useState(0);
@@ -25,7 +24,6 @@ const UserContextProvider:FC<PropUserContext> = ({children}) => {
   }, [idUser, doFetch])
 
   const totalPrice = useMemo(() => {
-    console.log('tinh toan lại')
     return cart.length > 0 
     ? cart.reduce((total: number, product: any) => {
       return total + product.ourPrice*product.amount;
