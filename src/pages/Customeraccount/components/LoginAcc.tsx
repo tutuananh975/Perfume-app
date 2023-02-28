@@ -70,7 +70,6 @@ const Login: FC = () => {
                     setValueOnChange(Change);
                 }}
                 onSubmit={(dataAcc: IUser) => {
-
                     const idUser = data.find((elm: any) => {
                         return elm.username === dataAcc?.userName && elm.password === dataAcc.passWord
 

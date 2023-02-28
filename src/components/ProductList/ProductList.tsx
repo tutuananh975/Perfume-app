@@ -18,8 +18,9 @@ type Props = {
   products : Product[],
   btnEdit? : boolean,
   handleDelete?:(id: any) => void
+  handleEdit?:(id: any) => void
 }
-const ProductList: FC<Props> = ({products,btnEdit,handleDelete}) => {
+const ProductList: FC<Props> = ({products,btnEdit,handleDelete,handleEdit}) => {
 
   const [isOpenSidebarMobile, setIsOpenSidebarMobile] = useState(false);
   const [isOpenSortBar, setIsOpenSortBar] = useState(false)
@@ -81,7 +82,13 @@ const ProductList: FC<Props> = ({products,btnEdit,handleDelete}) => {
         {
         products.slice(firstProductIndex, lastProductIndex).map((product) => {
           return (
-              <ProductItem key={product.id} product={product} btnEdit={btnEdit} handleDelete={handleDelete} />
+              <ProductItem 
+              key={product.id} 
+              product={product} 
+              btnEdit={btnEdit} 
+              handleDelete={handleDelete}
+              handleEdit={handleEdit}
+               />
           );
         })}
       </div>
