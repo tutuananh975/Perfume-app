@@ -3,10 +3,11 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 interface Prop {
     product: any,
-    btnEdit?:boolean
+    btnEdit?:boolean,
+    handleDelete?:any,
 }
 
-const ProductItem: FC<Prop> = ({product,btnEdit}) =>{
+const ProductItem: FC<Prop> = ({product,btnEdit,handleDelete}) =>{
     const navigate = useNavigate();
 
   return (

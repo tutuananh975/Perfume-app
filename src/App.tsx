@@ -9,7 +9,7 @@ import { selectUser } from './pages/Customeraccount/featurnes/useSlice';
 import NotAdmin from './pages/Admin/components/NotAdmin';
 import HomeAdmin from './pages/Admin/HomeAdmin';
 import Admin from './pages/Admin';
-import UsersManager from './pages/Admin/UsersManager';
+import UsersManager from './pages/Admin/UserManager/UsersManager';
 import ProductsManager from './pages/Admin/ProductsManager/ProductsManager';
 import BillsManager from './pages/Admin/BillsManager';
 import { createContext } from "react";

@@ -29,7 +29,6 @@ const useFetch = (url: string, { method = "GET", body }: UseFetchProps = {}) : U
                 setData(jsonData);
                 setLoading(false);
             } catch (error) {
-                // return
                 setError(error);
                 setLoading(true);
             }
