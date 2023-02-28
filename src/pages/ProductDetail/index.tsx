@@ -5,7 +5,7 @@ import useFetchAxios from "../../hooks/UseFetchAxios";
 import Image from "../../components/Image";
 import { selectUser } from "../Customeraccount/featurnes/useSlice";
 import { useSelector } from "react-redux";
-import { UserContext } from "../../App";
+import { UserContext } from "../../context/UserContextProvider";
 import { Link } from "react-router-dom";
 import Overflay from "../../components/overflay/Overflay";
 
@@ -25,7 +25,7 @@ const ProductDetail: FC = () => {
 
   const { data, isLoading } = responses;
   const { isLoading: isLoadingAddCart } = addCartResponses;
-  const { cart, handleSetTotalItems, totalItems } = useContext(UserContext);
+  const { cart, handleSetTotalItems, totalItems, handleSetCart } = useContext(UserContext);
 
   const onDecrease = () => {
     if (quantity > 1) {
@@ -84,6 +84,7 @@ const ProductDetail: FC = () => {
         cart: newCart,
       },
     });
+    handleSetCart(newCart);
     setAddCartSuccess(true)
 
     handleSetTotalItems(totalItems + quantity);

@@ -1,10 +1,11 @@
 import { FC, useContext } from 'react';
-import { UserContext } from '../../../../App';
+import { UserContext } from '../../../../context/UserContextProvider';
 
 
 const TotalItems: FC= () => {
 
-    const { totalItems } = useContext(UserContext)
+    const { totalItems } = useContext(UserContext);
+    // console.log(totalItems);
 
     return (
         <div 

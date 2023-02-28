@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../../../pages/Customeraccount/featurnes/useSlice";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../../pages/Customeraccount/featurnes/useSlice";
-import { UserContext } from "../../../../App";
+import { UserContext } from "../../../../context/UserContextProvider";
 import Overflay from "../../../overflay/Overflay";
 
 import TotalItems from "./TotalItems";
