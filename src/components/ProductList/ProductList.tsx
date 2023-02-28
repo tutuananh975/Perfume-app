@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import ProductItem from "../ProductItem";
+import ProductItem from "../ProductItem/index";
 import Pagination from "../Pagination";
 import SideBarMobile from "../layouts/MainLayout/SideBarMobile";
 

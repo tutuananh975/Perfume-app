@@ -50,7 +50,7 @@ const Search: FC = () => {
       return (
           <div className="px-4 pt-2">
             {loading && <Loading/>}
-        <ProductList products={products}/>
+        <ProductList products={products} isNavigate={true}/>
       </div>
       )
 }

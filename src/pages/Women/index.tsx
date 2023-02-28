@@ -44,7 +44,7 @@ const Women: FC = () => {
     <div className="px-4 pt-2">
       {isLoading && <Loading />}
       <Banner imgBanner="https://cdn.shopify.com/s/files/1/0269/7763/2389/files/collection_header_BestSellersWomen_Desktop.jpg"/>
-      <ProductList products={womenProducts} />
+      <ProductList products={womenProducts} isNavigate={true}/>
     </div>
   )
 }
