@@ -32,18 +32,18 @@ const ProductCart: FC<ProductProp> = ({
       <div className="product-cart-img mr-5 sm:w" style={{ width: "135px", height: "135px", minWidth: "135px" }}>
         <Image src={src} alt={alt} w="135px" h="135px" />
       </div>
-      <div className="flex flex-col md:flex-row items-start md:items-center">
-        <div className="w-2/3 md:w-1/2">
+      <div className="w-2/3 flex flex-col md:flex-row items-start md:items-center">
+        <div className="w-2/3 md:w-1/3">
           <div className="text-lg uppercase font-semibold leading-6">{name}</div>
           <p className=" text-base font-extralight mt-2">{desc}</p>
-        </div>
+        </div>  
         <div className="md:ml-4 font-normal text-base leading-tight">
           <h3 className="text-gray-400 mb-2 line-through">
             Retail Price ${retailPrice}
           </h3>
           <h3>Our Price ${ourPrice}</h3>
         </div>
-        <div className="flex md:ml-auto mt-4 md:mt-0">
+        <div className="w-1/6 flex md:ml-auto mt-4 md:mt-0">
           <div
             onClick={onDecrease}
             className="flex justify-center items-center w-7 h-7 cursor-pointer border border-slate-300 mr-3 hover:bg-black hover:text-white"
@@ -79,7 +79,7 @@ const ProductCart: FC<ProductProp> = ({
           </div>
         </div>
       </div>
-      <div className="flex items-center ml-auto">
+      <div className="flex items-center">
         <h4 className="md:mr-10 text-xl font-bold leading-5 ml-3  absolute left-0 sm:static bottom-0 right-0 mb-8 md:mb-0 md:static">
           ${(ourPrice * amount).toFixed(2)}
         </h4>
