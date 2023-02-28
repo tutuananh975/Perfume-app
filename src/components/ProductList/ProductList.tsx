@@ -17,8 +17,9 @@ interface Product {
 type Props = {
   products : Product[],
   btnEdit? : boolean,
+  isNavigate: boolean
 }
-const ProductList: FC<Props> = ({products,btnEdit}) => {
+const ProductList: FC<Props> = ({products,btnEdit, isNavigate}) => {
 
   const [isOpenSidebarMobile, setIsOpenSidebarMobile] = useState(false);
   const [isOpenSortBar, setIsOpenSortBar] = useState(false)
@@ -80,7 +81,7 @@ const ProductList: FC<Props> = ({products,btnEdit}) => {
         {
         products.slice(firstProductIndex, lastProductIndex).map((product) => {
           return (
-              <ProductItem key={product.id} product={product} btnEdit={btnEdit} />
+              <ProductItem key={product.id} product={product} btnEdit={btnEdit} isNavigate = {isNavigate} />
           );
         })}
       </div>

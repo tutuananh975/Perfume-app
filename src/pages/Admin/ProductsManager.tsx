@@ -18,7 +18,7 @@ const ProductsManager:FC = () => {
     }
     
     return (
-        <>
+        <div className='pl-4'>
         {responses.isLoading && <Loading/>}       
         {responses.data && (
             <div>
@@ -26,11 +26,10 @@ const ProductsManager:FC = () => {
                     <button className='bg-blue-500 p-1 mr-2 text-white rounded-lg font-medium hover:bg-blue-800 px-2'>ADD</button>
                     <button onClick={handleOnclickEdit} className='bg-green-500 p-1 mr-2 text-white rounded-lg font-medium hover:bg-green-800 px-2'>EDIT</button>
                 </div>
-                <ProductList products={responses.data} btnEdit ={btnEdit}/>
+                <ProductList products={responses.data} btnEdit ={btnEdit} isNavigate={false}/>
             </div>
-        )
-        }  
-        </>
+        )}  
+        </div>
     )
 }
 

@@ -1,5 +1,5 @@
-import { FC, useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { FC, useState, useContext } from "react";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import Optional from "./Optional";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faBars } from "@fortawesome/free-solid-svg-icons";
@@ -10,25 +10,41 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../../../pages/Customeraccount/featurnes/useSlice";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../../pages/Customeraccount/featurnes/useSlice";
+import { UserContext } from "../../../../App";
+import Overflay from "../../../overflay/Overflay";
 
 import TotalItems from "./TotalItems";
 
 const Navbar: FC = () => {
   const { isLogin, userName, isAdmin } = useSelector(selectUser);
+  const { totalItems } = useContext(UserContext)
 
   const [isOpenNavbarMobile, setIsOpenNavbarMobile] = useState(false);
+  const [modalNotLogin, setModalNotLogin] = useState(false);
+  const [notItemInCart, setNotItemInCart] = useState(false);
   const dispath = useDispatch();
-
+  const navigate = useNavigate()
   const activeClass = (param: any) => {
     return param.isActive ? "nav-link-active" : ""
   }
-    
+
+  const handleNavigateCartPage = () => {
+    if (isLogin) {
+      if (totalItems) {
+        navigate('/cart')
+      } else {
+        setNotItemInCart(true);
+      }
+    } else {
+      setModalNotLogin(true)
+    }
+  }
 
   const handleLogout = () => {
     dispath(logout());
   };
   return (
-    <div className="navbar flex justify-between items-center ">
+    <div className="navbar flex justify-between items-center">
       <ul className="flex text-base font-semibold">
         <li className="py-2 mr-4 xl:hidden">
           <div
@@ -133,7 +149,7 @@ const Navbar: FC = () => {
         </li>
         <li className="ml-4 cursor-pointer hidden sm:block relative">
           <Link to="/cart">
-            <Optional  icon={faCartShopping} textLight="CART" />
+            <Optional icon={faCartShopping} textLight="CART" />
             {isLogin && <TotalItems />}
           </Link>
         </li>

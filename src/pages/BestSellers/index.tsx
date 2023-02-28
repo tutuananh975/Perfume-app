@@ -2,7 +2,6 @@ import { FC, useState, useEffect } from "react";
 import ProductList from "../../components/ProductList/ProductList";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import React from "react";
 
 
 
@@ -46,7 +45,7 @@ const BestSellers: FC = () => {
   
       return (
           <div className="px-4 pt-2">
-        <ProductList products={products}/>
+        <ProductList products={products} isNavigate={false}/>
       </div>
       )
 }

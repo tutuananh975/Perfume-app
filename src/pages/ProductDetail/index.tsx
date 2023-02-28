@@ -7,22 +7,25 @@ import { selectUser } from "../Customeraccount/featurnes/useSlice";
 import { useSelector } from "react-redux";
 import { UserContext } from "../../App";
 import { Link } from "react-router-dom";
+import Overflay from "../../components/overflay/Overflay";
 
 const ProductDetail: FC = () => {
   const [quantity, setQuantity] = useState<number>(1);
-  const { idUser ,isLogin } = useSelector(selectUser);
+  const [addCartSuccess, setAddCartSuccess] = useState(false)
+  const { idUser, isLogin } = useSelector(selectUser);
 
-  const {id} = useParams();
+  const { id } = useParams();
   const { responses, doFetch } = useFetchAxios(
     "https://63782c6a5c477765122d0c95.mockapi.io/perfume-products/" + id
   );
+
   const { responses: addCartResponses, doFetch: addCart } = useFetchAxios(
     "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser
   );
 
   const { data, isLoading } = responses;
   const { isLoading: isLoadingAddCart } = addCartResponses;
-  const {cart, handleSetTotalItems, totalItems} = useContext(UserContext);
+  const { cart, handleSetTotalItems, totalItems } = useContext(UserContext);
 
   const onDecrease = () => {
     if (quantity > 1) {
@@ -36,9 +39,9 @@ const ProductDetail: FC = () => {
 
   const handleAddCart = () => {
     let newCart: any = [];
-    let isExistInCart: boolean = false
+    let isExistInCart: boolean = false;
 
-    if(cart.length < 1) {
+    if (cart.length < 1) {
       newCart = [
         {
           id: 1,
@@ -47,42 +50,43 @@ const ProductDetail: FC = () => {
           desc: data.desc,
           retailPrice: data.retailPrice,
           ourPrice: data.ourPrice,
-          amount: quantity
-        }
-      ]
+          amount: quantity,
+        },
+      ];
     } else {
-        cart.forEach((product: any) => {
-        if(product.name === data.name && product.imgSrc === data.imgSrc) {
+      cart.forEach((product: any) => {
+        if (product.name === data.name && product.imgSrc === data.imgSrc) {
           isExistInCart = true;
           newCart.push({
             ...product,
-            amount: Number(product.amount) + quantity
-          })
+            amount: Number(product.amount) + quantity,
+          });
         } else {
           newCart.push(product);
         }
-      })
-      if(!isExistInCart) {
+      });
+      if (!isExistInCart) {
         newCart.push({
-          id: Number(cart[cart.length -1].id) + 1,
+          id: Number(cart[cart.length - 1].id) + 1,
           imgSrc: data.imgSrc,
           name: data.name,
           desc: data.desc,
           retailPrice: data.retailPrice,
           ourPrice: data.ourPrice,
-          amount: quantity
-        })
-      } 
+          amount: quantity,
+        });
+      }
     }
-  
+
     addCart({
       method: "PUT",
       data: {
         cart: newCart,
       },
     });
+    setAddCartSuccess(true)
 
-    handleSetTotalItems(totalItems + quantity)
+    handleSetTotalItems(totalItems + quantity);
   };
 
   useEffect(() => {
@@ -154,24 +158,55 @@ const ProductDetail: FC = () => {
                   <span className="uppercase font-semibold">{data.sex}</span>
                 </div>
               </div>
-                <div>
+              <div>
+                <button
+                  className={
+                    isLogin
+                      ? "mt-20 bg-rose-500 hover:bg-rose-400  py-4 px-12 rounded font-medium text-white"
+                      : "mt-20 bg-rose-200  py-4 px-12 rounded font-medium text-white"
+                  }
+                  onClick={handleAddCart}
+                  disabled={!isLogin}
+                >
+                  ADD TO CART
+                </button>
+                <Link to="/cart">
                   <button
-                    className={isLogin? "mt-20 bg-rose-500 hover:bg-rose-400  py-4 px-12 rounded font-medium text-white" : "mt-20 bg-rose-200  py-4 px-12 rounded font-medium text-white"}
-                    onClick={handleAddCart}
-                    disabled = {!isLogin}
+                    className={
+                      isLogin
+                        ? "mt-20 bg-black hover:bg-slate-800 py-4 px-12 rounded font-medium text-white ml-4"
+                        : "mt-20 bg-slate-200 py-4 px-12 rounded font-medium text-white ml-4"
+                    }
+                    disabled={!isLogin}
                   >
-                    ADD TO CART
+                    VIEW CART
                   </button>
-                  <Link to="/cart">
-                    <button 
-                      className={isLogin ? "mt-20 bg-black hover:bg-slate-800 py-4 px-12 rounded font-medium text-white ml-4" : "mt-20 bg-slate-200 py-4 px-12 rounded font-medium text-white ml-4"}
-                      disabled = {!isLogin}
-                    >
-                      VIEW CART
+                </Link>
+              </div>
+              {!isLogin && (
+                <h3 className="mt-3 ml-3 text-red-500 text-sm">
+                  You must be logged in to use these features!{" "}
+                </h3>
+              )}
+              {addCartSuccess && 
+              <div>
+                <div className="modal-ta">
+                  <p className="text-lg font-semibold">Add to Cart Successfully!</p>
+                  <div className="flex justify-center items-center mt-4">
+                    <button className=" bg-teal-500 text-white text-base py-1 rounded hover:bg-teal-300 px-6" onClick={() => setAddCartSuccess(false)}>
+                      Ok
                     </button>
-                  </Link>
+                    <Link to="/cart">
+                      <button className=" text-white text-base ml-4 py-1 rounded px-6 bg-black hover:bg-slate-800">
+                        View Cart
+                      </button>
+                    </Link>
+                  </div>
                 </div>
-                {!isLogin && <h3 className="mt-3 ml-3 text-red-500 text-sm">You must be logged in to use these features! </h3>}
+                <Overflay />
+              </div>
+              }
+
             </div>
           </div>
         </div>

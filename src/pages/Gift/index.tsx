@@ -6,7 +6,7 @@ const Gift: FC = () => {
     return (
         <div className="px-4 pt-2">
         <Banner imgBanner="https://cdn.shopify.com/s/files/1/0269/7763/2389/files/collection_header_GiftSets_Mobile.jpg"/>
-        <ProductList products={[]}/>
+        <ProductList products={[]} isNavigate  = {true} />
       </div>
     )
 }
