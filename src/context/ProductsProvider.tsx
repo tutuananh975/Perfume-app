@@ -1,4 +1,4 @@
-import { FC, createContext, useEffect, useState } from "react";
+import { FC, createContext, useEffect, useState, useMemo } from "react";
 import Loading from "../components/Loading";
 import useFetchAxios from "../hooks/UseFetchAxios";
 
@@ -10,7 +10,16 @@ interface PropProvider {
 const ProductsProvider: FC<PropProvider> = ({children}) => {
     const { responses, doFetch } = useFetchAxios('https://63782c6a5c477765122d0c95.mockapi.io/perfume-products');
     const { data, isLoading } = responses;
-    const [products, setProducts] = useState<any>([])
+    const [products, setProducts] = useState<any>([]);
+
+    const productsMen = useMemo(() => {
+        return products.filter((product: any) => product.sex === "men")
+    }, [products])
+
+    
+    const productsWomen = useMemo(() => {
+        return products.filter((product: any) => product.sex === "women")
+    }, [products])
 
     useEffect(() => {
         doFetch({
@@ -25,7 +34,9 @@ const ProductsProvider: FC<PropProvider> = ({children}) => {
     }, [data])
 
     const value = {
-        products
+        products,
+        productsMen,
+        productsWomen
     }
     return (
         <ProductsContext.Provider value={value}>
