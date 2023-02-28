@@ -5,6 +5,8 @@ import { FiChevronLeft } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import useFetchAxios from "../../hooks/UseFetchAxios";
 import Loading from "../../components/Loading";
+import { useSelector } from "react-redux";
+import { selectUser } from "../Customeraccount/featurnes/useSlice";
 
 interface TotalPrice {
     totalPrice: number;
@@ -13,8 +15,10 @@ interface TotalPrice {
 }
 
 const FormCheckOut: FC<TotalPrice> = ({ totalPrice, cartProducts, onResetCartProducts }) => {
+    const { idUser } = useSelector(selectUser)
+
     const { responses, doFetch } = useFetchAxios(
-        "https://63782c6a5c477765122d0c95.mockapi.io/users/2"
+        "https://63782c6a5c477765122d0c95.mockapi.io/users/" + idUser
     );
 
     const { data, isLoading } = responses;
@@ -23,7 +27,7 @@ const FormCheckOut: FC<TotalPrice> = ({ totalPrice, cartProducts, onResetCartPro
         "https://63f7976de40e087c95925720.mockapi.io/order-management"
     );
     
-    const { responses: responseResetCart, doFetch: resetCart } = useFetchAxios('https://63782c6a5c477765122d0c95.mockapi.io/users/2');
+    const { responses: responseResetCart, doFetch: resetCart } = useFetchAxios('https://63782c6a5c477765122d0c95.mockapi.io/users/' + idUser);
 
     const { isLoading: isLoadingResetCart } = responseResetCart;
 

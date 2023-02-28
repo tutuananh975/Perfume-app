@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../featurnes/useSlice';
 import Loading from '../../../components/Loading';
 import Modal from '../../../components/Modal';
+import Overflay from '../../../components/overflay/Overflay';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../featurnes/useSlice';
 
@@ -19,6 +20,8 @@ interface IUser {
 const Login: FC = () => {
     const [valueOnChange, setValueOnChange] = useState<IUser>()
     const [loginSuccess, setLoginSucces] = useState(false);
+    const [wrongPassword, setWrongPassword] = useState(false)
+
     const dispatch = useDispatch()
     const { data, loadding } = useFetch("https://63782c6a5c477765122d0c95.mockapi.io/users", {
         method: "GET",
@@ -31,12 +34,25 @@ const Login: FC = () => {
         <div>
             {loadding && <Loading />}
             {loginSuccess && <Modal
-                modalText={isAdmin 
-                    ? 'Congratulations, you have successfully logged in, auto navigate Admin page after' 
+                modalText={isAdmin
+                    ? 'Congratulations, you have successfully logged in, auto navigate Admin page after'
                     : 'Congratulations, you have successfully logged in, auto navigate Home page after'}
-                navigatePage = {isAdmin ? '/admin' : '/'}
-                modalBtn = "Navigate Now!"
+                navigatePage={isAdmin ? '/admin' : '/'}
+                modalBtn="Navigate Now!"
             />}
+            {wrongPassword &&
+                <div>
+                    <div className="modal-ta">
+                        <p className="text-lg font-semibold">Try re-entering!</p>
+                        <div className="flex justify-center items-center mt-4">
+                            <button className=" bg-teal-500 text-white text-base py-1 rounded hover:bg-teal-300 px-6" onClick={() => setWrongPassword(false)}>
+                                Ok
+                            </button>
+                        </div>
+                    </div>
+                    <Overflay />
+                </div>
+            }
 
             <Formik
                 initialValues={{
@@ -72,7 +88,7 @@ const Login: FC = () => {
                                 })
                         )
                         setLoginSucces(true)
-                        return
+                        return;
                     }
                     if (idUser) {
                         toast.success("Đăng nhập thành công")
@@ -85,10 +101,12 @@ const Login: FC = () => {
                                     sAdmin: false,
                                 })
                         )
+
+                        setLoginSucces(true)
                     } else {
                         toast.error("Tài khoản hoặc mật khẩu không chính xác")
+                        setWrongPassword(true);
                     }
-                    setLoginSucces(true)
                 }}
             >
                 {({ handleSubmit, handleChange }) => (
