@@ -17,9 +17,11 @@ interface Product {
 type Props = {
   products : Product[],
   btnEdit? : boolean,
+  isNavigate: boolean
   handleDelete?:(id: any) => void
   handleEdit?:(id: any) => void
 }
+
 const ProductList: FC<Props> = ({products,btnEdit,handleDelete,handleEdit}) => {
 
   const [isOpenSidebarMobile, setIsOpenSidebarMobile] = useState(false);

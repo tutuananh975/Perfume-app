@@ -99,7 +99,7 @@ const ProductsManager:FC = () => {
                 <div>
                  <ADDModal btnEdit ={btnEdit}  isOpen={isOpen} toggle={toggle} addUser={addUser} editProduct={editProduct} editPutProduct={editPutProduct} />
                 </div>
-                <ProductList products={user} btnEdit ={btnEdit} handleDelete={handleDelete} handleEdit ={handleEdit} />
+                <ProductList products={user} btnEdit ={btnEdit} handleDelete={handleDelete} handleEdit ={handleEdit} isNavigate={false}/>
             </div>
         )
         }  
