@@ -18,7 +18,7 @@ const ProductsManager:FC = () => {
     }
     
     return (
-        <>
+        <div className='pl-4'>
         {responses.isLoading && <Loading/>}       
         {responses.data && (
             <div>
@@ -28,9 +28,8 @@ const ProductsManager:FC = () => {
                 </div>
                 <ProductList products={responses.data} btnEdit ={btnEdit}/>
             </div>
-        )
-        }  
-        </>
+        )}  
+        </div>
     )
 }
 
