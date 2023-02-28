@@ -4,7 +4,7 @@ const BillsManager: FC = () => {
 
     return (
         <div>
-            Bill Mânger
+            
         </div>
     )
 }
