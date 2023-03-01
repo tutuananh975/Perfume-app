@@ -1,105 +1,65 @@
-import axios from 'axios';
-import { FC, useEffect, useState } from 'react';
+
+import { FC, useState, useContext } from 'react';
 import Loading from '../../../components/Loading';
 import ProductList from '../../../components/ProductList/ProductList';
-import useModal from '../../../hooks/useModal';
 import ADDModal from './AddModel';
-import "./ProductsManager.css"
+import "./ProductsManager.css";
+import { ProductsContext } from '../../../context/ProductsProvider';
+import axios from 'axios';
 
 
 
 const ProductsManager:FC = () => {
 
-    const [btnEdit, setBtnEdit] = useState<boolean>(false)
-    const [user, setUser] = useState<any>()
-    const [loading, setLoading] = useState<boolean>(true);
-    const [editProduct,setEditProduct]= useState<any>()
-
-    useEffect(()=>{
-        getUsers();
-        setLoading(true)
-    },[])
-
-    const getEditProduct = async(id:any)=>{
-        const result = await axios.get(`https://63782c6a5c477765122d0c95.mockapi.io/perfume-products/${id}`)
-        setEditProduct(result.data)
-        setLoading(false)
-        return
-    };
-    const putEditProduct = async(value:any,id:any)=>{
-        setLoading(true)
-        const result = await axios.put(`https://63782c6a5c477765122d0c95.mockapi.io/perfume-products/${id}`,value)
-        setEditProduct(result.data)
-        setLoading(false)
-        return
-    };
-
-    const getUsers = async()=>{
-        const result = await axios.get("https://63782c6a5c477765122d0c95.mockapi.io/perfume-products")
-        setUser(result.data)
-        setLoading(false)
-        return
-    };
-    const postUser = async(value:any)=>{
-        setLoading(true)
-        await axios.post('https://63782c6a5c477765122d0c95.mockapi.io/perfume-products',value)
-        setLoading(false)
-        return
-    }
-    const deleteUser = async(id:any)=>{
-        setLoading(true)
-        await axios.delete(`https://63782c6a5c477765122d0c95.mockapi.io/perfume-products/${id}`)
-        getUsers()
-        setLoading(false)
+    const [btnEdit, setBtnEdit] = useState<boolean>(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [productEdit, setProductEdit] = useState<any>({});
+    const [isModalAddProduct, setIsModalAddProduct] = useState(false);
+    const { products, handleSetProducts } = useContext(ProductsContext);
+    const [loading, setLoading] = useState(false);
+     
+    const handleDeleteProduct = (productID: number) => {
+        setLoading(true);
+        axios.delete('https://63782c6a5c477765122d0c95.mockapi.io/perfume-products/' + productID);
+        const newProducts = products.filter((product: any) => product.id !== productID);
+        handleSetProducts(newProducts);
+        setLoading(false);
     }
     
-
-    const addUser = (value:any)=>{     
-        postUser(value)
-        setTimeout(()=>{
-            getUsers()
-        },2000)
-        toggle()
-        return
-        // navigate("/admin/products-manager")
-    }
-    const editPutProduct = (value:any,id:any)=>{
-        putEditProduct(value,id)
-        setTimeout(()=>{
-            getUsers()
-        },3000)
-        toggle()
-        return
-    }
-    const  handleDelete = (id:any) => {
-        deleteUser(id)
-        getUsers()
-    }
-    const  handleEdit = (id:any) => {
-        getEditProduct(id)
-        toggle()
+    const handleShowModalEditProduct = (product: any) => {
+        setShowModal(true);
+        setProductEdit(product);
     }
 
-
-    const handleOnclickEdit = () =>{
-        setBtnEdit(btnEdit =>(!btnEdit))
+    const handleShowModalAddProduct = () => {
+        setShowModal(true)
+        setIsModalAddProduct(true);
     }
-    const { isOpen, toggle } = useModal();
-    
-    
+
     return (
         <>
         {loading && <Loading/>}       
-        {user && (
+        {products && (
             <div>
                 <div className='flex justify-end mt-4'>
-                    <button className='bg-blue-500 p-1 mr-2 text-white rounded-lg font-medium hover:bg-blue-800 px-2'  onClick={toggle}>ADD</button>
-                    <button onClick={handleOnclickEdit} className='bg-green-500 p-1 mr-2 text-white rounded-lg font-medium hover:bg-green-800 px-2'>EDIT</button>
+                    <button className='bg-blue-500 p-1 mr-2 text-white rounded-lg font-medium hover:bg-blue-800 px-2' onClick={handleShowModalAddProduct}>ADD</button>
+                    <button onClick={() => setBtnEdit(!btnEdit)} className='bg-green-500 p-1 mr-2 text-white rounded-lg font-medium hover:bg-green-800 px-2'>EDIT</button>
                 </div>
                 <div>
-                 <ADDModal btnEdit ={btnEdit}  isOpen={isOpen} toggle={toggle} addUser={addUser} editProduct={editProduct} editPutProduct={editPutProduct} />
+                 <ADDModal 
+                    showModal = {showModal}
+                    onCloseModal = {() => setShowModal(false)}  
+                    productEdit = {productEdit}  
+                    isModalAddProduct = {isModalAddProduct}
+                />
                 </div>
-                <ProductList products={user} btnEdit ={btnEdit} handleDelete={handleDelete} handleEdit ={handleEdit} isNavigate={false}/>
+                <ProductList 
+                    products={products} 
+                    btnEdit ={btnEdit} 
+                    onDelteProduct = {handleDeleteProduct}  
+                    onShowModalEditProduct = {handleShowModalEditProduct}
+                    isNavigate={false}
+                />
             </div>
         )
         }  

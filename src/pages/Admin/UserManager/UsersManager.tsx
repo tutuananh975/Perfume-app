@@ -1,6 +1,7 @@
-import axios from 'axios';
-import { FC, useEffect, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import Loading from '../../../components/Loading';
+import { UserContext } from '../../../context/UserContextProvider';
+import axios from 'axios';
 import "./usermannager.css"
 
 interface user{
@@ -14,53 +15,44 @@ interface user{
 }
 
 const UsersManager: FC = () => {
+    const [isLoading, setIsLoading] = useState(false);
 
-    const [user, setUser] = useState<any>()
-    const [loadding, setLoading] = useState<boolean>(true);
-
-    useEffect(()=>{
-        getUsers();
-        setLoading(true)
-    },[])
-
-    const getUsers = async()=>{
-        const result = await axios.get("https://63782c6a5c477765122d0c95.mockapi.io/users")
-        setUser(result.data)
-        setLoading(false)
-        return
-    };
-    const deleteUser = async(id:any)=>{
-        setLoading(true)
-        await axios.delete(`https://63782c6a5c477765122d0c95.mockapi.io/users/${id}`)
-        getUsers()
-        setLoading(false)
+    const {allUsers, handleSetAllUsers} = useContext(UserContext);
+    
+    const handleDelete = (userID: number, index: number) => {
+        setIsLoading(true);
+        axios.delete('https://63782c6a5c477765122d0c95.mockapi.io/users/' + userID)
+        const newAllUsers = [...allUsers];
+        newAllUsers.splice(index, 1);
+        handleSetAllUsers(newAllUsers);
+        setIsLoading(false);
     }
-
-    const  handleDelete = (id:any) => {
-        deleteUser(id)
-    }
-
     return (
         <>
-        {(loadding) && <Loading/>}       
-        {user && (
+        {isLoading && <Loading/>}       
+        {allUsers && (
             <div>
             <div className='text-center text-2xl font-semibold m-4 pb-5'>List of accounts</div>
             <table className='w-full'>
                 <thead>
-                    <th>ID</th>
-                    <th>FullName</th>
-                    <th>UserName</th>
-                    <th>Block</th>
+                    <tr>
+                        <th>ID</th>
+                        <th>FullName</th>
+                        <th>UserName</th>
+                        <th>Block</th>
+                    </tr>
                 </thead>
-            {user.map((value:user)=>(
                 <tbody>
-                    <td>{value.id}</td>
-                    <td>{value.fullName}</td>
-                    <td>{value.username}</td>
-                    <td><button onClick={()=>handleDelete(value.id)} className=' px-2 bg-red-600 p-1 mr-2 text-white rounded-lg font-medium hover:bg-red-800 text-sm'>BLOCK</button></td>
+                    {allUsers.map((value:user, index: number)=>(
+                        <tr key={index}>
+                            <td>{value.id}</td>
+                            <td>{value.fullName}</td>
+                            <td>{value.username}</td>
+                            <td><button onClick={()=>handleDelete(value.id, index)} className=' px-2 bg-red-600 p-1 mr-2 text-white rounded-lg font-medium hover:bg-red-800 text-sm'>BLOCK</button></td>
+                        </tr>
+                        
+                    ))}
                 </tbody>
-            ))}
             </table>
             </div>)}
         </>

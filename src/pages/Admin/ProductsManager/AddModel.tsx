@@ -1,34 +1,24 @@
-import { ReactNode } from "react";
 import Addproduct from "./Addproduct";
+import Overflay from "../../../components/overflay/Overflay";
 
-interface ModalType {
-  children?: ReactNode;
-  isOpen: boolean;
-  toggle: () => void;
-  addUser?: (value:any) =>void
-  editProduct?: any
-  editPutProduct?:any
-  btnEdit?:boolean
-}
-
-
-export default function Modal(props: ModalType) {
+export default function Modal({showModal, onCloseModal, productEdit, isModalAddProduct} : any) {
 
   return (
     <>
-      {props.isOpen && (
-        <div className="modal-overlay" >
-          <div  className=" modal-box">
-            <Addproduct 
-              toggle={props.toggle} 
-              addUser={props.addUser} 
-              editProduct={props.editProduct} 
-              editPutProduct={props.editPutProduct}
-              btnEdit={props.btnEdit}
+      {showModal &&
+        <div>
+          <Overflay />
+          <div className="modal-overlay" >
+            <div className=" modal-box">
+              <Addproduct  
+                onCloseModal = {onCloseModal}
+                productEdit = {productEdit}
+                isModalAddProduct = {isModalAddProduct}
               />
+            </div>
           </div>
         </div>
-      )}
+      }
     </>
   );
 }

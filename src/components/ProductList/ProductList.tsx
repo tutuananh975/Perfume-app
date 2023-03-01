@@ -17,12 +17,12 @@ interface Product {
 type Props = {
   products : Product[],
   btnEdit? : boolean,
-  isNavigate: boolean
-  handleDelete?:(id: any) => void
-  handleEdit?:(id: any) => void
+  isNavigate: boolean,
+  onDelteProduct?: any,
+  onShowModalEditProduct?:any
 }
 
-const ProductList: FC<Props> = ({products,btnEdit,handleDelete,handleEdit, isNavigate}) => {
+const ProductList: FC<Props> = ({products,btnEdit, onDelteProduct, onShowModalEditProduct, isNavigate}) => {
 
   const [isOpenSidebarMobile, setIsOpenSidebarMobile] = useState(false);
   const [isOpenSortBar, setIsOpenSortBar] = useState(false)
@@ -82,15 +82,15 @@ const ProductList: FC<Props> = ({products,btnEdit,handleDelete,handleEdit, isNav
       </div>
       <div className=" -mr-4  pt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
         {
-        products.slice(firstProductIndex, lastProductIndex).map((product) => {
+        products.slice(firstProductIndex, lastProductIndex).map((product, index) => {
           return (
               <ProductItem 
-              key={product.id} 
-              product={product} 
-              btnEdit={btnEdit} 
-              handleDelete={handleDelete}
-              handleEdit={handleEdit}
-              isNavigate={isNavigate}
+                key={index} 
+                product={product} 
+                btnEdit={btnEdit} 
+                onDelteProduct = {onDelteProduct}
+                onShowModalEditProduct = {onShowModalEditProduct}
+                isNavigate={isNavigate}
                />
           );
         })}

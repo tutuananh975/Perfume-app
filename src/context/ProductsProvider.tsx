@@ -31,12 +31,17 @@ const ProductsProvider: FC<PropProvider> = ({children}) => {
         if(data) {
             setProducts(data);
         }
-    }, [data])
+    }, [data]);
+
+    const handleSetProducts = (newProducts: any) => {
+        setProducts(newProducts)
+    }
 
     const value = {
         products,
         productsMen,
-        productsWomen
+        productsWomen,
+        handleSetProducts
     }
     return (
         <ProductsContext.Provider value={value}>
