@@ -23,13 +23,20 @@ const SearchBar: FC = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const search = () => {
+    navigate("/search", { state: { searchValue } });
+  }
+
+  const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate("/search", { 
-      state: { 
-      searchValue
-    } });
+    navigate("/best-sellers", { state: { searchValue } });
   };
+
+  const handleEnterSearch = (e: any) => {
+    if(e.code === "Enter") {
+      search()
+    }
+  }
 
   return (
     <>
@@ -38,12 +45,13 @@ const SearchBar: FC = () => {
           <img className="w-60 h-16" src={logo} alt="logo" />
         </NavLink>
         <div className="search relative hidden lg:flex">
-          <form onSubmit={(event) => {handleSubmit(event)}} className="w-full">
+          <form onSubmit={handleSubmit} className="w-full">
             <input
               type="text"
               className="search-input pl-4 pr-24 py-1 border h-10 w-full rounded-full"
               placeholder="Search"
               onChange={(e) => setSearchValue(e.target.value)}
+              onKeyDown = {handleEnterSearch}
             />
             <button className="btn-search w-15 h-10 p-1 absolute right-0 rounded-r-3xl hover:bg-gray-300">
             <Optional  icon={faSearch} />

@@ -1,13 +1,14 @@
-import { FC, useState } from "react";
+import { FC, useState, useContext } from "react";
 import { Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from 'yup';
-import useFetch from "../../../hooks/useFetch";
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { login } from "../featurnes/useSlice";
 import Loading from "../../../components/Loading";
 import Modal from "../../../components/Modal";
+import useFetchAxios from "../../../hooks/UseFetchAxios";
+import { UserContext } from "../../../context/UserContextProvider";
 
 
 interface newUser{
@@ -19,36 +20,21 @@ interface newUser{
     address: string,
 }
 
-interface newValueAcc{
-    fullName: string,
-    username: string,
-    password: string,
-    email: string,
-    phone: string,
-    address: string
-    cart:[]
-}
-
-
-
 
 const CreateAcc:FC = () => {
 
     const [newValue, setNewValue] = useState<newUser>()
-    const [valueAcc, setvaluesAcc] = useState<newValueAcc>()
-    const [method, setMethod] = useState<any> ("GET");
     const [registerSuccess, setRegisterSuccess] = useState(false);
     const dispatch = useDispatch()
-      
-    const {data, loadding} = useFetch("https://63782c6a5c477765122d0c95.mockapi.io/users",{
-        method: method,
-        body: valueAcc
-      })
+    const {allUsers, handleSetAllUsers} = useContext(UserContext);
+    
+    const {responses, doFetch: CreatUser} = useFetchAxios('https://63782c6a5c477765122d0c95.mockapi.io/users');
+    const {isLoading} = responses
 
     return (
     <div>
-        {loadding && <Loading />}
-        {registerSuccess && <Modal 
+        {isLoading && <Loading />}
+        {registerSuccess && !isLoading && <Modal 
             modalText="Congratulations, you have successfully registered. Auto navigate Home Page after "
             navigatePage="/"
             modalBtn="Navigate Home Now"
@@ -87,19 +73,26 @@ const CreateAcc:FC = () => {
         }}
         validateOnChange={false}
         
-        onSubmit={(values:newUser)=>{
-            const dataAcc:newValueAcc = ({...values,cart:[]})        
-            setvaluesAcc(dataAcc)
-            const isExi = data.some((elemen:any)=>{
-                return elemen.username===dataAcc?.username
+        onSubmit={(values:newUser)=>{      
+            const isExi = allUsers.some((elemen:any)=>{
+                return elemen.username === values.username
         })
             if(isExi){
                toast.error("Tài khoản đã tồn tại")
             }else{
-                setMethod("POST")
+                CreatUser({
+                    method: "Post",
+                    data: {
+                        ...values,
+                        avtSrc: "",
+                        cart: []
+                    }
+                })
+                const newAllUsers = [...allUsers, {...values, avtSrc: "", cart: []}]
+                handleSetAllUsers(newAllUsers);
                 toast.success("Đăng ký tài khoản thành công")
                 dispatch(login({
-                    idUser: Number(data[data.length-1].id) + 1,
+                    idUser: Number(allUsers[allUsers.length-1].id) + 1,
                     userName: values.username,
                     isAdmin: false,
                     isLogin:true

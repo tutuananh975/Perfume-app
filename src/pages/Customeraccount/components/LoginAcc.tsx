@@ -1,15 +1,14 @@
-import { FC, useState, memo } from 'react'
+import { FC, useState, memo, useContext } from 'react'
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
-import useFetch from '../../../hooks/useFetch';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { login } from '../featurnes/useSlice';
-import Loading from '../../../components/Loading';
 import Modal from '../../../components/Modal';
 import Overflay from '../../../components/overflay/Overflay';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../featurnes/useSlice';
+import { UserContext } from '../../../context/UserContextProvider';
 
 interface IUser {
     userName: string,
@@ -18,21 +17,20 @@ interface IUser {
 
 
 const Login: FC = () => {
+
+    const {allUsers} = useContext(UserContext);
+
     const [valueOnChange, setValueOnChange] = useState<IUser>()
     const [loginSuccess, setLoginSucces] = useState(false);
     const [wrongPassword, setWrongPassword] = useState(false)
 
     const dispatch = useDispatch()
-    const { data, loadding } = useFetch("https://63782c6a5c477765122d0c95.mockapi.io/users", {
-        method: "GET",
-    })
 
     const { isAdmin } = useSelector(selectUser)
 
 
     return (
         <div>
-            {loadding && <Loading />}
             {loginSuccess && <Modal
                 modalText={isAdmin
                     ? 'Congratulations, you have successfully logged in, auto navigate Admin page after'
@@ -70,19 +68,18 @@ const Login: FC = () => {
                     setValueOnChange(Change);
                 }}
                 onSubmit={(dataAcc: IUser) => {
-
-                    const idUser = data.find((elm: any) => {
+                    const user = allUsers.find((elm: any) => {
                         return elm.username === dataAcc?.userName && elm.password === dataAcc.passWord
 
                     })
 
-                    if (data[0].username === dataAcc.userName && data[0].password === dataAcc.passWord) {
+                    if (allUsers[0].username === dataAcc.userName && allUsers[0].password === dataAcc.passWord) {
                         toast.success("Đăng nhập tài khoản admin thành công")
                         dispatch(
                             login(
                                 {
-                                    idUser: idUser.id,
-                                    userName: idUser.username,
+                                    idUser: user.id,
+                                    userName: user.username,
                                     isAdmin: true,
                                     isLogin: true,
                                 })
@@ -90,12 +87,12 @@ const Login: FC = () => {
                         setLoginSucces(true)
                         return;
                     }
-                    if (idUser) {
+                    if (user) {
                         toast.success("Đăng nhập thành công")
                         dispatch(
                             login(
                                 {
-                                    idUser: idUser.id,
+                                    idUser: user.id,
                                     userName: dataAcc.userName,
                                     isLogin: true,
                                     sAdmin: false,
