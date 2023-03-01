@@ -63,7 +63,10 @@ const FormCheckOut: FC = () => {
                             },
                         });
                         deleteCart({
-                            method: "DELETE"
+                            method: "PUT",
+                            data: {
+                                cart: []
+                            }
                         })
                         handleSetCart([])
                         setIsSuccess(true);
