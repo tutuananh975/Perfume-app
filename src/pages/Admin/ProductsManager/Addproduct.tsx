@@ -87,8 +87,19 @@ const Addproduct: FC<ModalType> = ({ onCloseModal, productEdit, isModalAddProduc
       {loading && <Loading />}
       {isModalAddProduct &&
         <div className="AddInput">
-          <label htmlFor="imgSrc">Image</label>
-          <input id='imgSrc' name='imgSrc' type="file" onChange={(e: any) => { upLoadImg(e) }} className="AddInputBox" />
+          <div className='flex justify-center items-center'>
+            {baseImage === "" ? <label htmlFor="imgSrc" className='previewImg img-priview'></label>
+            : <label 
+                htmlFor="imgSrc" 
+                className='previewImg' 
+                style={{
+                backgroundImage: `url(${baseImage})`
+                }}>
+              </label>
+            }
+            
+          </div>
+          <input id='imgSrc' name='imgSrc' type="file" onChange={(e: any) => { upLoadImg(e) }} className="AddInputBox hidden" />
         </div>
       }
       <Formik

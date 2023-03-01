@@ -24,9 +24,9 @@ const ProductItem: FC<Prop> = ({product,btnEdit, onDelteProduct,onShowModalEditP
             <div className="productdesc">
                 <p className='flex justify-start tracking-normal text-black uppercase font-semibold text-base leading-6'>{product.name}</p>
                 <p className='py-2 text-sm h-16'>{product.desc}</p>
-                <b className='line-through text-gray-400 font-normal'>Retail Price: ${product.retailPrice}</b>
+                <b className='line-through text-gray-400 font-normal'>Retail Price: ${Number(product.retailPrice).toFixed(2)}</b>
                 <br/>
-                <b className=' text-red-600'>Our Price: ${product.ourPrice}</b>
+                <b className=' text-red-600'>Our Price: ${Number(product.ourPrice).toFixed(2)}</b>
                 <br/>
                 {(btnEdit)?
                 <div className='mt-4'>

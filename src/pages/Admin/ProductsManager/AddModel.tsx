@@ -9,7 +9,7 @@ export default function Modal({showModal, onCloseModal, productEdit, isModalAddP
         <div>
           <Overflay />
           <div className="modal-overlay" >
-            <div className=" modal-box">
+            <div className=" modal-box w-full md:w-3/5">
               <Addproduct  
                 onCloseModal = {onCloseModal}
                 productEdit = {productEdit}
