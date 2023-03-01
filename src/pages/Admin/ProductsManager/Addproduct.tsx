@@ -51,7 +51,7 @@ const Addproduct: FC<ModalType> = ({ onCloseModal, productEdit, isModalAddProduc
         .then(res => res.json())
         .then(data => { console.log(data) })
         .catch(error => console.log(error))
-      const newProducts = [...products, { ...data, id: products[products.length - 1].id + 1 }];
+      const newProducts = [...products, { ...data, id: Number(products[products.length - 1].id) + 1 }];
       handleSetProducts(newProducts);
     } else {
       const data = {
