@@ -24,8 +24,11 @@ const UserContextProvider:FC<PropUserContext> = ({children}) => {
     if(idUser) {
       doFetch({method: "GET"})
     }
+  }, [idUser, doFetch]);
+
+  useEffect(() => {
     getAllUsers({method: "GET"})
-  }, [idUser, doFetch, getAllUsers])
+  }, [getAllUsers])
 
   const totalPrice = useMemo(() => {
     return cart.length > 0 
