@@ -7,9 +7,15 @@ import useFetchAxios from "../../hooks/UseFetchAxios";
 import Loading from "../../components/Loading";
 import { UserContext } from "../../context/UserContextProvider";
 import OrderSuccess from "./OrderSuccess";
+import { useSelector } from "react-redux";
+import { selectUser } from "../Customeraccount/featurnes/useSlice";
+
 
 const FormCheckOut: FC = () => {
+    const {idUser} = useSelector(selectUser);
     const [isSuccess, setIsSuccess] = useState(false);
+    const {responses: responsesDeleteCart, doFetch: deleteCart} = useFetchAxios('https://63782c6a5c477765122d0c95.mockapi.io/users/' + idUser);
+    const {isLoading: isLoadingDeleteCart} = responsesDeleteCart;
 
     const { userData: data, handleSetCart, handleSetTotalItems, totalItems, totalPrice, cart} = useContext(UserContext)
 
@@ -20,7 +26,7 @@ const FormCheckOut: FC = () => {
 
     return (
         <>
-            {(isLoading) && <Loading />}
+            {(isLoading || isLoadingDeleteCart) && <Loading />}
             {data && (
                 <Formik
                     initialValues={{
@@ -55,9 +61,12 @@ const FormCheckOut: FC = () => {
                                 products: cart,
                             },
                         });
+                        deleteCart({
+                            method: "DELETE"
+                        })
                         handleSetCart([])
                         setIsSuccess(true);
-                        handleSetTotalItems(0)
+                        handleSetTotalItems(0);
                     }}
                 >
                     {({ errors, touched }: any) => (
