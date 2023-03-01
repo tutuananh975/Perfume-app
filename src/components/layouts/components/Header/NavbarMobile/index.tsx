@@ -11,6 +11,7 @@ import {
     logout,
     selectUser,
 } from "../../../../../pages/Customeraccount/featurnes/useSlice";
+import { useNavigate } from "react-router-dom";
 
 interface PropNavbarMobile {
     onCloseNavbarMobile: Function;
@@ -19,9 +20,14 @@ interface PropNavbarMobile {
 const NavbarMobile: FC<PropNavbarMobile> = ({ onCloseNavbarMobile }) => {
     const { isLogin, isAdmin } = useSelector(selectUser);
     const disPatch = useDispatch();
+    const navigate = useNavigate();
 
-    const handleLognOut = () => {
-        disPatch(logout());
+    const handleAccount = () => {
+        if(isLogin) {
+            disPatch(logout());
+        } else {
+            navigate('/customeraccount');
+        }
     };
 
     return (
@@ -39,7 +45,7 @@ const NavbarMobile: FC<PropNavbarMobile> = ({ onCloseNavbarMobile }) => {
                     <h3 className="font-semibold">MENU</h3>
                     <CloseBtn onClose={onCloseNavbarMobile} />
                 </div>
-                <NavLink to="/customeraccount" onClick={handleLognOut}>
+                <div onClick={handleAccount}>
                     <div className="flex items-center py-4 px-2 cursor-pointer bg-slate-100 hover:bg-slate-300">
                         <div
                             style={{
@@ -55,9 +61,9 @@ const NavbarMobile: FC<PropNavbarMobile> = ({ onCloseNavbarMobile }) => {
                         <p className="ml-4 text-red-600 font-semibold">{isLogin ? "Logn Out" : "My Acount"}</p>
                         <FaChevronRight className="text-gray-300 mr-6 ml-auto" />
                     </div>
-                </NavLink>
+                </div>
                 {isAdmin && (
-                    <NavLink to="/admin" onClick={handleLognOut}>
+                    <NavLink to="/admin">
                         <div className="flex items-center py-4 px-2 cursor-pointer bg-slate-100 hover:bg-slate-300">
                             <div
                                 style={{
