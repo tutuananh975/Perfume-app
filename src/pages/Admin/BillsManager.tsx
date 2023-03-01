@@ -1,6 +1,7 @@
 import { FC, useEffect } from 'react';
 import Loading from '../../components/Loading';
 import useFetchAxios from '../../hooks/UseFetchAxios';
+import {AiOutlineCheck} from "react-icons/ai";
 
 const BillsManager: FC = () => {
 
@@ -23,7 +24,7 @@ const BillsManager: FC = () => {
                             <th>Name</th>
                             <th>Total Items</th>
                             <th>Total Price</th>
-                            <th></th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,11 +32,19 @@ const BillsManager: FC = () => {
                             <tr key={bill.id}>
                                 <td>{index + 1}</td>
                                 <td>{bill.fullName}</td>
-                                <td>{bill.products.reduce((totalItems: number, product:any) => {
-                                    return totalItems + product.amount
-                                }, 0)}</td>
-                                <td>95.95</td>
-                                <td><button className=' px-2 bg-red-600 p-1 mr-2 text-white rounded-lg font-medium hover:bg-red-800 text-sm'>View Detail</button></td>
+                                <td>{bill.totalItems}</td>
+                                <td>${bill.totalPrice.toFixed(2)}</td>
+                                <td>
+                                    <button className=' px-2 bg-red-600 p-1 mr-2 text-white rounded-lg font-medium hover:bg-red-400 text-sm'>
+                                        View Detail
+                                    </button>
+                                    <button className=' px-2 bg-lime-600 p-1 mr-2 text-white rounded-lg font-medium hover:bg-lime-400 text-sm mt-2 sm:mt-0'>
+                                        <div className='flex items-center'>
+                                            <span>DONE</span>
+                                            <AiOutlineCheck />
+                                        </div>
+                                    </button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

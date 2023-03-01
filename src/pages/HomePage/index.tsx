@@ -16,6 +16,7 @@ import Categories from "./components/Categories/Categories";
 
 
 const HomePage: FC = () => {
+    console.log('test deploy')
     
     return (
         <div>

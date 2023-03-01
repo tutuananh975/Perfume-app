@@ -5,7 +5,7 @@ const SidebarAdmin: FC = () => {
 
     return(
         <div>
-            <SidebarAdminRow page = "Products Manager" route="products-manager"/>
+            <SidebarAdminRow page = "Products Manager" route="/admin"/>
             <SidebarAdminRow page = "Users Manager" route="users-manager"/>
             <SidebarAdminRow page = "Bills Manager" route="bills-manager"/>
         </div>
