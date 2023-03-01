@@ -59,6 +59,7 @@ const FormCheckOut: FC = () => {
                                 totalItems: totalItems,
                                 totalPrice: totalPrice,
                                 products: cart,
+                                isDone: false
                             },
                         });
                         deleteCart({
