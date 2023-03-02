@@ -27,10 +27,7 @@ const CreateAcc: FC = () => {
     const [registerSuccess, setRegisterSuccess] = useState(false);
     const dispatch = useDispatch()
     const { allUsers, handleSetAllUsers } = useContext(UserContext);
-
-    const { responses, doFetch: CreatUser } = useFetchAxios('https://63782c6a5c477765122d0c95.mockapi.io/users');
-    const { isLoading } = responses
-
+    const [isLoading, setIsLoading] = useState(false);
     return (
         <div>
             {isLoading && <Loading />}
@@ -74,6 +71,7 @@ const CreateAcc: FC = () => {
                 validateOnChange={false}
 
                 onSubmit={(values: newUser) => {
+                    setIsLoading(true)
                     const isExi = allUsers.some((elemen: any) => {
                         return elemen.username === values.username
                     })
@@ -109,7 +107,7 @@ const CreateAcc: FC = () => {
                                 const newAllUsers = [...allUsers, dataUser]
                                 handleSetAllUsers(newAllUsers);
                                 toast.success("Đăng ký tài khoản thành công")
-
+                                setIsLoading(false);
                                 setRegisterSuccess(true);
                             })
                     }
