@@ -80,7 +80,7 @@ const ProductList: FC<Props> = ({products,btnEdit, onDelteProduct, onShowModalEd
           </ul>
         </div>
       </div>
-      <div className=" -mr-4  pt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+      <div className=" -mr-4  pt-8 grid grid-col md:grid-cols-3 lg:grid-cols-4 ">
         {
         products.slice(firstProductIndex, lastProductIndex).map((product, index) => {
           return (
