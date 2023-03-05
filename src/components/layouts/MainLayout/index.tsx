@@ -16,7 +16,7 @@ const MainLayout: FC<any> = ({ children } ) => {
     // const [openSideBarMobile, setOpenSideBarMobile] = useState(true);
 
     return (
-        <div>
+        <div className="app">
             <Header />
             <div className="title-products flex items-center text-sm pb-4 px-4">
                 <span className="mr-2">Home</span>

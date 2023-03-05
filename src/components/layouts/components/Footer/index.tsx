@@ -4,7 +4,7 @@ import './FooterAction.css';
 
 const Footer: FC = () => {
   return (
-    <footer className="bg-eee mt-12">
+    <footer className="bg-eee mt-12 footer">
       <div className="text-base flex flex-col items-center">
           <div className="px-4 pt-4 text-lg font-semibold">
             Join Our Coupon List

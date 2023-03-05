@@ -77,3 +77,21 @@ img {
   width: 234.25px;
   height: 234.25px;
 }
+
+.app {
+  position: relative;
+  padding-bottom: 558px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+@media (min-width: 768px) {
+  .app {
+    padding-bottom: 374px;
+  }
+} 

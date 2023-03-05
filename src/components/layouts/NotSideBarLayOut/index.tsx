@@ -9,7 +9,7 @@ interface PropNotSideBarLayOut {
 const NotSideBarLayOut: FC<PropNotSideBarLayOut> = ({ children }) => {
 
     return (
-        <div>
+        <div className="app">
             <Header />
                 { children }
             <Footer />
