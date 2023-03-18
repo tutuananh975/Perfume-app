@@ -6,7 +6,7 @@ import Header from "../../components/layouts/components/Header";
 
 const Admin: FC = () => {
   return (
-    <div>
+    <div className="app">
       <Header />
       <div className="border-t border-slate-300 ">
         <div className="grid grid-cols-4 gap-4">
