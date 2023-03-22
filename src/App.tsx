@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 import "./App.css";
 import { selectUser } from './pages/Customeraccount/featurnes/useSlice';
 import NotAdmin from './pages/Admin/components/NotAdmin';
-import HomeAdmin from './pages/Admin/HomeAdmin';
 import Admin from './pages/Admin';
 import UsersManager from './pages/Admin/UserManager/UsersManager';
 import ProductsManager from './pages/Admin/ProductsManager/ProductsManager';

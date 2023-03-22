@@ -10,7 +10,7 @@ const ProductsCart: FC = () => {
   const {idUser} = useSelector(selectUser);
   const {cart , totalItems, handleSetTotalItems, handleSetCart } = useContext(UserContext);
   const {responses, doFetch} = useFetchAxios('https://63782c6a5c477765122d0c95.mockapi.io/users/' + idUser);
-  const {isLoading} = responses;
+  const {data, isLoading} = responses;
 
   const onCreaseAmount = (product: any, index: number) => {
     const newCart = [...cart];
@@ -21,6 +21,7 @@ const ProductsCart: FC = () => {
         cart: newCart
       }
     })
+    console.log(data);
     handleSetTotalItems(totalItems+1);
     handleSetCart(newCart);
   }

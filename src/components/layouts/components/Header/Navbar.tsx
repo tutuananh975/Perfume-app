@@ -16,8 +16,9 @@ import Overflay from "../../../overflay/Overflay";
 import TotalItems from "./TotalItems";
 
 const Navbar: FC = () => {
-  const { isLogin, userName, isAdmin } = useSelector(selectUser);
-  const { totalItems } = useContext(UserContext)
+  const { isLogin, isAdmin } = useSelector(selectUser);
+  const { userData, totalItems } = useContext(UserContext);
+  console.log(userData)
 
   const [isOpenNavbarMobile, setIsOpenNavbarMobile] = useState(false);
   const [modalNotLogin, setModalNotLogin] = useState(false);
@@ -118,7 +119,7 @@ const Navbar: FC = () => {
           <li className="cursor-pointer has-triangle hidden md:block sign-in-btn relative">
             {isLogin ? (
               <div>
-                <div className="nav-right-text-link">{userName}</div>
+                <div className="nav-right-text-link">{userData?.fullName}</div>
                 <div className="triangle absolute"></div>
               </div>
             ) : (
